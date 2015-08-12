@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Groups</key>
+	<dict>
+		<key>College Dudes :D</key>
+		<array>
+			<array>
+				<string>Mark Z.</string>
+				<string>50</string>
+				<string>10</string>
+			</array>
+			<array>
+				<string>Person 2</string>
+				<string>10</string>
+				<string>3</string>
+			</array>
+			<array>
+				<string>Person 3</string>
+				<string>8</string>
+				<string>1</string>
+			</array>
+		</array>
+		<key>High School Peeps</key>
+		<array>
+			<array>
+				<string>Person 1</string>
+				<string>488</string>
+				<string>59</string>
+			</array>
+			<array>
+				<string>Person 2</string>
+				<string>18</string>
+				<string>2</string>
+			</array>
+			<array>
+				<string>Person 3</string>
+				<string>13</string>
+				<string>1</string>
+			</array>
+		</array>
+	</dict>
+	<key>Friends</key>
+	<array>
+		<array>
+			<string>Friend 1</string>
+			<string>138</string>
+			<string>13</string>
+		</array>
+		<array>
+			<string>Friend 2</string>
+			<string>18</string>
+			<string>3</string>
+		</array>
+		<array>
+			<string>Friend 3</string>
+			<string>13</string>
+			<string>1</string>
+		</array>
+		<array>
+			<string>Friend 4</string>
+			<string>8</string>
+			<string>0</string>
+		</array>
+		<array>
+			<string>Friend 5</string>
+			<string>3</string>
+			<string>0</string>
+		</array>
+		<array>
+			<string>Friend 6</string>
+			<string>0</string>
+			<string>0</string>
+		</array>
+	</array>
+	<key>PickAPick</key>
+	<array>
+		<array>
+			<string>Person 1</string>
+			<string>28134</string>
+			<string>3293</string>
+		</array>
+		<array>
+			<string>Person 2</string>
+			<string>23401</string>
+			<string>2830</string>
+		</array>
+		<array>
+			<string>Person 3</string>
+			<string>20138</string>
+			<string>2694</string>
+		</array>
+		<array>
+			<string>Person 4</string>
+			<string>17400</string>
+			<string>21003</string>
+		</array>
+		<array>
+			<string>Person 5</string>
+			<string>15834</string>
+			<string>1704</string>
+		</array>
+		<array>
+			<string>Person 6</string>
+			<string>13284</string>
+			<string>1423</string>
+		</array>
+		<array>
+			<string>Person 7</string>
+			<string>13212</string>
+			<string>1242</string>
+		</array>
+		<array>
+			<string>Person 8</string>
+			<string>12934</string>
+			<string>1120</string>
+		</array>
+		<array>
+			<string>Person 9</string>
+			<string>11342</string>
+			<string>1028</string>
+		</array>
+		<array>
+			<string>Person 10</string>
+			<string>10591</string>
+			<string>958</string>
+		</array>
+	</array>
+</dict>
+</plist>
