@@ -1,11 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Zgj-b7-zgN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Zgj-b7-zgN">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Lato-Bold.ttf">
+            <string>Lato-Bold</string>
+            <string>Lato-Bold</string>
+        </mutableArray>
+        <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -27,7 +50,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="lPg-lk-wob"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
+                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="22"/>
                                 <state key="normal" title="New Game"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="fontName" value="Lato-Regular"/>
@@ -38,19 +61,19 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="numberOfPoints" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3h9-7K-iwT">
                                 <rect key="frame" x="124" y="136" width="460" height="35"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="23"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="firstName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LdO-4G-nPq">
                                 <rect key="frame" x="124" y="107" width="460" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.63137254901960782" blue="0.79607843137254897" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="numberOfWins" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKd-3U-nhi">
                                 <rect key="frame" x="124" y="174" width="116" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -91,19 +114,19 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="friendsList" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNQ-1D-2R2">
                                                     <rect key="frame" x="71" y="40" width="521" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="GroupName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMR-az-5Wk">
                                                     <rect key="frame" x="71" y="8" width="465" height="31"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="timeRemain" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qgs-ST-ySz">
                                                     <rect key="frame" x="544" y="8" width="48" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -143,7 +166,7 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="numberOfGames" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tw1-ar-YXs">
                                 <rect key="frame" x="248" y="174" width="336" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -292,7 +315,7 @@
         <!--One Phone - In Person-->
         <scene sceneID="loF-nd-Yxi">
             <objects>
-                <viewController id="vdD-nY-5Qw" sceneMemberID="viewController">
+                <viewController id="vdD-nY-5Qw" customClass="OnePhoneInPersonViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YvS-fi-aAx"/>
                         <viewControllerLayoutGuide type="bottom" id="8DA-q5-sJP"/>
@@ -328,17 +351,81 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4aF-kg-B7u">
+                                <rect key="frame" x="16" y="310" width="568" height="255"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="playerCell" rowHeight="60" id="aep-FM-ChU" customClass="OnePhonePlayerListTableViewCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="568" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aep-FM-ChU" id="H7c-MM-wk4">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tAz-RX-YWb">
+                                                    <rect key="frame" x="538" y="19" width="22" height="22"/>
+                                                    <connections>
+                                                        <action selector="addButton:" destination="aep-FM-ChU" eventType="touchUpInside" id="IPJ-IC-BZ8"/>
+                                                    </connections>
+                                                </button>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="tap to enter a player name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FfU-pZ-FBK">
+                                                    <rect key="frame" x="8" y="15" width="522" height="30"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="tAz-RX-YWb" firstAttribute="top" secondItem="H7c-MM-wk4" secondAttribute="topMargin" constant="11" id="Duq-9Z-us2"/>
+                                                <constraint firstItem="tAz-RX-YWb" firstAttribute="trailing" secondItem="H7c-MM-wk4" secondAttribute="trailingMargin" id="Es0-II-ySe"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="FfU-pZ-FBK" secondAttribute="bottom" constant="6.5" id="IcH-NW-sn0"/>
+                                                <constraint firstItem="FfU-pZ-FBK" firstAttribute="top" secondItem="H7c-MM-wk4" secondAttribute="topMargin" constant="7" id="UDt-Qp-lP9"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="tAz-RX-YWb" secondAttribute="bottom" constant="10.5" id="YUb-bf-ppo"/>
+                                                <constraint firstItem="tAz-RX-YWb" firstAttribute="leading" secondItem="FfU-pZ-FBK" secondAttribute="trailing" constant="8" id="ggo-qk-7XM"/>
+                                                <constraint firstItem="FfU-pZ-FBK" firstAttribute="leading" secondItem="H7c-MM-wk4" secondAttribute="leadingMargin" id="mcH-zV-PJB"/>
+                                                <constraint firstItem="tAz-RX-YWb" firstAttribute="leading" secondItem="FfU-pZ-FBK" secondAttribute="trailing" constant="8" id="zEI-9A-sgE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textField" destination="FfU-pZ-FBK" id="Dlb-Ai-Uar"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="vdD-nY-5Qw" id="ZGn-5u-7bh"/>
+                                    <outlet property="delegate" destination="vdD-nY-5Qw" id="wge-HB-7KF"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GQF-PL-uex">
+                                <rect key="frame" x="16" y="543" width="568" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="QUf-Dx-paB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="22"/>
+                                <state key="normal" title="Begin Game">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="beginGame:" destination="vdD-nY-5Qw" eventType="touchUpInside" id="jYI-eA-2vV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="V1N-lc-5La" firstAttribute="top" secondItem="YvS-fi-aAx" secondAttribute="bottom" constant="18" id="0bo-56-g6Q"/>
+                            <constraint firstItem="8DA-q5-sJP" firstAttribute="top" secondItem="4aF-kg-B7u" secondAttribute="bottom" constant="35" id="33b-Qi-jty"/>
+                            <constraint firstItem="4aF-kg-B7u" firstAttribute="trailing" secondItem="nxc-26-gPP" secondAttribute="trailingMargin" id="5iM-cL-3Nb"/>
                             <constraint firstItem="u55-sq-bsz" firstAttribute="top" secondItem="YvS-fi-aAx" secondAttribute="bottom" constant="18" id="AUt-7I-WGR"/>
+                            <constraint firstItem="GQF-PL-uex" firstAttribute="leading" secondItem="nxc-26-gPP" secondAttribute="leadingMargin" id="BnN-Ac-2Ei"/>
                             <constraint firstItem="QR1-0s-K6X" firstAttribute="width" secondItem="V1N-lc-5La" secondAttribute="width" id="Dcj-1A-Ixe"/>
+                            <constraint firstItem="4aF-kg-B7u" firstAttribute="top" secondItem="QR1-0s-K6X" secondAttribute="bottom" constant="48" id="KkB-d7-p1u"/>
                             <constraint firstItem="V1N-lc-5La" firstAttribute="leading" secondItem="QR1-0s-K6X" secondAttribute="trailing" constant="14" id="Nvg-BY-2OS"/>
+                            <constraint firstItem="4aF-kg-B7u" firstAttribute="leading" secondItem="nxc-26-gPP" secondAttribute="leadingMargin" id="W1g-eZ-jNz"/>
                             <constraint firstItem="QR1-0s-K6X" firstAttribute="width" secondItem="u55-sq-bsz" secondAttribute="width" id="WYC-yl-ZhH"/>
                             <constraint firstItem="u55-sq-bsz" firstAttribute="trailing" secondItem="nxc-26-gPP" secondAttribute="trailingMargin" id="ZrF-yp-lSt"/>
+                            <constraint firstItem="GQF-PL-uex" firstAttribute="trailing" secondItem="nxc-26-gPP" secondAttribute="trailingMargin" id="bNK-nf-1vN"/>
                             <constraint firstItem="QR1-0s-K6X" firstAttribute="leading" secondItem="nxc-26-gPP" secondAttribute="leadingMargin" id="bhZ-D3-lm3"/>
                             <constraint firstItem="QR1-0s-K6X" firstAttribute="top" secondItem="YvS-fi-aAx" secondAttribute="bottom" constant="18" id="jUw-aE-I3u"/>
+                            <constraint firstItem="8DA-q5-sJP" firstAttribute="top" secondItem="GQF-PL-uex" secondAttribute="bottom" constant="13" id="sp3-aH-Aqr"/>
                             <constraint firstItem="u55-sq-bsz" firstAttribute="leading" secondItem="V1N-lc-5La" secondAttribute="trailing" constant="14" id="uyR-4h-2o9"/>
                             <constraint firstAttribute="centerX" secondItem="V1N-lc-5La" secondAttribute="centerX" id="w7W-y8-bSA"/>
                             <constraint firstItem="V1N-lc-5La" firstAttribute="leading" secondItem="QR1-0s-K6X" secondAttribute="trailing" constant="14" id="xkx-bo-cIi"/>
@@ -346,6 +433,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="One Phone - In Person" id="ad8-sO-jZn"/>
+                    <connections>
+                        <outlet property="beginGameButtonOutlet" destination="GQF-PL-uex" id="1Yu-v0-ec1"/>
+                        <outlet property="tableView" destination="4aF-kg-B7u" id="zNi-Bg-F4L"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3rP-mf-Sav" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -365,13 +456,13 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="numberOfGames" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDr-do-hOZ">
                                 <rect key="frame" x="362" y="203" width="214" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="numberOfPoints" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGe-u9-0kK">
                                 <rect key="frame" x="124" y="160" width="460" height="35"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="23"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -386,7 +477,7 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="firstName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWE-oa-aNc">
                                 <rect key="frame" x="124" y="131" width="460" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.63137254899999995" blue="0.79607843140000001" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -442,19 +533,19 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mN3-qv-2Nb">
                                                     <rect key="frame" x="188" y="6" width="192" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Wins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Igh-so-jpc">
                                                     <rect key="frame" x="388" y="5" width="172" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOb-ZU-xs6">
                                                     <rect key="frame" x="8" y="5" width="176" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -501,7 +592,7 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="numberOfWins" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAF-gT-upG">
                                 <rect key="frame" x="124" y="203" width="230" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -601,7 +692,7 @@
         <image name="random" width="60" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XyB-Lo-O2i"/>
-        <segue reference="Zoi-5w-qjY"/>
+        <segue reference="QNl-zM-2qX"/>
+        <segue reference="ctZ-6a-w2M"/>
     </inferredMetricsTieBreakers>
 </document>
