@@ -69,8 +69,8 @@
     CALayer *btnLayer = [gameNewButton layer];
     [btnLayer setMasksToBounds:YES];
     [btnLayer setBorderWidth:2.0f];
-    [btnLayer setBorderColor:[UIColor colorWithRed:57.0/255.0 green:181.0/255.0 blue:74.0/255.0 alpha:1].CGColor];
-    [btnLayer setBackgroundColor:[UIColor colorWithRed:75.0/255.0 green:142.0/255.0 blue:16.0/255.0 alpha:1].CGColor];
+    [btnLayer setBorderColor:[UIColor colorWithRed:186.0/255.0 green:0.0/255.0 blue:93.0/255.0 alpha:0.2].CGColor];
+    [btnLayer setBackgroundColor:[UIColor colorWithRed:160.0/255.0 green:0.0/255.0 blue:93.0/255.0 alpha:0.9].CGColor];
     [btnLayer setCornerRadius:8.0f];
     
     // create some text for the button with the finger image

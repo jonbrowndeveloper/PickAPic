@@ -35,6 +35,9 @@
 		AA3883B21B7C149A00C2CE1D /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 343CC8451B34CED80030FF65 /* Lato-Light.ttf */; };
 		AA3883B31B7C149A00C2CE1D /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 343CC8461B34CED80030FF65 /* Lato-LightItalic.ttf */; };
 		AA3883B41B7C149A00C2CE1D /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 343CC8471B34CED80030FF65 /* Lato-Regular.ttf */; };
+		AA6231881B814FBD00E3DC48 /* TopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6231871B814FBD00E3DC48 /* TopicViewController.m */; };
+		AA62318B1B81517F00E3DC48 /* TopicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA62318A1B81517F00E3DC48 /* TopicTableViewCell.m */; };
+		AA62318D1B81544F00E3DC48 /* TopicsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA62318C1B81544F00E3DC48 /* TopicsList.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +93,11 @@
 		AA3883A61B7BF91800C2CE1D /* OnePhoneInPersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OnePhoneInPersonViewController.m; path = pickapic/OnePhoneInPersonViewController.m; sourceTree = SOURCE_ROOT; };
 		AA3883A81B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OnePhonePlayerListTableViewCell.h; path = pickapic/OnePhonePlayerListTableViewCell.h; sourceTree = SOURCE_ROOT; };
 		AA3883A91B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OnePhonePlayerListTableViewCell.m; path = pickapic/OnePhonePlayerListTableViewCell.m; sourceTree = SOURCE_ROOT; };
+		AA6231861B814FBD00E3DC48 /* TopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TopicViewController.h; path = pickapic/TopicViewController.h; sourceTree = SOURCE_ROOT; };
+		AA6231871B814FBD00E3DC48 /* TopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TopicViewController.m; path = pickapic/TopicViewController.m; sourceTree = SOURCE_ROOT; };
+		AA6231891B81517F00E3DC48 /* TopicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TopicTableViewCell.h; path = pickapic/TopicTableViewCell.h; sourceTree = SOURCE_ROOT; };
+		AA62318A1B81517F00E3DC48 /* TopicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TopicTableViewCell.m; path = pickapic/TopicTableViewCell.m; sourceTree = SOURCE_ROOT; };
+		AA62318C1B81544F00E3DC48 /* TopicsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = TopicsList.plist; path = pickapic/TopicsList.plist; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +163,7 @@
 				343CC8151B3361670030FF65 /* Info.plist */,
 				34B010CA1B4B0DBB005F2096 /* placeholderLeaderboard.plist */,
 				343CC8161B3361670030FF65 /* main.m */,
+				AA62318C1B81544F00E3DC48 /* TopicsList.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -204,6 +213,10 @@
 				AA3883A61B7BF91800C2CE1D /* OnePhoneInPersonViewController.m */,
 				AA3883A81B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.h */,
 				AA3883A91B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.m */,
+				AA6231861B814FBD00E3DC48 /* TopicViewController.h */,
+				AA6231871B814FBD00E3DC48 /* TopicViewController.m */,
+				AA6231891B81517F00E3DC48 /* TopicTableViewCell.h */,
+				AA62318A1B81517F00E3DC48 /* TopicTableViewCell.m */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -306,6 +319,7 @@
 				AA3883AB1B7C149A00C2CE1D /* Lato-Black.ttf in Resources */,
 				AA3883AC1B7C149A00C2CE1D /* Lato-BlackItalic.ttf in Resources */,
 				AA3883AD1B7C149A00C2CE1D /* Lato-Bold.ttf in Resources */,
+				AA62318D1B81544F00E3DC48 /* TopicsList.plist in Resources */,
 				AA3883AE1B7C149A00C2CE1D /* Lato-BoldItalic.ttf in Resources */,
 				AA3883AF1B7C149A00C2CE1D /* Lato-Hairline.ttf in Resources */,
 				AA3883B01B7C149A00C2CE1D /* Lato-HairlineItalic.ttf in Resources */,
@@ -341,6 +355,8 @@
 				AA3883AA1B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.m in Sources */,
 				343CC81D1B3361670030FF65 /* PickAPic.xcdatamodeld in Sources */,
 				343CC81A1B3361670030FF65 /* AppDelegate.m in Sources */,
+				AA62318B1B81517F00E3DC48 /* TopicTableViewCell.m in Sources */,
+				AA6231881B814FBD00E3DC48 /* TopicViewController.m in Sources */,
 				343CC8201B3361670030FF65 /* ViewController.m in Sources */,
 				343CC8171B3361670030FF65 /* main.m in Sources */,
 				AA3883A71B7BF91800C2CE1D /* OnePhoneInPersonViewController.m in Sources */,

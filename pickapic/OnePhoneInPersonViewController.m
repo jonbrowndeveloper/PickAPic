@@ -15,11 +15,13 @@
 
 @implementation OnePhoneInPersonViewController
 
-@synthesize playerList, tableView, beginGameButtonOutlet;
+@synthesize playerList, tableView, beginGameButtonOutlet, topicLabel, topicChosen, alertTextField;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // topicChosen = @" ";
     
     // New Game button
     
@@ -59,6 +61,21 @@
     self.navigationItem.leftBarButtonItem = backItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    // to make sure the 'TopicViewConroller' is not in the view controller hierarchy
+    
+    NSArray * viewControllers = [self.navigationController viewControllers];
+    NSArray * newViewControllers = [NSArray arrayWithObjects:[viewControllers objectAtIndex:0], [viewControllers objectAtIndex:1], self,nil];
+    [self.navigationController setViewControllers:newViewControllers];
+    
+    // set the Topic Label
+    if(!([topicChosen length] == 0))
+    {
+    topicLabel.text = [NSString stringWithFormat:@"Topic Chosen: %@", topicChosen];
+    }
+}
+
 - (void)backAction
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -91,14 +108,21 @@
 
     // cell.textField = [[tableView cellForRowAtIndexPath:indexPath] viewWithTag:(indexPath.row)];
     
-    cell.textField.text = @"test";
+    // cell.textField.text = @"test";
     cell.textField.delegate = self;
+    cell.textField.tag  = indexPath.row;
+    
+    [self.playerList addObject:@"Placeholder"];
     
     // [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
+}
 
 /*
 #pragma mark - Navigation
@@ -113,5 +137,71 @@
 - (IBAction)beginGame:(id)sender
 {
     
+}
+- (IBAction)addTopic:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Create a new topic" message:@"\n" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Done", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    alertTextField = [alert textFieldAtIndex:0];
+    alertTextField.keyboardType = UIKeyboardTypeDefault;
+    NSLog(@"cancel button index: %ld", (long)[alert cancelButtonIndex]);
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        if (alertTextField.text.length > 25 || alertTextField.text.length == 0)
+        {
+            // if mis-formatted string, display new alert view with instructions
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please enter a topic that is between 1 to 25 characters" message:@"\n" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Done", nil];
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            alertTextField = [alert textFieldAtIndex:0];
+            alertTextField.keyboardType = UIKeyboardTypeDefault;
+            NSLog(@"cancel button index: %ld", (long)[alert cancelButtonIndex]);
+            [alert show];
+        }
+        else
+        {
+            // set topic string and topic label
+            
+            topicChosen = alertTextField.text;
+            topicLabel.text = [NSString stringWithFormat:@"Topic Chosen: %@", alertTextField.text];
+            
+            // add to master list
+            
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TopicsList" ofType:@"plist"];
+            NSArray *topicsArray = [[NSArray alloc] initWithContentsOfFile:filePath];
+            
+            NSMutableArray *topicsArrayMut = [NSMutableArray arrayWithArray:topicsArray];
+            
+            [topicsArrayMut addObject:alertTextField.text];
+            NSLog(@"topics array: %@", topicsArrayMut);
+            
+            [topicsArrayMut writeToFile:filePath atomically:YES];
+        }
+    }
+}
+
+- (IBAction)randomTopic:(id)sender
+{
+    // get current topic list from file system
+    
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TopicsList" ofType:@"plist"];
+    NSArray *topicsArray = [[NSArray alloc] initWithContentsOfFile:filePath];
+    
+    // generate random value from 0 to size of topics list
+    
+    int lowerBound = 0;
+    int upperBound = (int)topicsArray.count;
+    int rndValue = lowerBound + arc4random() % (upperBound - lowerBound);
+    
+    NSLog(@"random number is: %d", rndValue);
+    
+    // set topics label and topic string
+    
+    topicChosen = topicsArray[rndValue];
+    topicLabel.text = [NSString stringWithFormat:@"Topic Chosen: RANDOM :D"];
 }
 @end

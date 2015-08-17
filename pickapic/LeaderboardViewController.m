@@ -136,6 +136,8 @@
     
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:settingsItem, leaderboardItem, nil];
     
+    // back button
+    
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0, 0, (self.navigationController.navigationBar.frame.size.height *0.65), (self.navigationController.navigationBar.frame.size.height *0.65));
     [backButton setImage:[UIImage imageNamed:@"icn_back"] forState:UIControlStateNormal];

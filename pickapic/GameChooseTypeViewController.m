@@ -25,8 +25,25 @@
     // [manyPhoneInPersonButton setImage:[UIImage imageNamed:@"multiple-phones-in-person.png"] forState:UIControlStateNormal];
     // [manyPhoneRemoteButton setImage:[UIImage imageNamed:@"multiple-phones-remote.png"] forState:UIControlStateNormal];
     
+    // back button
     
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    backButton.frame = CGRectMake(0, 0, (self.navigationController.navigationBar.frame.size.height *0.65), (self.navigationController.navigationBar.frame.size.height *0.65));
+    [backButton setImage:[UIImage imageNamed:@"icn_back"] forState:UIControlStateNormal];
+    [backButton setImage:[UIImage imageNamed:@"icn_back_active"] forState:(UIControlStateSelected | UIControlStateHighlighted)];
+    [backButton setSelected:YES];
     
+    [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    
+    self.navigationItem.leftBarButtonItem = backItem;
+    
+}
+
+- (void)backAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
