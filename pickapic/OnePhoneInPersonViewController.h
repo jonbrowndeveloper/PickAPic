@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OnePhonePlayerListTableViewCell.h"
 
 @interface OnePhoneInPersonViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
+
+// players
+
+- (IBAction)addPlayer:(id)sender;
 
 @property (atomic, retain) NSMutableArray *playerList;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -22,7 +27,6 @@
 // add topic
 
 - (IBAction)addTopic:(id)sender;
-@property (nonatomic, retain) UITextField *alertTextField;
 
 // random topic
 
@@ -33,5 +37,11 @@
 
 @property (strong, atomic) NSString *topicChosen;
 @property (weak, nonatomic) IBOutlet UILabel *topicLabel;
+
+// custom cell
+
+@property (weak, nonatomic) OnePhonePlayerListTableViewCell *cell;
+@property (strong, atomic) UIGestureRecognizer *tapper;
+
 
 @end

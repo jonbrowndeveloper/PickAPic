@@ -11,6 +11,7 @@
 @interface OnePhonePlayerListTableViewCell : UITableViewCell 
 
 @property (weak, nonatomic) IBOutlet UITextField *textField;
-- (IBAction)addButton:(id)sender;
+
+
 
 @end

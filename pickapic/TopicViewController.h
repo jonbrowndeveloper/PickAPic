@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TopicViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface TopicViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, atomic) NSArray *topicsArray;
-@property (weak, nonatomic) NSString *topicChosen;
+@property (strong, atomic) NSMutableArray *topicsArray;
+@property (strong, atomic) NSString *topicChosen;
+
+// Adding Topic
+
+@property (strong, nonatomic) NSString *isAddingTopic;
+@property (nonatomic, retain) UITextField *alertTextField;
 
 @end

@@ -8,6 +8,8 @@
 
 #import "OnePhoneInPersonViewController.h"
 #import "OnePhonePlayerListTableViewCell.h"
+#import "TopicViewController.h"
+#import "OPIPGameViewController.h"
 
 @interface OnePhoneInPersonViewController ()
 
@@ -15,13 +17,14 @@
 
 @implementation OnePhoneInPersonViewController
 
-@synthesize playerList, tableView, beginGameButtonOutlet, topicLabel, topicChosen, alertTextField;
+@synthesize playerList, tableView, beginGameButtonOutlet, topicLabel, topicChosen, cell, tapper;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    // topicChosen = @" ";
+    playerList = [[NSMutableArray alloc] initWithObjects:(@""),(@""),(@""), nil];
+    
     
     // New Game button
     
@@ -59,6 +62,13 @@
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
     self.navigationItem.leftBarButtonItem = backItem;
+    
+    // gesure recognizer for dismissing keybaord if another part of the screen is touched
+    
+    tapper = [[UITapGestureRecognizer alloc]
+              initWithTarget:self action:@selector(handleSingleTap:)];
+    tapper.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapper];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -70,10 +80,12 @@
     [self.navigationController setViewControllers:newViewControllers];
     
     // set the Topic Label
+    
     if(!([topicChosen length] == 0))
     {
-    topicLabel.text = [NSString stringWithFormat:@"Topic Chosen: %@", topicChosen];
+        topicLabel.text = [NSString stringWithFormat:@"%@", topicChosen];
     }
+    
 }
 
 - (void)backAction
@@ -93,18 +105,38 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return playerList.count;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60.0;
+    return 40.0;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    if (playerList.count == 3)
+    {
+        return NO;
+    }
+    else
+    {
+        return YES;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [playerList removeObjectAtIndex:indexPath.row];
+    
+    [self.tableView reloadData];
 }
 
 - (UITableView *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OnePhonePlayerListTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"playerCell" forIndexPath:indexPath];
+     cell = [self.tableView dequeueReusableCellWithIdentifier:@"playerCell" forIndexPath:indexPath];
 
     // cell.textField = [[tableView cellForRowAtIndexPath:indexPath] viewWithTag:(indexPath.row)];
     
@@ -112,16 +144,36 @@
     cell.textField.delegate = self;
     cell.textField.tag  = indexPath.row;
     
-    [self.playerList addObject:@"Placeholder"];
+    cell.textField.text = playerList[indexPath.row];
     
     // [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    // returning current index path
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:(OnePhonePlayerListTableViewCell *)[[textField superview] superview]];
     
+    playerList[indexPath.row] = textField.text;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return NO;
+}
+
+- (void)handleSingleTap:(UITapGestureRecognizer *) sender
+{
+    // resigning first responder does not work. THIS WORKS!
+    [self.view endEditing:YES];
 }
 
 /*
@@ -136,52 +188,59 @@
 
 - (IBAction)beginGame:(id)sender
 {
+    NSLog(@"Begin Game Button Pressed");
     
-}
-- (IBAction)addTopic:(id)sender
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Create a new topic" message:@"\n" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Done", nil];
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    alertTextField = [alert textFieldAtIndex:0];
-    alertTextField.keyboardType = UIKeyboardTypeDefault;
-    NSLog(@"cancel button index: %ld", (long)[alert cancelButtonIndex]);
-    [alert show];
+    if (!(playerList.count == 0) && !([topicChosen length] == 0))
+    {
+        [self performSegueWithIdentifier:@"beginGameSegue" sender:self];
+        
+        NSLog(@"the game is starting");
+    }
+    else if (playerList.count == 0)
+    {
+        NSLog(@"NO PLAYERS IN LIST");
+    }
+    else if (([topicChosen length] == 0))
+    {
+        NSLog(@"NO TOPIC CHOSEN");
+    }
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if(buttonIndex == 1)
+    // send category name to bucket collection view
+    if([segue.identifier isEqualToString:@"addingTopic"])
     {
-        if (alertTextField.text.length > 25 || alertTextField.text.length == 0)
-        {
-            // if mis-formatted string, display new alert view with instructions
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please enter a topic that is between 1 to 25 characters" message:@"\n" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Done", nil];
-            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-            alertTextField = [alert textFieldAtIndex:0];
-            alertTextField.keyboardType = UIKeyboardTypeDefault;
-            NSLog(@"cancel button index: %ld", (long)[alert cancelButtonIndex]);
-            [alert show];
-        }
-        else
-        {
-            // set topic string and topic label
-            
-            topicChosen = alertTextField.text;
-            topicLabel.text = [NSString stringWithFormat:@"Topic Chosen: %@", alertTextField.text];
-            
-            // add to master list
-            
-            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TopicsList" ofType:@"plist"];
-            NSArray *topicsArray = [[NSArray alloc] initWithContentsOfFile:filePath];
-            
-            NSMutableArray *topicsArrayMut = [NSMutableArray arrayWithArray:topicsArray];
-            
-            [topicsArrayMut addObject:alertTextField.text];
-            NSLog(@"topics array: %@", topicsArrayMut);
-            
-            [topicsArrayMut writeToFile:filePath atomically:YES];
-        }
+        TopicViewController *divc = (TopicViewController *)[segue destinationViewController];
+
+        divc.isAddingTopic = @"YES";
     }
+    else if ([segue.identifier isEqualToString:@"pickingTopic"])
+    {
+        TopicViewController *divc = (TopicViewController *)[segue destinationViewController];
+        
+        divc.isAddingTopic = @"NO";
+    }
+    else if ([segue.identifier isEqualToString:@"toGame"])
+    {
+        OPIPGameViewController *divc = (OPIPGameViewController *)[segue destinationViewController];
+        
+        divc.topicLabel.text = topicChosen;
+        divc.playersArray = playerList;
+    }
+}
+
+- (IBAction)addPlayer:(id)sender
+{
+    [playerList addObject:[NSString stringWithFormat:@""]];
+    
+    [self.tableView reloadData];
+}
+
+- (IBAction)addTopic:(id)sender
+{
+    // [self performSegueWithIdentifier:@"toTopicsFromOPIP" sender:self];
+    
 }
 
 - (IBAction)randomTopic:(id)sender
@@ -202,6 +261,7 @@
     // set topics label and topic string
     
     topicChosen = topicsArray[rndValue];
-    topicLabel.text = [NSString stringWithFormat:@"Topic Chosen: RANDOM :D"];
+    topicLabel.text = [NSString stringWithFormat:@"%@", topicChosen];
 }
+
 @end

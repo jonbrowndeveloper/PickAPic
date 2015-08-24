@@ -16,11 +16,11 @@
 
 @implementation TopicViewController
 
-@synthesize tableView, topicsArray, topicChosen;
+@synthesize tableView, topicsArray, topicChosen, isAddingTopic, alertTextField;
 
 - (void)viewDidLoad
 {
-    
+    topicChosen = [[NSString alloc] init];
     
     // back button
     
@@ -41,7 +41,9 @@
     // Load topics
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TopicsList" ofType:@"plist"];
-    topicsArray = [[NSArray alloc] initWithContentsOfFile:filePath];
+    NSArray *topicsArrayNM = [[NSArray alloc] initWithContentsOfFile:filePath];
+    topicsArray = [NSMutableArray arrayWithArray:topicsArrayNM];
+    
     // topicsArray = [NSArray arrayWithArray:[dict objectForKey:@"Root"]];
     
     // NSLog(@"topics array: %@\nFilePath: %@", topicsArray, filePath);
@@ -49,6 +51,18 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    if ([isAddingTopic isEqual: @"YES"]) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Create a new topic" message:@"\n" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Done", nil];
+         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+         alertTextField = [alert textFieldAtIndex:0];
+         alertTextField.keyboardType = UIKeyboardTypeDefault;
+         NSLog(@"cancel button index: %ld", (long)[alert cancelButtonIndex]);
+         [alert show];
+         
+    }
+    
+    self.tableView.allowsSelection = YES;
 
 }
 
@@ -114,21 +128,64 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        if (alertTextField.text.length > 25 || alertTextField.text.length == 0)
+        {
+            // if mis-formatted string, display new alert view with instructions
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please enter a topic that is between 1 to 25 characters" message:@"\n" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Done", nil];
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            alertTextField = [alert textFieldAtIndex:0];
+            alertTextField.keyboardType = UIKeyboardTypeDefault;
+            NSLog(@"cancel button index: %ld", (long)[alert cancelButtonIndex]);
+            [alert show];
+        }
+        else
+        {
+            // set topic string and topic label
+            
+            topicChosen = alertTextField.text;
+            // topicLabel.text = [NSString stringWithFormat:@"Topic Chosen: %@", alertTextField.text];
+            
+            // add to master list
+            
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TopicsList" ofType:@"plist"];
+
+            [topicsArray insertObject:alertTextField.text atIndex:0];
+            // NSLog(@"topics array: %@", topicsArray);
+            
+            [topicsArray writeToFile:filePath atomically:YES];
+            
+            [self.tableView reloadData];
+            
+            self.tableView.allowsSelection = NO;
+            
+            [NSTimer scheduledTimerWithTimeInterval:0.75
+                                             target:self
+                                           selector:@selector(changeView)
+                                           userInfo:nil
+                                            repeats:NO];
+        }
+    }
+}
+
+- (void)changeView
+{
+    NSLog(@"Topic chosen before segue: %@", topicChosen);
+    [self performSegueWithIdentifier:@"fromTopics" sender:self];
+}
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
     OnePhoneInPersonViewController *divc = (OnePhoneInPersonViewController *)[segue destinationViewController];
-    /*
-    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
-    NSLog(@"Selected Index Path: %ld", (long)selectedIndexPath.row);
-    NSLog(@"Topic Chosen From topicview: %@", [topicsArray objectAtIndex:selectedIndexPath.row]);
-    */
+
     divc.topicChosen = topicChosen;
     NSLog(@"Topic Chosen3: %@", topicChosen);
-    // divc.topicLabel.text = [NSString stringWithFormat:@"Topic Chosen: %@", [topicsArray objectAtIndex:selectedIndexPath.row]];
+
 }
 
 

@@ -35,6 +35,10 @@
 		AA3883B21B7C149A00C2CE1D /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 343CC8451B34CED80030FF65 /* Lato-Light.ttf */; };
 		AA3883B31B7C149A00C2CE1D /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 343CC8461B34CED80030FF65 /* Lato-LightItalic.ttf */; };
 		AA3883B41B7C149A00C2CE1D /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 343CC8471B34CED80030FF65 /* Lato-Regular.ttf */; };
+		AA4DA3CD1B83F5AE001C45DE /* OPIPGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4DA3CC1B83F5AE001C45DE /* OPIPGameViewController.m */; };
+		AA4DA3CF1B8AEEDF001C45DE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4DA3CE1B8AEEDF001C45DE /* CoreGraphics.framework */; };
+		AA4DA3D11B8AEEFA001C45DE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4DA3D01B8AEEFA001C45DE /* UIKit.framework */; };
+		AA4DA3D31B8AEF05001C45DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4DA3D21B8AEF05001C45DE /* Foundation.framework */; };
 		AA6231881B814FBD00E3DC48 /* TopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6231871B814FBD00E3DC48 /* TopicViewController.m */; };
 		AA62318B1B81517F00E3DC48 /* TopicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA62318A1B81517F00E3DC48 /* TopicTableViewCell.m */; };
 		AA62318D1B81544F00E3DC48 /* TopicsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA62318C1B81544F00E3DC48 /* TopicsList.plist */; };
@@ -93,6 +97,11 @@
 		AA3883A61B7BF91800C2CE1D /* OnePhoneInPersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OnePhoneInPersonViewController.m; path = pickapic/OnePhoneInPersonViewController.m; sourceTree = SOURCE_ROOT; };
 		AA3883A81B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OnePhonePlayerListTableViewCell.h; path = pickapic/OnePhonePlayerListTableViewCell.h; sourceTree = SOURCE_ROOT; };
 		AA3883A91B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OnePhonePlayerListTableViewCell.m; path = pickapic/OnePhonePlayerListTableViewCell.m; sourceTree = SOURCE_ROOT; };
+		AA4DA3CB1B83F5AE001C45DE /* OPIPGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OPIPGameViewController.h; path = pickapic/OPIPGameViewController.h; sourceTree = SOURCE_ROOT; };
+		AA4DA3CC1B83F5AE001C45DE /* OPIPGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OPIPGameViewController.m; path = pickapic/OPIPGameViewController.m; sourceTree = SOURCE_ROOT; };
+		AA4DA3CE1B8AEEDF001C45DE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AA4DA3D01B8AEEFA001C45DE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		AA4DA3D21B8AEF05001C45DE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AA6231861B814FBD00E3DC48 /* TopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TopicViewController.h; path = pickapic/TopicViewController.h; sourceTree = SOURCE_ROOT; };
 		AA6231871B814FBD00E3DC48 /* TopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TopicViewController.m; path = pickapic/TopicViewController.m; sourceTree = SOURCE_ROOT; };
 		AA6231891B81517F00E3DC48 /* TopicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TopicTableViewCell.h; path = pickapic/TopicTableViewCell.h; sourceTree = SOURCE_ROOT; };
@@ -105,6 +114,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA4DA3D31B8AEF05001C45DE /* Foundation.framework in Frameworks */,
+				AA4DA3D11B8AEEFA001C45DE /* UIKit.framework in Frameworks */,
+				AA4DA3CF1B8AEEDF001C45DE /* CoreGraphics.framework in Frameworks */,
 				34BE668F1B38B8300059AF9B /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,6 +134,9 @@
 		343CC8081B3361670030FF65 = {
 			isa = PBXGroup;
 			children = (
+				AA4DA3D21B8AEF05001C45DE /* Foundation.framework */,
+				AA4DA3D01B8AEEFA001C45DE /* UIKit.framework */,
+				AA4DA3CE1B8AEEDF001C45DE /* CoreGraphics.framework */,
 				34BE668E1B38B8300059AF9B /* QuartzCore.framework */,
 				343CC8131B3361670030FF65 /* PickAPic */,
 				343CC8301B3361670030FF65 /* PickAPicTests */,
@@ -147,6 +162,7 @@
 				349C87DD1B7A98A1002C7B65 /* Home, Settings, and Leaderboard */,
 				343CC8481B34DD260030FF65 /* constants.h */,
 				343CC8491B34DD260030FF65 /* constants.m */,
+				AA4DA3C11B83F289001C45DE /* 3rd Party Classes */,
 				343CC8211B3361670030FF65 /* Main.storyboard */,
 				343CC8241B3361670030FF65 /* Images.xcassets */,
 				343CC8261B3361670030FF65 /* LaunchScreen.xib */,
@@ -213,6 +229,8 @@
 				AA3883A61B7BF91800C2CE1D /* OnePhoneInPersonViewController.m */,
 				AA3883A81B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.h */,
 				AA3883A91B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.m */,
+				AA4DA3CB1B83F5AE001C45DE /* OPIPGameViewController.h */,
+				AA4DA3CC1B83F5AE001C45DE /* OPIPGameViewController.m */,
 				AA6231861B814FBD00E3DC48 /* TopicViewController.h */,
 				AA6231871B814FBD00E3DC48 /* TopicViewController.m */,
 				AA6231891B81517F00E3DC48 /* TopicTableViewCell.h */,
@@ -234,6 +252,13 @@
 				34B010C81B4AFF8F005F2096 /* LeaderboardTableViewCell.m */,
 			);
 			name = "Home, Settings, and Leaderboard";
+			sourceTree = "<group>";
+		};
+		AA4DA3C11B83F289001C45DE /* 3rd Party Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "3rd Party Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,6 +383,7 @@
 				AA62318B1B81517F00E3DC48 /* TopicTableViewCell.m in Sources */,
 				AA6231881B814FBD00E3DC48 /* TopicViewController.m in Sources */,
 				343CC8201B3361670030FF65 /* ViewController.m in Sources */,
+				AA4DA3CD1B83F5AE001C45DE /* OPIPGameViewController.m in Sources */,
 				343CC8171B3361670030FF65 /* main.m in Sources */,
 				AA3883A71B7BF91800C2CE1D /* OnePhoneInPersonViewController.m in Sources */,
 				34A18ABC1B4217A90000BBEC /* SettingsViewController.m in Sources */,
