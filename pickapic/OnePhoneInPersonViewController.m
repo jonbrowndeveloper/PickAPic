@@ -103,6 +103,8 @@
     return 1;
 }
 
+#pragma tablview methods
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return playerList.count;
@@ -190,9 +192,23 @@
 {
     NSLog(@"Begin Game Button Pressed");
     
-    if (!(playerList.count == 0) && !([topicChosen length] == 0))
+    // check the strings in the array to make sure they aren't blank
+    
+    BOOL stringIsEmpty = NO;
+    
+    for (NSString *string in playerList)
     {
-        [self performSegueWithIdentifier:@"beginGameSegue" sender:self];
+        if ([string length] == 0)
+        {
+            // trip the bool that there is a string that is empty
+            stringIsEmpty = YES;
+        }
+
+    }
+    
+    if (!(playerList.count == 0) && !([topicChosen length] == 0) && stringIsEmpty == NO)
+    {
+        [self performSegueWithIdentifier:@"toGame" sender:self];
         
         NSLog(@"the game is starting");
     }
@@ -203,6 +219,10 @@
     else if (([topicChosen length] == 0))
     {
         NSLog(@"NO TOPIC CHOSEN");
+    }
+    else if (stringIsEmpty == YES)
+    {
+        NSLog(@"there is an empty string in the players array");
     }
 }
 
@@ -225,7 +245,9 @@
     {
         OPIPGameViewController *divc = (OPIPGameViewController *)[segue destinationViewController];
         
-        divc.topicLabel.text = topicChosen;
+        NSLog(@"going to game. Topic Chosen: %@", topicChosen);
+        
+        divc.topicChosen = topicChosen;
         divc.playersArray = playerList;
     }
 }

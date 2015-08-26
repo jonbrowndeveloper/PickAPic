@@ -39,6 +39,8 @@
 		AA4DA3CF1B8AEEDF001C45DE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4DA3CE1B8AEEDF001C45DE /* CoreGraphics.framework */; };
 		AA4DA3D11B8AEEFA001C45DE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4DA3D01B8AEEFA001C45DE /* UIKit.framework */; };
 		AA4DA3D31B8AEF05001C45DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4DA3D21B8AEF05001C45DE /* Foundation.framework */; };
+		AA4DA3D61B8E2A17001C45DE /* OPIPTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4DA3D51B8E2A17001C45DE /* OPIPTableViewCell.m */; };
+		AA4DA3D81B8E5C98001C45DE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4DA3D71B8E5C98001C45DE /* AudioToolbox.framework */; };
 		AA6231881B814FBD00E3DC48 /* TopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6231871B814FBD00E3DC48 /* TopicViewController.m */; };
 		AA62318B1B81517F00E3DC48 /* TopicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA62318A1B81517F00E3DC48 /* TopicTableViewCell.m */; };
 		AA62318D1B81544F00E3DC48 /* TopicsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA62318C1B81544F00E3DC48 /* TopicsList.plist */; };
@@ -102,6 +104,9 @@
 		AA4DA3CE1B8AEEDF001C45DE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		AA4DA3D01B8AEEFA001C45DE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AA4DA3D21B8AEF05001C45DE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AA4DA3D41B8E2A17001C45DE /* OPIPTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OPIPTableViewCell.h; path = pickapic/OPIPTableViewCell.h; sourceTree = SOURCE_ROOT; };
+		AA4DA3D51B8E2A17001C45DE /* OPIPTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OPIPTableViewCell.m; path = pickapic/OPIPTableViewCell.m; sourceTree = SOURCE_ROOT; };
+		AA4DA3D71B8E5C98001C45DE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		AA6231861B814FBD00E3DC48 /* TopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TopicViewController.h; path = pickapic/TopicViewController.h; sourceTree = SOURCE_ROOT; };
 		AA6231871B814FBD00E3DC48 /* TopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TopicViewController.m; path = pickapic/TopicViewController.m; sourceTree = SOURCE_ROOT; };
 		AA6231891B81517F00E3DC48 /* TopicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TopicTableViewCell.h; path = pickapic/TopicTableViewCell.h; sourceTree = SOURCE_ROOT; };
@@ -114,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA4DA3D81B8E5C98001C45DE /* AudioToolbox.framework in Frameworks */,
 				AA4DA3D31B8AEF05001C45DE /* Foundation.framework in Frameworks */,
 				AA4DA3D11B8AEEFA001C45DE /* UIKit.framework in Frameworks */,
 				AA4DA3CF1B8AEEDF001C45DE /* CoreGraphics.framework in Frameworks */,
@@ -134,6 +140,7 @@
 		343CC8081B3361670030FF65 = {
 			isa = PBXGroup;
 			children = (
+				AA4DA3D71B8E5C98001C45DE /* AudioToolbox.framework */,
 				AA4DA3D21B8AEF05001C45DE /* Foundation.framework */,
 				AA4DA3D01B8AEEFA001C45DE /* UIKit.framework */,
 				AA4DA3CE1B8AEEDF001C45DE /* CoreGraphics.framework */,
@@ -231,6 +238,8 @@
 				AA3883A91B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.m */,
 				AA4DA3CB1B83F5AE001C45DE /* OPIPGameViewController.h */,
 				AA4DA3CC1B83F5AE001C45DE /* OPIPGameViewController.m */,
+				AA4DA3D41B8E2A17001C45DE /* OPIPTableViewCell.h */,
+				AA4DA3D51B8E2A17001C45DE /* OPIPTableViewCell.m */,
 				AA6231861B814FBD00E3DC48 /* TopicViewController.h */,
 				AA6231871B814FBD00E3DC48 /* TopicViewController.m */,
 				AA6231891B81517F00E3DC48 /* TopicTableViewCell.h */,
@@ -382,6 +391,7 @@
 				343CC81A1B3361670030FF65 /* AppDelegate.m in Sources */,
 				AA62318B1B81517F00E3DC48 /* TopicTableViewCell.m in Sources */,
 				AA6231881B814FBD00E3DC48 /* TopicViewController.m in Sources */,
+				AA4DA3D61B8E2A17001C45DE /* OPIPTableViewCell.m in Sources */,
 				343CC8201B3361670030FF65 /* ViewController.m in Sources */,
 				AA4DA3CD1B83F5AE001C45DE /* OPIPGameViewController.m in Sources */,
 				343CC8171B3361670030FF65 /* main.m in Sources */,
