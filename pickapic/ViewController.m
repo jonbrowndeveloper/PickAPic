@@ -42,7 +42,7 @@
     // navbar color
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.0/255.0 green:161.0/255.0 blue:203.0/255.0 alpha:1]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.0/255.0 green:158.0/255.0 blue:201.0/255.0 alpha:1]];
     
 
     // background profile imageview setup
@@ -69,8 +69,8 @@
     CALayer *btnLayer = [gameNewButton layer];
     [btnLayer setMasksToBounds:YES];
     [btnLayer setBorderWidth:2.0f];
-    [btnLayer setBorderColor:[UIColor colorWithRed:186.0/255.0 green:0.0/255.0 blue:93.0/255.0 alpha:0.2].CGColor];
-    [btnLayer setBackgroundColor:[UIColor colorWithRed:160.0/255.0 green:0.0/255.0 blue:93.0/255.0 alpha:0.9].CGColor];
+    [btnLayer setBorderColor:[UIColor colorWithRed:186.0/255.0 green:0.0/255.0 blue:93.0/255.0 alpha:1].CGColor];
+    [btnLayer setBackgroundColor:[UIColor colorWithRed:160.0/255.0 green:0.0/255.0 blue:93.0/255.0 alpha:1].CGColor];
     [btnLayer setCornerRadius:8.0f];
     
     // create some text for the button with the finger image

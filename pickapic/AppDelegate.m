@@ -15,7 +15,24 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"preferencesSet"])
+    {
+        BOOL preferencesSet = YES;
+        [[NSUserDefaults standardUserDefaults] setBool:preferencesSet forKey:@"preferencesSet"];
+        
+        double gameTimer = 60.0;
+        [[NSUserDefaults standardUserDefaults] setDouble:gameTimer forKey:@"gameTimer"];
+        
+        BOOL rounds = YES;
+        [[NSUserDefaults standardUserDefaults] setBool:rounds forKey:@"isRounds"];
+        
+        double numberOfRoundsOrPoints = 5.0;
+        [[NSUserDefaults standardUserDefaults] setDouble:numberOfRoundsOrPoints forKey:@"numberOfRoundsOrPoints"];
+        
+    }
+    
     // Override point for customization after application launch.
     return YES;
 }

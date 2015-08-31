@@ -13,10 +13,16 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, atomic) NSMutableArray *topicsArray;
 @property (strong, atomic) NSString *topicChosen;
+@property (strong, nonatomic) NSString *fromController;
+
+@property (strong, nonatomic) NSMutableArray *playersArray;
+@property (strong, nonatomic) NSMutableArray *scoreArray;
 
 // Adding Topic
 
 @property (strong, nonatomic) NSString *isAddingTopic;
 @property (nonatomic, retain) UITextField *alertTextField;
+
+@property (nonatomic, assign) NSNumber *roundNumber;
 
 @end

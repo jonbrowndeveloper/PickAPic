@@ -15,7 +15,7 @@
 
 - (IBAction)addPlayer:(id)sender;
 
-@property (atomic, retain) NSMutableArray *playerList;
+@property (strong, nonatomic) NSMutableArray *playerList;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 // begin game
@@ -42,6 +42,9 @@
 
 @property (weak, nonatomic) OnePhonePlayerListTableViewCell *cell;
 @property (strong, atomic) UIGestureRecognizer *tapper;
+
+@property (nonatomic, retain) UIButton *settingsButton;
+
 
 
 @end

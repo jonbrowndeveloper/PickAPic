@@ -23,6 +23,7 @@
 		34B010CB1B4B0DBB005F2096 /* placeholderLeaderboard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34B010CA1B4B0DBB005F2096 /* placeholderLeaderboard.plist */; };
 		34BE668F1B38B8300059AF9B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34BE668E1B38B8300059AF9B /* QuartzCore.framework */; };
 		34BE66981B3C61230059AF9B /* gTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 34BE66971B3C61230059AF9B /* gTableViewCell.m */; };
+		AA0FF3A91B93DC6600E9E9EC /* OPIPSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0FF3A81B93DC6600E9E9EC /* OPIPSettingsViewController.m */; };
 		AA3883A71B7BF91800C2CE1D /* OnePhoneInPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3883A61B7BF91800C2CE1D /* OnePhoneInPersonViewController.m */; };
 		AA3883AA1B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3883A91B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.m */; };
 		AA3883AB1B7C149A00C2CE1D /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 343CC83E1B34CED80030FF65 /* Lato-Black.ttf */; };
@@ -95,6 +96,8 @@
 		34BE668E1B38B8300059AF9B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		34BE66961B3C61230059AF9B /* gTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gTableViewCell.h; path = ../gTableViewCell.h; sourceTree = "<group>"; };
 		34BE66971B3C61230059AF9B /* gTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = gTableViewCell.m; path = ../gTableViewCell.m; sourceTree = "<group>"; };
+		AA0FF3A71B93DC6600E9E9EC /* OPIPSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OPIPSettingsViewController.h; path = pickapic/OPIPSettingsViewController.h; sourceTree = SOURCE_ROOT; };
+		AA0FF3A81B93DC6600E9E9EC /* OPIPSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OPIPSettingsViewController.m; path = pickapic/OPIPSettingsViewController.m; sourceTree = SOURCE_ROOT; };
 		AA3883A51B7BF91800C2CE1D /* OnePhoneInPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OnePhoneInPersonViewController.h; path = pickapic/OnePhoneInPersonViewController.h; sourceTree = SOURCE_ROOT; };
 		AA3883A61B7BF91800C2CE1D /* OnePhoneInPersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OnePhoneInPersonViewController.m; path = pickapic/OnePhoneInPersonViewController.m; sourceTree = SOURCE_ROOT; };
 		AA3883A81B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OnePhonePlayerListTableViewCell.h; path = pickapic/OnePhonePlayerListTableViewCell.h; sourceTree = SOURCE_ROOT; };
@@ -140,11 +143,6 @@
 		343CC8081B3361670030FF65 = {
 			isa = PBXGroup;
 			children = (
-				AA4DA3D71B8E5C98001C45DE /* AudioToolbox.framework */,
-				AA4DA3D21B8AEF05001C45DE /* Foundation.framework */,
-				AA4DA3D01B8AEEFA001C45DE /* UIKit.framework */,
-				AA4DA3CE1B8AEEDF001C45DE /* CoreGraphics.framework */,
-				34BE668E1B38B8300059AF9B /* QuartzCore.framework */,
 				343CC8131B3361670030FF65 /* PickAPic */,
 				343CC8301B3361670030FF65 /* PickAPicTests */,
 				343CC8121B3361670030FF65 /* Products */,
@@ -163,6 +161,7 @@
 		343CC8131B3361670030FF65 /* PickAPic */ = {
 			isa = PBXGroup;
 			children = (
+				AA4DA3D91B8E8C4B001C45DE /* Frameworks */,
 				343CC8181B3361670030FF65 /* AppDelegate.h */,
 				343CC8191B3361670030FF65 /* AppDelegate.m */,
 				349C87DC1B7A988B002C7B65 /* Game */,
@@ -228,18 +227,11 @@
 		349C87DC1B7A988B002C7B65 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				AA0FF3AA1B93DC7100E9E9EC /* OPIP */,
 				34BE66961B3C61230059AF9B /* gTableViewCell.h */,
 				34BE66971B3C61230059AF9B /* gTableViewCell.m */,
 				3411030A1B72BA1600EA1E24 /* GameChooseTypeViewController.h */,
 				3411030B1B72BA1600EA1E24 /* GameChooseTypeViewController.m */,
-				AA3883A51B7BF91800C2CE1D /* OnePhoneInPersonViewController.h */,
-				AA3883A61B7BF91800C2CE1D /* OnePhoneInPersonViewController.m */,
-				AA3883A81B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.h */,
-				AA3883A91B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.m */,
-				AA4DA3CB1B83F5AE001C45DE /* OPIPGameViewController.h */,
-				AA4DA3CC1B83F5AE001C45DE /* OPIPGameViewController.m */,
-				AA4DA3D41B8E2A17001C45DE /* OPIPTableViewCell.h */,
-				AA4DA3D51B8E2A17001C45DE /* OPIPTableViewCell.m */,
 				AA6231861B814FBD00E3DC48 /* TopicViewController.h */,
 				AA6231871B814FBD00E3DC48 /* TopicViewController.m */,
 				AA6231891B81517F00E3DC48 /* TopicTableViewCell.h */,
@@ -263,11 +255,40 @@
 			name = "Home, Settings, and Leaderboard";
 			sourceTree = "<group>";
 		};
+		AA0FF3AA1B93DC7100E9E9EC /* OPIP */ = {
+			isa = PBXGroup;
+			children = (
+				AA3883A51B7BF91800C2CE1D /* OnePhoneInPersonViewController.h */,
+				AA3883A61B7BF91800C2CE1D /* OnePhoneInPersonViewController.m */,
+				AA3883A81B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.h */,
+				AA3883A91B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.m */,
+				AA4DA3CB1B83F5AE001C45DE /* OPIPGameViewController.h */,
+				AA4DA3CC1B83F5AE001C45DE /* OPIPGameViewController.m */,
+				AA4DA3D41B8E2A17001C45DE /* OPIPTableViewCell.h */,
+				AA4DA3D51B8E2A17001C45DE /* OPIPTableViewCell.m */,
+				AA0FF3A71B93DC6600E9E9EC /* OPIPSettingsViewController.h */,
+				AA0FF3A81B93DC6600E9E9EC /* OPIPSettingsViewController.m */,
+			);
+			name = OPIP;
+			sourceTree = "<group>";
+		};
 		AA4DA3C11B83F289001C45DE /* 3rd Party Classes */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = "3rd Party Classes";
+			sourceTree = "<group>";
+		};
+		AA4DA3D91B8E8C4B001C45DE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AA4DA3D71B8E5C98001C45DE /* AudioToolbox.framework */,
+				AA4DA3D21B8AEF05001C45DE /* Foundation.framework */,
+				AA4DA3D01B8AEEFA001C45DE /* UIKit.framework */,
+				AA4DA3CE1B8AEEDF001C45DE /* CoreGraphics.framework */,
+				34BE668E1B38B8300059AF9B /* QuartzCore.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,6 +403,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA0FF3A91B93DC6600E9E9EC /* OPIPSettingsViewController.m in Sources */,
 				343CC84A1B34DD260030FF65 /* constants.m in Sources */,
 				34BE66981B3C61230059AF9B /* gTableViewCell.m in Sources */,
 				34A18ABF1B4217B70000BBEC /* LeaderboardViewController.m in Sources */,
@@ -522,7 +544,7 @@
 				INFOPLIST_FILE = PickAPic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e5403eae-2297-497e-87c9-1bc702fd3833";
+				PROVISIONING_PROFILE = "c3c3fe29-f8e3-41e9-8413-ddcbc89305ab";
 			};
 			name = Debug;
 		};
@@ -533,7 +555,7 @@
 				INFOPLIST_FILE = PickAPic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e5403eae-2297-497e-87c9-1bc702fd3833";
+				PROVISIONING_PROFILE = "c3c3fe29-f8e3-41e9-8413-ddcbc89305ab";
 			};
 			name = Release;
 		};

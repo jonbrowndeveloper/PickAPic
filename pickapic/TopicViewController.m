@@ -9,6 +9,7 @@
 #import "TopicViewController.h"
 #import "TopicTableViewCell.h"
 #import "OnePhoneInPersonViewController.h"
+#import "OPIPGameViewController.h"
 
 @interface TopicViewController ()
 
@@ -16,7 +17,7 @@
 
 @implementation TopicViewController
 
-@synthesize tableView, topicsArray, topicChosen, isAddingTopic, alertTextField;
+@synthesize tableView, topicsArray, topicChosen, isAddingTopic, alertTextField, fromController, playersArray, scoreArray, roundNumber;
 
 - (void)viewDidLoad
 {
@@ -68,18 +69,37 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *selectedCell = [self.tableView cellForRowAtIndexPath:indexPath];
-    topicChosen = selectedCell.textLabel.text;
-    
-    NSLog(@"topic Chosen2: %@", topicChosen);
-    
-    // deselect cell on editing
-    
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    // send back to game controller
-    
-    [self performSegueWithIdentifier:@"fromTopics" sender:self];
+    if ([fromController isEqualToString:@"Setup"])
+    {
+        UITableViewCell *selectedCell = [self.tableView cellForRowAtIndexPath:indexPath];
+        topicChosen = selectedCell.textLabel.text;
+        
+        NSLog(@"topic Chosen2: %@", topicChosen);
+        
+        // deselect cell on editing
+        
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+        // send back to game controller
+        
+        [self performSegueWithIdentifier:@"fromTopicsToSetup" sender:self];
+    }
+    else if ([fromController isEqualToString:@"Game"])
+    {
+        UITableViewCell *selectedCell = [self.tableView cellForRowAtIndexPath:indexPath];
+        topicChosen = selectedCell.textLabel.text;
+        
+        NSLog(@"topic Chosen2: %@", topicChosen);
+        
+        // deselect cell on editing
+        
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+        // send back to game controller
+        
+        [self performSegueWithIdentifier:@"fromTopicsToGame" sender:self];
+    }
+
 }
 
 - (void)backAction
@@ -174,17 +194,43 @@
 - (void)changeView
 {
     NSLog(@"Topic chosen before segue: %@", topicChosen);
-    [self performSegueWithIdentifier:@"fromTopics" sender:self];
+    
+    if ([fromController isEqualToString:@"Setup"])
+    {
+        [self performSegueWithIdentifier:@"fromTopicsToSetup" sender:self];
+    }
+    else if ([fromController isEqualToString:@"Game"])
+    {
+        [self performSegueWithIdentifier:@"fromTopicsToGame" sender:self];
+    }
+    
 }
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    OnePhoneInPersonViewController *divc = (OnePhoneInPersonViewController *)[segue destinationViewController];
-
-    divc.topicChosen = topicChosen;
-    NSLog(@"Topic Chosen3: %@", topicChosen);
+    if([segue.identifier isEqualToString:@"fromTopicsToSetup"])
+    {
+        OnePhoneInPersonViewController *divc = (OnePhoneInPersonViewController *)[segue destinationViewController];
+        
+        divc.topicChosen = topicChosen;
+        NSLog(@"Topic Chosen from Topics Window: %@", topicChosen);
+        
+        divc.playerList = playersArray;
+    }
+    else if([segue.identifier isEqualToString:@"fromTopicsToGame"])
+    {
+        OPIPGameViewController *divc = (OPIPGameViewController *)[segue destinationViewController];
+        
+        divc.topicChosen = topicChosen;
+        NSLog(@"Topic Chosen from Topics Window: %@", topicChosen);
+        
+        divc.playersArray = playersArray;
+        divc.playerScores = scoreArray;
+        
+        divc.roundNumber = roundNumber;
+    }
 
 }
 

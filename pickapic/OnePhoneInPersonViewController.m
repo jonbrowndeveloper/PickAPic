@@ -17,14 +17,19 @@
 
 @implementation OnePhoneInPersonViewController
 
-@synthesize playerList, tableView, beginGameButtonOutlet, topicLabel, topicChosen, cell, tapper;
+@synthesize playerList, tableView, beginGameButtonOutlet, topicLabel, topicChosen, cell, tapper, settingsButton;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    playerList = [[NSMutableArray alloc] initWithObjects:(@""),(@""),(@""), nil];
+    if (playerList == nil)
+    {
+        playerList = [[NSMutableArray alloc] initWithObjects:(@""),(@""),(@""), nil];
+    }
     
+    topicLabel.textColor = [UIColor grayColor];
+    topicLabel.text = @"select an option from below";
     
     // New Game button
     
@@ -53,6 +58,7 @@
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0, 0, (self.navigationController.navigationBar.frame.size.height *0.65), (self.navigationController.navigationBar.frame.size.height *0.65));
+    backButton.hidden = YES;
     [backButton setImage:[UIImage imageNamed:@"icn_back"] forState:UIControlStateNormal];
     [backButton setImage:[UIImage imageNamed:@"icn_back_active"] forState:(UIControlStateSelected | UIControlStateHighlighted)];
     [backButton setSelected:YES];
@@ -69,14 +75,34 @@
               initWithTarget:self action:@selector(handleSingleTap:)];
     tapper.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapper];
+    
+    // set 'Pick A Pic' logo on navigation bar
+    
+    UIImage *logo = [UIImage imageNamed:@"icn_logo.png"];
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:logo];
+    imgView.frame = CGRectMake(0, 0, (self.navigationController.navigationBar.frame.size.width * 0.75), (self.navigationController.navigationBar.frame.size.height * 0.75));
+    imgView.contentMode = UIViewContentModeScaleAspectFit;
+    self.navigationItem.titleView = imgView;
+    
+    // navbar color
+    
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.0/255.0 green:158.0/255.0 blue:201.0/255.0 alpha:1]];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    /* TODO: USE IN FINAL VERSION
     // to make sure the 'TopicViewConroller' is not in the view controller hierarchy
     
     NSArray * viewControllers = [self.navigationController viewControllers];
     NSArray * newViewControllers = [NSArray arrayWithObjects:[viewControllers objectAtIndex:0], [viewControllers objectAtIndex:1], self,nil];
+    [self.navigationController setViewControllers:newViewControllers];
+    */
+    // to make sure the 'TopicViewConroller' is not in the view controller hierarchy
+    
+    NSArray * newViewControllers = [NSArray arrayWithObjects:self,nil];
     [self.navigationController setViewControllers:newViewControllers];
     
     // set the Topic Label
@@ -84,8 +110,32 @@
     if(!([topicChosen length] == 0))
     {
         topicLabel.text = [NSString stringWithFormat:@"%@", topicChosen];
+        
+        topicLabel.textColor = [UIColor blackColor];
     }
     
+    NSLog(@"players list: %@", playerList);
+    
+    // settings button
+    
+    // settings button
+    
+    settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    settingsButton.frame = CGRectMake(0, 0, (self.navigationController.navigationBar.frame.size.height *0.65), (self.navigationController.navigationBar.frame.size.height *0.65));
+    [settingsButton setImage:[UIImage imageNamed:@"icn_settings"] forState:UIControlStateNormal];
+    [settingsButton setImage:[UIImage imageNamed:@"icn_settings_active"] forState:(UIControlStateSelected | UIControlStateHighlighted)];
+    [settingsButton setSelected:YES];
+    
+    [settingsButton addTarget:self action:@selector(activateSettingsSegue) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *settingsItem = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
+    
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:settingsItem, nil];
+}
+
+- (void)activateSettingsSegue
+{
+    [self performSegueWithIdentifier:@"segueToSettings" sender:self];
 }
 
 - (void)backAction
@@ -136,7 +186,7 @@
     [self.tableView reloadData];
 }
 
-- (UITableView *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (OnePhonePlayerListTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
      cell = [self.tableView dequeueReusableCellWithIdentifier:@"playerCell" forIndexPath:indexPath];
 
@@ -215,14 +265,24 @@
     else if (playerList.count == 0)
     {
         NSLog(@"NO PLAYERS IN LIST");
+        
     }
     else if (([topicChosen length] == 0))
     {
         NSLog(@"NO TOPIC CHOSEN");
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Please choose a topic" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Done", nil];
+        alert.alertViewStyle = UIAlertActionStyleDefault;
+        [alert show];
     }
     else if (stringIsEmpty == YES)
     {
         NSLog(@"there is an empty string in the players array");
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Minimum of 3 players needed to begin game" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Done", nil];
+        alert.alertViewStyle = UIAlertActionStyleDefault;
+        [alert show];
+        
     }
 }
 
@@ -234,12 +294,18 @@
         TopicViewController *divc = (TopicViewController *)[segue destinationViewController];
 
         divc.isAddingTopic = @"YES";
+        divc.fromController = @"Setup";
+        
+        divc.playersArray = playerList;
     }
     else if ([segue.identifier isEqualToString:@"pickingTopic"])
     {
         TopicViewController *divc = (TopicViewController *)[segue destinationViewController];
         
         divc.isAddingTopic = @"NO";
+        divc.fromController = @"Setup";
+        
+        divc.playersArray = playerList;
     }
     else if ([segue.identifier isEqualToString:@"toGame"])
     {
@@ -267,6 +333,8 @@
 
 - (IBAction)randomTopic:(id)sender
 {
+    topicLabel.textColor = [UIColor blackColor];
+    
     // get current topic list from file system
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TopicsList" ofType:@"plist"];

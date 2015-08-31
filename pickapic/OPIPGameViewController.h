@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "OPIPTableViewCell.h"
-#import <AudioToolbox/AudioToolbox.h> 
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface OPIPGameViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
@@ -16,17 +16,20 @@
 
 @property (strong, nonatomic) NSString *topicChosen;
 @property (weak, nonatomic) IBOutlet UILabel *topicLabel;
-@property (strong, nonatomic) NSMutableArray *playersArray;
-@property (strong, nonatomic) NSMutableArray *playerScores;
+@property (strong, atomic) NSMutableArray *playersArray;
+@property (strong, atomic) NSMutableArray *playerScores;
 
 @property (assign, atomic) int timerValue;
 @property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
-@property (strong, nonatomic) IBOutlet UITableView *gameTableView;
+@property (strong, atomic) IBOutlet UITableView *gameTableView;
 
-@property (strong, nonatomic) OPIPTableViewCell *cell;
+@property (strong, atomic) OPIPTableViewCell *cell;
 @property (strong, nonatomic) NSString *currentJudge;
 @property (nonatomic, assign) NSNumber *roundNumber;
 @property (nonatomic, assign) BOOL hasAddedPoint;
+@property (nonatomic, assign) BOOL timerHasReachedZero;
+
+@property (weak, nonatomic) IBOutlet UILabel *roundLabel;
 
 // bottom buttons
 
@@ -35,5 +38,13 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *shareButton;
 - (IBAction)shareAction:(id)sender;
+
+// topic buttons
+@property (unsafe_unretained, nonatomic) IBOutlet UIButton *pickTopicButton;
+@property (unsafe_unretained, nonatomic) IBOutlet UIButton *addTopicButton;
+@property (unsafe_unretained, nonatomic) IBOutlet UIButton *randomTopicButton;
+
+- (IBAction)randomTopic:(id)sender;
+
 
 @end
