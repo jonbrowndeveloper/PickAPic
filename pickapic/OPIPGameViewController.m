@@ -8,6 +8,8 @@
 
 #import "OPIPGameViewController.h"
 #import "TopicViewController.h"
+#import <QuartzCore/QuartzCore.h>
+#import "PhotoPickViewController.h"
 
 @interface OPIPGameViewController ()
 
@@ -15,7 +17,7 @@
 
 @implementation OPIPGameViewController
 
-@synthesize topicLabel, playersArray = _playersArray, timer, timerValue = _timerValue, countdownLabel, topicChosen, nTopicButton, shareButton, cell = _cell, playerScores, currentJudge, roundNumber, hasAddedPoint = _hasAddedPoint, addTopicButton, pickTopicButton, randomTopicButton, roundLabel, timerHasReachedZero = _timerHasReachedZero;
+@synthesize topicLabel, playersArray = _playersArray, timer, timerValue = _timerValue, countdownLabel, topicChosen, nTopicButton, shareButton, cell = _cell, playerScores, currentJudge, roundNumber, hasAddedPoint = _hasAddedPoint, addTopicButton, pickTopicButton, randomTopicButton, roundLabel, timerHasReachedZero = _timerHasReachedZero, logoImageView, grayScreenView, fingerButton, hostNameLabel, buttonView, photoChosen = _photoChosen, image, smallPhotoImageView, bigPhotoImageView;
 
 - (void)viewDidLoad
 {
@@ -34,7 +36,8 @@
         }
     }
     
-    if (roundNumber == nil) {
+    if (roundNumber == nil)
+    {
         roundNumber = [NSNumber numberWithInt:1];
     }
     
@@ -46,7 +49,22 @@
     
     topicLabel.text = topicChosen;
     
-    [self startGame];
+    // set pickapic logo
+    
+    logoImageView.image = [UIImage imageNamed:@"pickAPickLogoLarge"];
+    logoImageView.hidden = YES;
+    
+    // setup gray popover screen for when host needs to choose
+    
+    grayScreenView.hidden = YES;
+    buttonView.hidden = YES;
+    
+    buttonView.layer.cornerRadius = 20.0;
+    buttonView.layer.masksToBounds = YES;
+    
+    [[fingerButton imageView] setContentMode:UIViewContentModeScaleAspectFit];
+    
+    hostNameLabel.text = [NSString stringWithFormat:@"%@ needs to pick a pic!", _playersArray[0]];
     
     // set button colors and frames
     
@@ -99,9 +117,78 @@
         topicLabel.text = topicChosen;
     }
     
+    NSLog(@"Topic Chosen: %@", topicChosen);
+    
+    bigPhotoImageView.hidden = YES;
+    
     // roundLabel.text = roundNumber.stringValue;
     
     [self.gameTableView reloadData];
+    
+    if (_photoChosen == NO)
+    {
+        [self startGame];
+    }
+    else
+    {
+        countdownLabel.text = [NSString stringWithFormat:@"%d", _timerValue];
+        
+        addTopicButton.hidden = YES;
+        pickTopicButton.hidden = YES;
+        randomTopicButton.hidden = YES;
+        
+        countdownLabel.hidden = NO;
+        
+        nTopicButton.alpha = 0.4;
+        nTopicButton.enabled = NO;
+        logoImageView.hidden = YES;
+        
+        timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
+        
+        // set image
+        
+        smallPhotoImageView.image = image;
+        
+        smallPhotoImageView.layer.cornerRadius = 5.0;
+        smallPhotoImageView.layer.masksToBounds = YES;
+        
+        smallPhotoImageView.hidden = NO;
+        
+        // add touch identifier
+        
+        UITapGestureRecognizer *newTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showLargePic)];
+        
+        [smallPhotoImageView setUserInteractionEnabled:YES];
+        
+        [smallPhotoImageView addGestureRecognizer:newTap];
+    }
+}
+
+- (void)showLargePic
+{
+    UITapGestureRecognizer *newTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideLargePic)];
+    
+    [bigPhotoImageView setUserInteractionEnabled:YES];
+    
+    [bigPhotoImageView addGestureRecognizer:newTap];
+    
+    bigPhotoImageView.image = image;
+    bigPhotoImageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.15;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionFade;
+    transition.delegate = self;
+    [self.view.layer addAnimation:transition forKey:nil];
+    grayScreenView.hidden = NO;
+    bigPhotoImageView.hidden = NO;
+}
+
+- (void)hideLargePic
+{
+    grayScreenView.hidden = YES;
+    bigPhotoImageView.hidden = YES;
 }
 
 - (void)backAction
@@ -113,7 +200,7 @@
 {
     countdownLabel.text = @"";
     
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
+    timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
 }
 
 - (void)advanceTimer:(NSTimer *)timer
@@ -121,13 +208,21 @@
     --_timerValue;
     if(self.timerValue != 0 && _hasAddedPoint == NO)
     {
-        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
+        timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
         countdownLabel.text = [NSString stringWithFormat:@"%d", _timerValue];
+        if ( _timerValue % 2)
+        {
+            AudioServicesPlaySystemSound(1105);
+        }
+        else
+        {
+            AudioServicesPlaySystemSound(1306);
+        }
+        
     }
     
     if (self.timerValue == 0)
     {
-        
         countdownLabel.text = [NSString stringWithFormat:@"0"];
         
         // do something like say the round is over, choose a winner
@@ -135,12 +230,19 @@
         // possible buzzer
         
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        // AudioServicesPlaySystemSound(1005);
         
         _timerHasReachedZero = YES;
         
-        // [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(fadeCountdownOut) userInfo:nil repeats:NO];
+        timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(fadeCountdownOut) userInfo:nil repeats:NO];
     }
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [timer invalidate];
+    timer = nil;
 }
 
 - (void)fadeCountdownOut
@@ -152,7 +254,8 @@
     transition.delegate = self;
     [self.view.layer addAnimation:transition forKey:nil];
     countdownLabel.hidden = YES;
-    // randomTopicButton.hidden = NO;
+    logoImageView.hidden = NO;
+
 }
 
 - (void)fadeOutNewTopicButton
@@ -189,6 +292,8 @@
     
     // hide and unhide buttons
     
+    logoImageView.hidden = YES;
+    
     addTopicButton.hidden = NO;
     pickTopicButton.hidden = NO;
     randomTopicButton.hidden = NO;
@@ -197,6 +302,8 @@
     
     nTopicButton.alpha = 0.4;
     nTopicButton.enabled = NO;
+    
+    smallPhotoImageView.hidden = YES;
 }
 
 - (void)fadeOutTopicButtons
@@ -224,7 +331,6 @@
 {
     return _playersArray.count;
 }
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -337,8 +443,6 @@
         
     }
     
-    
-    
     [self.gameTableView reloadData];
 }
 
@@ -370,6 +474,30 @@
 
 - (IBAction)nTopicAction:(id)sender
 {
+    
+    BOOL isRounds = [[NSUserDefaults standardUserDefaults] boolForKey:@"isRounds"];
+    
+    int numberToCheck;
+    
+    if (isRounds == YES)
+    {
+        numberToCheck = (int)roundNumber;
+    }
+    else if (isRounds == NO)
+    {
+        // point checker
+        
+        
+    }
+    
+    // get number of points or rounds they selected from settings screen
+    
+    double numberOfRoundsOrPoints = [[NSUserDefaults standardUserDefaults] doubleForKey:@"numberOfRoundsOrPoints"];
+
+    
+    
+    //  && numberToCheck >= (int)numberOfRoundsOrPoints
+    
     if (_hasAddedPoint == YES)
     {
         [self fadeInTopicButtons];
@@ -392,6 +520,13 @@
         _timerHasReachedZero = NO;
         
         [self.gameTableView reloadData];
+        
+        logoImageView.hidden = YES;
+        
+        _photoChosen = NO;
+        
+        [timer invalidate];
+        timer = nil;
         
     }
     else
@@ -430,6 +565,20 @@
         divc.roundNumber = roundNumber;
 
     }
+    else if ([segue.identifier isEqualToString:@"fromOPIPToPicker"])
+    {
+        PhotoPickViewController *divc = (PhotoPickViewController *)[segue destinationViewController];
+        
+        divc.timerValue = _timerValue;
+        
+        divc.playersArray = _playersArray;
+        divc.scoreArray = playerScores;
+        
+        divc.roundNumber = roundNumber;
+    }
+    
+    [timer invalidate];
+    timer = nil;
 }
 
 - (IBAction)randomTopic:(id)sender
@@ -467,10 +616,22 @@
         
         nTopicButton.alpha = 0.4;
         nTopicButton.enabled = NO;
+        logoImageView.hidden = YES;
+        
     }
     else
     {
         [self fadeOutTopicButtons];
+    }
+    
+    NSLog(@"round number: %d", (int)roundNumber);
+    
+    if (((roundNumber.integerValue)%_playersArray.count) != 1)
+    {
+        NSLog(@"host is playing");
+        
+        grayScreenView.hidden = NO;
+        buttonView.hidden = NO;
     }
 
     
@@ -478,6 +639,8 @@
     _timerHasReachedZero = NO;
     
     // begin countdown
+    
+    // _timerValue = 6;
     
     _timerValue = (int)[[NSUserDefaults standardUserDefaults] doubleForKey:@"gameTimer"] + 1;
     

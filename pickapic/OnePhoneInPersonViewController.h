@@ -35,7 +35,7 @@
 
 // topic data
 
-@property (strong, atomic) NSString *topicChosen;
+@property (weak, nonatomic) NSString *topicChosen;
 @property (weak, nonatomic) IBOutlet UILabel *topicLabel;
 
 // custom cell

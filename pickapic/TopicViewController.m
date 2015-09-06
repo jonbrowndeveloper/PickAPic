@@ -212,12 +212,21 @@
 {
     if([segue.identifier isEqualToString:@"fromTopicsToSetup"])
     {
+        UINavigationController *navController = (UINavigationController*)[segue destinationViewController];
+        OnePhoneInPersonViewController *opipController = [navController topViewController];
+        
+        opipController.topicChosen = self.topicChosen;
+        
+        opipController.playerList = self.playersArray;
+        
+        /* TODO: put this in final version
         OnePhoneInPersonViewController *divc = (OnePhoneInPersonViewController *)[segue destinationViewController];
         
-        divc.topicChosen = topicChosen;
+        divc.topicChosen = self.topicChosen;
         NSLog(@"Topic Chosen from Topics Window: %@", topicChosen);
         
-        divc.playerList = playersArray;
+        divc.playerList = self.playersArray;
+         */
     }
     else if([segue.identifier isEqualToString:@"fromTopicsToGame"])
     {
@@ -230,6 +239,8 @@
         divc.playerScores = scoreArray;
         
         divc.roundNumber = roundNumber;
+        
+        divc.photoChosen = NO;
     }
 
 }

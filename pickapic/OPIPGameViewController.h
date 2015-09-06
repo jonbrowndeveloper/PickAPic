@@ -12,7 +12,7 @@
 
 @interface OPIPGameViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) NSTimer *timer;
+@property (weak, nonatomic) NSTimer *timer;
 
 @property (strong, nonatomic) NSString *topicChosen;
 @property (weak, nonatomic) IBOutlet UILabel *topicLabel;
@@ -46,5 +46,19 @@
 
 - (IBAction)randomTopic:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
+
+// gray popover screen
+
+@property (weak, nonatomic) IBOutlet UIView *grayScreenView;
+@property (weak, nonatomic) IBOutlet UIButton *fingerButton;
+@property (weak, nonatomic) IBOutlet UILabel *hostNameLabel;
+@property (weak, nonatomic) IBOutlet UIView *buttonView;
+
+@property (nonatomic, assign) BOOL photoChosen;
+@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *smallPhotoImageView;
+@property (nonatomic, weak) UIImage *image;
+
+@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bigPhotoImageView;
 
 @end

@@ -42,6 +42,7 @@
 		AA4DA3D31B8AEF05001C45DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4DA3D21B8AEF05001C45DE /* Foundation.framework */; };
 		AA4DA3D61B8E2A17001C45DE /* OPIPTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4DA3D51B8E2A17001C45DE /* OPIPTableViewCell.m */; };
 		AA4DA3D81B8E5C98001C45DE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4DA3D71B8E5C98001C45DE /* AudioToolbox.framework */; };
+		AA61A5261B98F04E00CEEE5B /* PhotoPickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA61A5251B98F04E00CEEE5B /* PhotoPickViewController.m */; };
 		AA6231881B814FBD00E3DC48 /* TopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6231871B814FBD00E3DC48 /* TopicViewController.m */; };
 		AA62318B1B81517F00E3DC48 /* TopicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA62318A1B81517F00E3DC48 /* TopicTableViewCell.m */; };
 		AA62318D1B81544F00E3DC48 /* TopicsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA62318C1B81544F00E3DC48 /* TopicsList.plist */; };
@@ -110,6 +111,8 @@
 		AA4DA3D41B8E2A17001C45DE /* OPIPTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OPIPTableViewCell.h; path = pickapic/OPIPTableViewCell.h; sourceTree = SOURCE_ROOT; };
 		AA4DA3D51B8E2A17001C45DE /* OPIPTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OPIPTableViewCell.m; path = pickapic/OPIPTableViewCell.m; sourceTree = SOURCE_ROOT; };
 		AA4DA3D71B8E5C98001C45DE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		AA61A5241B98F04E00CEEE5B /* PhotoPickViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoPickViewController.h; path = pickapic/PhotoPickViewController.h; sourceTree = SOURCE_ROOT; };
+		AA61A5251B98F04E00CEEE5B /* PhotoPickViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoPickViewController.m; path = pickapic/PhotoPickViewController.m; sourceTree = SOURCE_ROOT; };
 		AA6231861B814FBD00E3DC48 /* TopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TopicViewController.h; path = pickapic/TopicViewController.h; sourceTree = SOURCE_ROOT; };
 		AA6231871B814FBD00E3DC48 /* TopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TopicViewController.m; path = pickapic/TopicViewController.m; sourceTree = SOURCE_ROOT; };
 		AA6231891B81517F00E3DC48 /* TopicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TopicTableViewCell.h; path = pickapic/TopicTableViewCell.h; sourceTree = SOURCE_ROOT; };
@@ -236,6 +239,8 @@
 				AA6231871B814FBD00E3DC48 /* TopicViewController.m */,
 				AA6231891B81517F00E3DC48 /* TopicTableViewCell.h */,
 				AA62318A1B81517F00E3DC48 /* TopicTableViewCell.m */,
+				AA61A5241B98F04E00CEEE5B /* PhotoPickViewController.h */,
+				AA61A5251B98F04E00CEEE5B /* PhotoPickViewController.m */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -413,6 +418,7 @@
 				343CC81A1B3361670030FF65 /* AppDelegate.m in Sources */,
 				AA62318B1B81517F00E3DC48 /* TopicTableViewCell.m in Sources */,
 				AA6231881B814FBD00E3DC48 /* TopicViewController.m in Sources */,
+				AA61A5261B98F04E00CEEE5B /* PhotoPickViewController.m in Sources */,
 				AA4DA3D61B8E2A17001C45DE /* OPIPTableViewCell.m in Sources */,
 				343CC8201B3361670030FF65 /* ViewController.m in Sources */,
 				AA4DA3CD1B83F5AE001C45DE /* OPIPGameViewController.m in Sources */,

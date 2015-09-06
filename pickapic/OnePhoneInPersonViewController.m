@@ -28,6 +28,8 @@
         playerList = [[NSMutableArray alloc] initWithObjects:(@""),(@""),(@""), nil];
     }
     
+    
+    
     topicLabel.textColor = [UIColor grayColor];
     topicLabel.text = @"select an option from below";
     
@@ -197,6 +199,11 @@
     cell.textField.tag  = indexPath.row;
     
     cell.textField.text = playerList[indexPath.row];
+    
+    if (indexPath.row == 0)
+    {
+        cell.textField.placeholder = @"tap to enter host's name";
+    }
     
     // [self configureCell:cell atIndexPath:indexPath];
     
