@@ -208,7 +208,7 @@
     --_timerValue;
     if(self.timerValue != 0 && _hasAddedPoint == NO)
     {
-        timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
         countdownLabel.text = [NSString stringWithFormat:@"%d", _timerValue];
         if ( _timerValue % 2)
         {
@@ -234,7 +234,7 @@
         
         _timerHasReachedZero = YES;
         
-        timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(fadeCountdownOut) userInfo:nil repeats:NO];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(fadeCountdownOut) userInfo:nil repeats:NO];
     }
     
 }
@@ -449,6 +449,7 @@
 
 - (IBAction)shareAction:(id)sender
 {
+    /*
     NSString *textToShare = @"Lets play PickAPic!";
     NSURL *myWebsite = [NSURL URLWithString:@"\n\nAppStoreLink"];
     
@@ -467,7 +468,7 @@
     activityVC.excludedActivityTypes = excludeActivities;
     
     [self presentViewController:activityVC animated:YES completion:nil];
-
+     */
 
 }
 

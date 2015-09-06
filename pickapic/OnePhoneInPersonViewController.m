@@ -247,7 +247,7 @@
 
 - (IBAction)beginGame:(id)sender
 {
-    NSLog(@"Begin Game Button Pressed");
+    NSLog(@"Begin Game Button Pressed. Topic is: %@", topicChosen);
     
     // check the strings in the array to make sure they aren't blank
     
@@ -359,6 +359,8 @@
     
     topicChosen = topicsArray[rndValue];
     topicLabel.text = [NSString stringWithFormat:@"%@", topicChosen];
+    
+    
 }
 
 @end
