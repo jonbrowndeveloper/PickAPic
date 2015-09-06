@@ -28,8 +28,6 @@
         playerList = [[NSMutableArray alloc] initWithObjects:(@""),(@""),(@""), nil];
     }
     
-    
-    
     topicLabel.textColor = [UIColor grayColor];
     topicLabel.text = @"select an option from below";
     
@@ -91,6 +89,20 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.0/255.0 green:158.0/255.0 blue:201.0/255.0 alpha:1]];
     
+    // settings button
+    
+    settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    settingsButton.frame = CGRectMake(0, 0, (self.navigationController.navigationBar.frame.size.height *0.65), (self.navigationController.navigationBar.frame.size.height *0.65));
+    [settingsButton setImage:[UIImage imageNamed:@"icn_settings"] forState:UIControlStateNormal];
+    [settingsButton setImage:[UIImage imageNamed:@"icn_settings_active"] forState:(UIControlStateSelected | UIControlStateHighlighted)];
+    [settingsButton setSelected:YES];
+    
+    [settingsButton addTarget:self action:@selector(activateSettingsSegue) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *settingsItem = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
+    
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:settingsItem, nil];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -117,22 +129,6 @@
     }
     
     NSLog(@"players list: %@", playerList);
-    
-    // settings button
-    
-    // settings button
-    
-    settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    settingsButton.frame = CGRectMake(0, 0, (self.navigationController.navigationBar.frame.size.height *0.65), (self.navigationController.navigationBar.frame.size.height *0.65));
-    [settingsButton setImage:[UIImage imageNamed:@"icn_settings"] forState:UIControlStateNormal];
-    [settingsButton setImage:[UIImage imageNamed:@"icn_settings_active"] forState:(UIControlStateSelected | UIControlStateHighlighted)];
-    [settingsButton setSelected:YES];
-    
-    [settingsButton addTarget:self action:@selector(activateSettingsSegue) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *settingsItem = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
-    
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:settingsItem, nil];
 }
 
 - (void)activateSettingsSegue

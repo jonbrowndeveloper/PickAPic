@@ -40,6 +40,7 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -334,10 +335,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pickAPickLogoLarge" translatesAutoresizingMaskIntoConstraints="NO" id="76C-eL-vFm">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="76C-eL-vFm">
                                 <rect key="frame" x="0.0" y="106" width="600" height="397"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qt3-FI-ueW">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qt3-FI-ueW">
                                 <rect key="frame" x="499" y="511" width="85" height="81"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="85" id="T9z-GJ-DNJ"/>
@@ -371,13 +372,7 @@
                                     <segue destination="Mu0-8c-vzV" kind="show" identifier="pickerToOPIP" id="n4P-CX-tsD"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="60" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKB-Fa-nXS">
-                                <rect key="frame" x="279" y="72" width="50" height="26"/>
-                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="24"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWl-NO-7HL">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWl-NO-7HL">
                                 <rect key="frame" x="16" y="511" width="85" height="81"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="85" id="aJH-rQ-RkQ"/>
@@ -390,6 +385,12 @@
                                     <action selector="getFacebookPhoto:" destination="mNR-3o-mic" eventType="touchUpInside" id="jgM-ue-s0T"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="60" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKB-Fa-nXS">
+                                <rect key="frame" x="238" y="93" width="136" height="121"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="78"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -406,7 +407,7 @@
                             <constraint firstAttribute="centerX" secondItem="gHK-CE-71i" secondAttribute="centerX" constant="-6.5" id="fmj-ew-3Uw"/>
                             <constraint firstItem="UIg-TO-TAa" firstAttribute="top" secondItem="gHK-CE-71i" secondAttribute="bottom" constant="8" id="kM4-iw-zKt"/>
                             <constraint firstItem="76C-eL-vFm" firstAttribute="top" secondItem="up3-aN-yWS" secondAttribute="bottom" constant="42" id="nUj-jG-94W"/>
-                            <constraint firstItem="eKB-Fa-nXS" firstAttribute="top" secondItem="up3-aN-yWS" secondAttribute="bottom" constant="8" id="rXR-DP-grg"/>
+                            <constraint firstItem="eKB-Fa-nXS" firstAttribute="top" secondItem="up3-aN-yWS" secondAttribute="bottom" constant="100" id="rXR-DP-grg"/>
                         </constraints>
                     </view>
                     <connections>
@@ -537,7 +538,7 @@
                                     <constraint firstAttribute="height" constant="30" id="QnT-1j-nMf"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bL-Nz-oAt">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bL-Nz-oAt">
                                 <rect key="frame" x="16" y="107" width="568" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="flc-U0-w2R"/>
@@ -719,7 +720,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ROUND 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFl-mJ-srS">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ROUND 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFl-mJ-srS">
                                 <rect key="frame" x="232" y="70" width="136" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="136" id="00v-Mx-xZL"/>
@@ -729,7 +730,7 @@
                                 <color key="textColor" red="0.0" green="0.63137254899999995" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kIL-nh-OzY">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kIL-nh-OzY">
                                 <rect key="frame" x="80" y="120" width="440" height="140"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="140" id="j3p-Is-MdR"/>
@@ -742,21 +743,21 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qaP-0o-glc">
                                 <rect key="frame" x="208" y="211" width="183" height="178"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lg5-xR-qc0">
-                                        <rect key="frame" x="8" y="8" width="167" height="128"/>
-                                        <state key="normal" backgroundImage="icn_profile_game">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lg5-xR-qc0">
+                                        <rect key="frame" x="8" y="8" width="338" height="338"/>
+                                        <state key="normal" image="Host-Picture-Prompt">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <segue destination="mNR-3o-mic" kind="show" identifier="fromOPIPToPicker" id="aRg-gR-tOz"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSU-tf-smo">
-                                        <rect key="frame" x="8" y="144" width="167" height="33"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="tSU-tf-smo">
+                                        <rect key="frame" x="8" y="354" width="167" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="33" id="c1K-aQ-P3k"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -764,6 +765,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="tSU-tf-smo" firstAttribute="top" secondItem="Lg5-xR-qc0" secondAttribute="bottom" constant="8" id="8Th-md-L3G"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Lg5-xR-qc0" secondAttribute="trailing" constant="8" id="DbS-sa-vi8"/>
                                     <constraint firstItem="tSU-tf-smo" firstAttribute="top" secondItem="Lg5-xR-qc0" secondAttribute="bottom" constant="8" id="JJZ-eB-pTT"/>
                                     <constraint firstAttribute="trailing" secondItem="tSU-tf-smo" secondAttribute="trailing" constant="8" id="Jqc-Rh-YgC"/>
                                     <constraint firstAttribute="bottom" secondItem="tSU-tf-smo" secondAttribute="bottom" constant="1" id="KMt-bJ-eWn"/>
@@ -1394,18 +1396,17 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Host-Picture-Prompt" width="338" height="338"/>
         <image name="add" width="60" height="60"/>
-        <image name="icn_profile_game" width="17" height="17"/>
         <image name="icn_settings" width="51" height="51"/>
         <image name="multiple-phones-in-person" width="216" height="116"/>
         <image name="multiple-phones-remote" width="216" height="116"/>
         <image name="one-phone-in-person" width="217" height="117"/>
         <image name="pick" width="60" height="60"/>
-        <image name="pickAPickLogoLarge" width="347" height="99"/>
         <image name="random" width="60" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qAn-fC-QCH"/>
+        <segue reference="n4P-CX-tsD"/>
         <segue reference="wfT-cP-NZH"/>
         <segue reference="YPe-Gq-53J"/>
         <segue reference="QNl-zM-2qX"/>

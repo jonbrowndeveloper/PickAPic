@@ -31,6 +31,10 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *roundLabel;
 
+// settings button
+
+@property (nonatomic, retain) UIButton *settingsButton;
+
 // bottom buttons
 
 @property (strong, nonatomic) IBOutlet UIButton *nTopicButton;

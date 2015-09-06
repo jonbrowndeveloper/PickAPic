@@ -17,7 +17,7 @@
 
 @implementation OPIPGameViewController
 
-@synthesize topicLabel, playersArray = _playersArray, timer, timerValue = _timerValue, countdownLabel, topicChosen, nTopicButton, shareButton, cell = _cell, playerScores, currentJudge, roundNumber, hasAddedPoint = _hasAddedPoint, addTopicButton, pickTopicButton, randomTopicButton, roundLabel, timerHasReachedZero = _timerHasReachedZero, logoImageView, grayScreenView, fingerButton, hostNameLabel, buttonView, photoChosen = _photoChosen, image, smallPhotoImageView, bigPhotoImageView;
+@synthesize topicLabel, playersArray = _playersArray, timer, timerValue = _timerValue, countdownLabel, topicChosen, nTopicButton, shareButton, cell = _cell, playerScores, currentJudge, roundNumber, hasAddedPoint = _hasAddedPoint, addTopicButton, pickTopicButton, randomTopicButton, roundLabel, timerHasReachedZero = _timerHasReachedZero, logoImageView, grayScreenView, fingerButton, hostNameLabel, buttonView, photoChosen = _photoChosen, image, smallPhotoImageView, bigPhotoImageView, settingsButton;
 
 - (void)viewDidLoad
 {
@@ -95,6 +95,28 @@
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
     self.navigationItem.leftBarButtonItem = backItem;
+    
+    // set 'Pick A Pic' logo on navigation bar
+    
+    UIImage *logo = [UIImage imageNamed:@"icn_logo.png"];
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:logo];
+    imgView.frame = CGRectMake(0, 0, (self.navigationController.navigationBar.frame.size.width * 0.75), (self.navigationController.navigationBar.frame.size.height * 0.75));
+    imgView.contentMode = UIViewContentModeScaleAspectFit;
+    self.navigationItem.titleView = imgView;
+    
+    // settings button
+    
+    settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    settingsButton.frame = CGRectMake(0, 0, (self.navigationController.navigationBar.frame.size.height *0.65), (self.navigationController.navigationBar.frame.size.height *0.65));
+    [settingsButton setImage:[UIImage imageNamed:@"icn_settings"] forState:UIControlStateNormal];
+    [settingsButton setImage:[UIImage imageNamed:@"icn_settings_active"] forState:(UIControlStateSelected | UIControlStateHighlighted)];
+    [settingsButton setSelected:YES];
+    
+    settingsButton.hidden = YES;
+    
+    UIBarButtonItem *settingsItem = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
+    
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:settingsItem, nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -206,7 +228,7 @@
 - (void)advanceTimer:(NSTimer *)timer
 {
     --_timerValue;
-    if(self.timerValue != 0 && _hasAddedPoint == NO)
+    if(self.timerValue >= 0 && _hasAddedPoint == NO)
     {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
         countdownLabel.text = [NSString stringWithFormat:@"%d", _timerValue];
@@ -479,27 +501,55 @@
     BOOL isRounds = [[NSUserDefaults standardUserDefaults] boolForKey:@"isRounds"];
     
     int numberToCheck;
+
+    // get the max numbers in the array
+    
+    NSMutableArray *winners = [[NSMutableArray alloc] init];
+    
+    __block NSUInteger maxIndex;
+    __block NSNumber* maxValue = [NSNumber numberWithFloat:0];
+    
+    [_playersArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+    {
+        NSNumber* newValue = obj;
+        
+        if (newValue > maxValue)
+        {
+            maxValue = newValue;
+            maxIndex = idx;
+        }
+    }];
+    
+    // check if there are duplicate winners
+    
+    [_playersArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+     {
+         NSNumber* newValue = obj;
+         
+         if (newValue == maxValue)
+         {
+             NSLog(@"There are duplicates");
+             [winners addObject:_playersArray[idx]];
+         }
+     }];
     
     if (isRounds == YES)
     {
-        numberToCheck = (int)roundNumber;
+        numberToCheck = roundNumber.intValue;
     }
-    else if (isRounds == NO)
+    else
     {
         // point checker
         
+        numberToCheck = maxValue.intValue;
         
     }
     
     // get number of points or rounds they selected from settings screen
     
     double numberOfRoundsOrPoints = [[NSUserDefaults standardUserDefaults] doubleForKey:@"numberOfRoundsOrPoints"];
-
     
-    
-    //  && numberToCheck >= (int)numberOfRoundsOrPoints
-    
-    if (_hasAddedPoint == YES)
+    if (_hasAddedPoint == YES && numberToCheck < (int)numberOfRoundsOrPoints)
     {
         [self fadeInTopicButtons];
         
@@ -530,9 +580,17 @@
         timer = nil;
         
     }
-    else
+    else if (_hasAddedPoint == NO)
     {
         NSLog(@"Give someone a point first!");
+    }
+    else if (numberToCheck >= numberOfRoundsOrPoints)
+    {
+        NSLog(@"round number: %@\nnumber to check: %d\nnumber of rounds to win: %d", roundNumber, numberToCheck, (int)numberOfRoundsOrPoints);
+        
+        NSLog(@"GAME IS OVER. There is(are) %lu winner(s). Winner: %@",(unsigned long)winners.count, winners);
+        
+        
     }
 }
 
