@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
+#import <ParseCrashReporting/ParseCrashReporting.h>
 
 @interface AppDelegate ()
 
@@ -14,9 +16,22 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    // [Optional] Power your app with Local Datastore. For more info, go to
+    // https://parse.com/docs/ios_guide#localdatastore/iOS
+    [Parse enableLocalDatastore];
+    
+    // [ParseCrashReporting enable];
+    
+    // Initialize Parse.
+    [Parse setApplicationId:@"P0gD8NJp4RKgtZBzvihB5nTZXmeqdfVimDlD4iC1"
+                  clientKey:@"mc3mFS6GNdhkvllSq3IsYVfVXVb7NMYf1FhJ4kG0"];
+    
+    // [Optional] Track statistics around application opens.
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"preferencesSet"])
     {
         BOOL preferencesSet = YES;

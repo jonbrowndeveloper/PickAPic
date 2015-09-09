@@ -10,6 +10,7 @@
 #import "TopicTableViewCell.h"
 #import "OnePhoneInPersonViewController.h"
 #import "OPIPGameViewController.h"
+#import <Parse/Parse.h>
 
 @interface TopicViewController ()
 
@@ -170,6 +171,21 @@
             // topicLabel.text = [NSString stringWithFormat:@"Topic Chosen: %@", alertTextField.text];
             
             // add to master list
+            
+            
+            
+            
+            PFObject *newTopic = [PFObject objectWithClassName:@"NewTopic"];
+            newTopic[@"topicString"] = topicChosen;
+            newTopic[@"deviceName"] = [[UIDevice currentDevice] name];
+            newTopic[@"userName"] = @"defaultUser";
+            [newTopic saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    NSLog(@"%@\n\nsaved successfully!!",newTopic);
+                } else {
+                    NSLog(@"%@\n\nnot save successfully!!\n%@", newTopic,error.description);
+                }
+            }];
             
             NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TopicsList" ofType:@"plist"];
 
