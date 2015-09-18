@@ -17,11 +17,13 @@
 
 @implementation OPIPGameViewController
 
-@synthesize topicLabel, playersArray = _playersArray, timer, timerValue = _timerValue, countdownLabel, topicChosen, nTopicButton, shareButton, cell = _cell, playerScores, currentJudge, roundNumber, hasAddedPoint = _hasAddedPoint, addTopicButton, pickTopicButton, randomTopicButton, roundLabel, timerHasReachedZero = _timerHasReachedZero, logoImageView, grayScreenView, fingerButton, hostNameLabel, buttonView, photoChosen = _photoChosen, image, smallPhotoImageView, bigPhotoImageView, settingsButton;
+@synthesize topicLabel, playersArray = _playersArray, timer, timerValue = _timerValue, countdownLabel, topicChosen, nTopicButton, shareButton, cell = _cell, playerScores, currentJudge, roundNumber, hasAddedPoint = _hasAddedPoint, addTopicButton, pickTopicButton, randomTopicButton, roundLabel, timerHasReachedZero = _timerHasReachedZero, logoImageView, grayScreenView, photoChosen = _photoChosen, image, smallPhotoImageView, bigPhotoImageView, settingsButton, hostNeedsToPic, hosthasPickedAPic, actualRoundNumber, gameOver, pressedBackButton, shouldAddToRoundNumber, winners;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // the game isn't over
     
     NSLog(@"round: %ld", (long)roundNumber);
     
@@ -32,7 +34,9 @@
         
         for (int i = 0; i < _playersArray.count; i++)
         {
-            [playerScores addObject:[NSString stringWithFormat:@"0"]];
+            NSInteger thisInteger = 0;
+            
+            [playerScores addObject:[NSNumber numberWithInteger:thisInteger]];
         }
     }
     
@@ -41,7 +45,11 @@
         roundNumber = [NSNumber numberWithInt:1];
     }
     
-    roundLabel.text = [NSString stringWithFormat:@"ROUND %d", roundNumber.intValue];
+    if (actualRoundNumber == nil) {
+        actualRoundNumber = [NSNumber numberWithInt:1];
+    }
+    
+    roundLabel.text = [NSString stringWithFormat:@"ROUND %d", actualRoundNumber.intValue];
     
     // set topic label
     
@@ -57,14 +65,6 @@
     // setup gray popover screen for when host needs to choose
     
     grayScreenView.hidden = YES;
-    buttonView.hidden = YES;
-    
-    buttonView.layer.cornerRadius = 20.0;
-    buttonView.layer.masksToBounds = YES;
-    
-    [[fingerButton imageView] setContentMode:UIViewContentModeScaleAspectFit];
-    
-    hostNameLabel.text = [NSString stringWithFormat:@"%@ needs to pick a pic!", _playersArray[0]];
     
     // set button colors and frames
     
@@ -129,6 +129,11 @@
      [self.navigationController setViewControllers:newViewControllers];
      */
     // to make sure the 'TopicViewConroller' is not in the view controller hierarchy
+    
+    // making sure bools are set correctly when view appears
+    
+    pressedBackButton = NO;
+    gameOver = NO;
     
     NSArray * viewControllers = [self.navigationController viewControllers];
     NSArray * newViewControllers = [NSArray arrayWithObjects:[viewControllers objectAtIndex:0], self,nil];
@@ -215,7 +220,11 @@
 
 - (void)backAction
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    pressedBackButton = YES;
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to quit?" message:[NSString stringWithFormat:@"\n"] delegate:self cancelButtonTitle:@"Quit Game" otherButtonTitles:@"Cancel", nil];
+    alert.alertViewStyle = UIAlertActionStyleDefault;
+    [alert show];
 }
 
 - (void)startCountdown:(id)sender
@@ -228,18 +237,12 @@
 - (void)advanceTimer:(NSTimer *)timer
 {
     --_timerValue;
-    if(self.timerValue >= 0 && _hasAddedPoint == NO)
+    if(self.timerValue >= 0)
     {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
         countdownLabel.text = [NSString stringWithFormat:@"%d", _timerValue];
-        if ( _timerValue % 2)
-        {
-            AudioServicesPlaySystemSound(1105);
-        }
-        else
-        {
-            AudioServicesPlaySystemSound(1306);
-        }
+        
+        AudioServicesPlaySystemSound(1105);
         
     }
     
@@ -252,11 +255,11 @@
         // possible buzzer
         
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        // AudioServicesPlaySystemSound(1005);
+        AudioServicesPlaySystemSound(1005);
         
         _timerHasReachedZero = YES;
         
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(fadeCountdownOut) userInfo:nil repeats:NO];
+        // self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(fadeCountdownOut) userInfo:nil repeats:NO];
     }
     
 }
@@ -386,7 +389,7 @@
     _cell.playerNameLabel.text  = _playersArray[indexPath.row];
     _cell.addPointButton.tag = indexPath.row;
     _cell.subtractPointButton.tag = 10000 + indexPath.row;
-    _cell.scoreLabel.text = playerScores[indexPath.row];
+    _cell.scoreLabel.text = [NSString stringWithFormat:@"%@", playerScores[indexPath.row]];
     
     if (indexPath.row  == ((roundNumber.integerValue -1)%_playersArray.count))
     {
@@ -394,6 +397,19 @@
         
         _cell.addPointButton.hidden = YES;
         _cell.subtractPointButton.hidden = YES;
+        
+        // bool to add 1 to actual round number
+        
+        if (indexPath.row == _playersArray.count-1)
+        {
+            shouldAddToRoundNumber = YES;
+            NSLog(@"Should add to round number");
+        }
+        else
+        {
+            shouldAddToRoundNumber = NO;
+            NSLog(@"Should not add to round number");
+        }
     }
     else if (indexPath.row == ((roundNumber.integerValue -2)%_playersArray.count))
     {
@@ -401,6 +417,8 @@
         
         _cell.addPointButton.hidden = NO;
         _cell.subtractPointButton.hidden = NO;
+        
+        // do not add to round number yet
     }
     
     // NSLog(@"player score at index %ld is %@", (long)indexPath.row, playerScores[indexPath.row]);
@@ -421,11 +439,12 @@
     // increase score by 1
     if (_hasAddedPoint == NO)
     {
-        NSString *playerScore = [playerScores objectAtIndex:(sender.tag)];
-        long i = playerScore.integerValue + 1;
-        NSString *newPlayerScore = [NSString stringWithFormat:@"%ld", i];
+        NSNumber *playerScore = [playerScores objectAtIndex:(sender.tag)];
         
-        [playerScores replaceObjectAtIndex:(sender.tag) withObject:newPlayerScore];
+        int value = [playerScore intValue];
+        playerScore = [NSNumber numberWithInt:value + 1];
+        
+        [playerScores replaceObjectAtIndex:(sender.tag) withObject:playerScore];
         
         [self.gameTableView reloadData];
         
@@ -434,36 +453,86 @@
         [self fadeInNewTopicButton];
         nTopicButton.enabled = YES;
     }
+    
+    // check to see if the game is over
+    
+    BOOL isRounds = [[NSUserDefaults standardUserDefaults] boolForKey:@"isRounds"];
+    
+    int numberToCheck;
+    
+    // get the max numbers in the array
+    
+    winners = [[NSMutableArray alloc] init];
+    
+    NSNumber *maxValue = [playerScores valueForKeyPath:@"@max.intValue"];
+    
+    for (int i = 0; i < playerScores.count; i++)
+    {
+        if (playerScores[i] == maxValue)
+        {
+            [winners addObject:_playersArray[i]];
+        }
+    }
+    
+    if (isRounds == YES)
+    {
+        numberToCheck = actualRoundNumber.intValue;
+    }
+    else
+    {
+        // point checker
+        
+        NSLog(@"POINT GAME");
+        
+        numberToCheck = maxValue.intValue + 1;
+    }
+    
+    // get number of points or rounds they selected from settings screen
+    
+    double numberOfRoundsOrPoints = [[NSUserDefaults standardUserDefaults] doubleForKey:@"numberOfRoundsOrPoints"];
+    
+    NSLog(@"Number to check %d", numberToCheck);
+    
+    NSLog(@"number to check is %d\nnumber of rounds is %d", numberToCheck, (int)numberOfRoundsOrPoints);
 
+    if (numberToCheck == numberOfRoundsOrPoints)
+    {
+        gameOver = YES;
+        
+        [nTopicButton setTitle:@"End Game" forState:UIControlStateNormal];
+    }
+    
 }
 
 - (void)subtractPointFromScore:(UIButton *)sender
 {
     
-    NSString *playerScore = [playerScores objectAtIndex:(sender.tag - 10000)];
-    long i = playerScore.integerValue - 1;
+    NSNumber *playerScore = [playerScores objectAtIndex:(sender.tag - 10000)];
+    int value = [playerScore intValue];
     
-    if (i >= 0)
+    if (value > 0)
     {
         // decrease score by 1
-
-        NSString *newPlayerScore = [NSString stringWithFormat:@"%ld", i];
         
-        [playerScores replaceObjectAtIndex:(sender.tag - 10000) withObject:newPlayerScore];
+        playerScore = [NSNumber numberWithInt:value - 1];
+        
+        [playerScores replaceObjectAtIndex:(sender.tag - 10000) withObject:playerScore];
         
         _hasAddedPoint = NO;
         
         [self fadeOutNewTopicButton];
         nTopicButton.enabled = NO;
-        
+        /*
         if (_timerHasReachedZero != YES)
         {
             _timerValue++;
             
             [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
-        }
+        }*/
         
     }
+    
+    gameOver = NO;
     
     [self.gameTableView reloadData];
 }
@@ -494,62 +563,29 @@
 
 }
 
-
 - (IBAction)nTopicAction:(id)sender
 {
+    [timer invalidate];
+    timer = nil;
     
-    BOOL isRounds = [[NSUserDefaults standardUserDefaults] boolForKey:@"isRounds"];
+    // set host picking bool to make sure the photo picker doesn't show up yet
     
-    int numberToCheck;
-
-    // get the max numbers in the array
+    hostNeedsToPic = NO;
     
-    NSMutableArray *winners = [[NSMutableArray alloc] init];
+    // increment round number by 1
     
-    __block NSUInteger maxIndex;
-    __block NSNumber* maxValue = [NSNumber numberWithFloat:0];
+    int value = [roundNumber intValue];
+    roundNumber = [NSNumber numberWithInt:value + 1];
     
-    [_playersArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+    if (shouldAddToRoundNumber == YES)
     {
-        NSNumber* newValue = obj;
+        int roundValue = [actualRoundNumber intValue];
         
-        if (newValue > maxValue)
-        {
-            maxValue = newValue;
-            maxIndex = idx;
-        }
-    }];
-    
-    // check if there are duplicate winners
-    
-    [_playersArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-     {
-         NSNumber* newValue = obj;
-         
-         if (newValue == maxValue)
-         {
-             NSLog(@"There are duplicates");
-             [winners addObject:_playersArray[idx]];
-         }
-     }];
-    
-    if (isRounds == YES)
-    {
-        numberToCheck = roundNumber.intValue;
-    }
-    else
-    {
-        // point checker
-        
-        numberToCheck = maxValue.intValue;
-        
+        actualRoundNumber = [NSNumber numberWithInteger:roundValue +1];
     }
     
-    // get number of points or rounds they selected from settings screen
     
-    double numberOfRoundsOrPoints = [[NSUserDefaults standardUserDefaults] doubleForKey:@"numberOfRoundsOrPoints"];
-    
-    if (_hasAddedPoint == YES && numberToCheck < (int)numberOfRoundsOrPoints)
+    if (_hasAddedPoint == YES && !gameOver)
     {
         [self fadeInTopicButtons];
         
@@ -559,12 +595,7 @@
         
         _hasAddedPoint = NO;
         
-        // increment round number by 1
-        
-        int value = [roundNumber intValue];
-        roundNumber = [NSNumber numberWithInt:value + 1];
-        
-        roundLabel.text = [NSString stringWithFormat:@"ROUND %d", roundNumber.intValue];
+        roundLabel.text = [NSString stringWithFormat:@"ROUND %d", actualRoundNumber.intValue];
         
         _timerValue = (int)[[NSUserDefaults standardUserDefaults] doubleForKey:@"gameTimer"] + 1;
         
@@ -579,17 +610,40 @@
         [timer invalidate];
         timer = nil;
         
+        NSLog(@"Give Phone to next player!");
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"Now, pass the phone to %@ to choose the next topic!", _playersArray[(int)roundNumber%(int)_playersArray.count]] delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        alert.alertViewStyle = UIAlertActionStyleDefault;
+        [alert show];
+        
     }
     else if (_hasAddedPoint == NO)
     {
         NSLog(@"Give someone a point first!");
     }
-    else if (numberToCheck >= numberOfRoundsOrPoints)
+    else if (gameOver)
     {
-        NSLog(@"round number: %@\nnumber to check: %d\nnumber of rounds to win: %d", roundNumber, numberToCheck, (int)numberOfRoundsOrPoints);
+        if (winners.count == 1)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"GAME OVER!" message:[NSString stringWithFormat:@"%@ Wins!", winners[0]] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            alert.alertViewStyle = UIAlertActionStyleDefault;
+            [alert show];
+        }
+        else
+        {
+            NSString *winnersString = @"";
+            for (int i = 0; i < winners.count; i++)
+            {
+                [winnersString stringByAppendingString:[NSString stringWithFormat:@"\n%@", winners[i]]];
+            }
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"GAME OVER!" message:[NSString stringWithFormat:@"There is a tie!\n%@\nwin!", winnersString] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            alert.alertViewStyle = UIAlertActionStyleDefault;
+            [alert show];
+        }
+
         
-        NSLog(@"GAME IS OVER. There is(are) %lu winner(s). Winner: %@",(unsigned long)winners.count, winners);
-        
+        gameOver = YES;
         
     }
 }
@@ -636,8 +690,8 @@
         divc.roundNumber = roundNumber;
     }
     
-    [timer invalidate];
-    timer = nil;
+    // [timer invalidate];
+    // timer = nil;
 }
 
 - (IBAction)randomTopic:(id)sender
@@ -683,14 +737,21 @@
         [self fadeOutTopicButtons];
     }
     
-    NSLog(@"round number: %d", (int)roundNumber);
+    NSLog(@"round number: %d", (int)roundNumber%(int)_playersArray.count);
+    
     
     if (((roundNumber.integerValue)%_playersArray.count) != 1)
     {
         NSLog(@"host is playing");
         
-        grayScreenView.hidden = NO;
-        buttonView.hidden = NO;
+        // grayScreenView.hidden = NO;
+        
+        hostNeedsToPic = YES;
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"Now, pass the phone to %@ to pick a pic!", _playersArray[0]] delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        alert.alertViewStyle = UIAlertActionStyleDefault;
+        [alert show];
+
     }
 
     
@@ -705,5 +766,70 @@
     
     [self startCountdown:self];
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0)
+    {
+        if (pressedBackButton == YES)
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else if (hostNeedsToPic == YES && pressedBackButton == NO && gameOver == NO)
+        {
+            NSLog(@"host should pick a pic now!");
+            
+            // open up photo picker
+            
+            [self getCameraRollPhoto];
+        }
+        else if (gameOver == YES)
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+
+    }
+    else
+    {
+        NSLog(@"cancel button has been pressed");
+        
+        pressedBackButton = NO;
+        gameOver = NO;
+    }
+}
+
+// photo picker methods
+
+- (void)getCameraRollPhoto
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    image = info[UIImagePickerControllerEditedImage];
+    self.bigPhotoImageView.image = image;
+    self.bigPhotoImageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    self.smallPhotoImageView.image = image;
+    self.smallPhotoImageView.contentMode = UIViewContentModeScaleAspectFill;
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+    hostNeedsToPic = NO;
+    _photoChosen = YES;
+}
+
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
 
 @end

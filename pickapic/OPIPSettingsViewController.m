@@ -20,12 +20,12 @@
 {
     double timerValue = [[NSUserDefaults standardUserDefaults] doubleForKey:@"gameTimer"];
     
-    if ((int)timerValue == 30)
+    if ((int)timerValue == 60)
     {
         timerControlOutlet.selectedSegmentIndex = 0;
 
     }
-    else if ((int)timerValue == 60)
+    else if ((int)timerValue == 75)
     {
         timerControlOutlet.selectedSegmentIndex = 1;
 
@@ -53,8 +53,29 @@
     
     numberStepperOutlet.value = (double)gameTypeNumber;
     
+    
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // back button
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    backButton.frame = CGRectMake(0, 0, (self.navigationController.navigationBar.frame.size.height *0.65), (self.navigationController.navigationBar.frame.size.height *0.65));
+    [backButton setImage:[UIImage imageNamed:@"icn_back"] forState:UIControlStateNormal];
+    [backButton setImage:[UIImage imageNamed:@"icn_back_active"] forState:(UIControlStateSelected | UIControlStateHighlighted)];
+    [backButton setSelected:YES];
+    
+    [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    
+    self.navigationItem.leftBarButtonItem = backItem;
+}
+
+- (void)backAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,12 +111,12 @@
 {
     if (timerControlOutlet.selectedSegmentIndex == 0)
     {
-        double value = 30;
+        double value = 60;
         [[NSUserDefaults standardUserDefaults] setDouble:value forKey:@"gameTimer"];
     }
     else if (timerControlOutlet.selectedSegmentIndex == 1)
     {
-        double value = 60;
+        double value = 75;
         [[NSUserDefaults standardUserDefaults] setDouble:value forKey:@"gameTimer"];
     }
     else if (timerControlOutlet.selectedSegmentIndex == 2)

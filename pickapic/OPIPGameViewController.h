@@ -10,7 +10,7 @@
 #import "OPIPTableViewCell.h"
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface OPIPGameViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface OPIPGameViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) NSTimer *timer;
 
@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *topicLabel;
 @property (strong, atomic) NSMutableArray *playersArray;
 @property (strong, atomic) NSMutableArray *playerScores;
+@property (strong, atomic) NSMutableArray *winners;
 
 @property (assign, atomic) int timerValue;
 @property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
@@ -26,8 +27,13 @@
 @property (strong, atomic) OPIPTableViewCell *cell;
 @property (strong, nonatomic) NSString *currentJudge;
 @property (nonatomic, assign) NSNumber *roundNumber;
+@property (nonatomic, assign) NSNumber *actualRoundNumber;
 @property (nonatomic, assign) BOOL hasAddedPoint;
 @property (nonatomic, assign) BOOL timerHasReachedZero;
+@property (nonatomic, assign) BOOL gameOver;
+@property (nonatomic, assign) BOOL pressedBackButton;
+@property (nonatomic, assign) BOOL shouldAddToRoundNumber;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *roundLabel;
 
@@ -55,14 +61,14 @@
 // gray popover screen
 
 @property (weak, nonatomic) IBOutlet UIView *grayScreenView;
-@property (weak, nonatomic) IBOutlet UIButton *fingerButton;
-@property (weak, nonatomic) IBOutlet UILabel *hostNameLabel;
-@property (weak, nonatomic) IBOutlet UIView *buttonView;
 
 @property (nonatomic, assign) BOOL photoChosen;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *smallPhotoImageView;
 @property (nonatomic, weak) UIImage *image;
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bigPhotoImageView;
+
+@property (nonatomic, assign) BOOL hostNeedsToPic;
+@property (nonatomic, assign) BOOL hosthasPickedAPic;
 
 @end

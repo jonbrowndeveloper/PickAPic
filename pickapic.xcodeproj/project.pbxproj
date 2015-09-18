@@ -39,7 +39,6 @@
 		AA46161A1BA0B4F400171704 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4616191BA0B4F400171704 /* CFNetwork.framework */; };
 		AA46161C1BA0B50000171704 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA46161B1BA0B50000171704 /* CoreLocation.framework */; };
 		AA46161E1BA0B50C00171704 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA46161D1BA0B50C00171704 /* Security.framework */; };
-		AA4616201BA0B51600171704 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA46161F1BA0B51600171704 /* StoreKit.framework */; };
 		AA4616221BA0B52100171704 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4616211BA0B52100171704 /* SystemConfiguration.framework */; };
 		AA4616241BA0B53F00171704 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4616231BA0B53F00171704 /* libstdc++.6.dylib */; };
 		AA4616261BA0B55700171704 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4616251BA0B55700171704 /* libz.dylib */; };
@@ -117,7 +116,6 @@
 		AA4616191BA0B4F400171704 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		AA46161B1BA0B50000171704 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		AA46161D1BA0B50C00171704 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		AA46161F1BA0B51600171704 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		AA4616211BA0B52100171704 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AA4616231BA0B53F00171704 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		AA4616251BA0B55700171704 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -153,7 +151,6 @@
 				AA4616261BA0B55700171704 /* libz.dylib in Frameworks */,
 				AA4616241BA0B53F00171704 /* libstdc++.6.dylib in Frameworks */,
 				AA4616221BA0B52100171704 /* SystemConfiguration.framework in Frameworks */,
-				AA4616201BA0B51600171704 /* StoreKit.framework in Frameworks */,
 				AA46161E1BA0B50C00171704 /* Security.framework in Frameworks */,
 				AA46161C1BA0B50000171704 /* CoreLocation.framework in Frameworks */,
 				AA46161A1BA0B4F400171704 /* CFNetwork.framework in Frameworks */,
@@ -336,7 +333,6 @@
 				AA4616251BA0B55700171704 /* libz.dylib */,
 				AA4616231BA0B53F00171704 /* libstdc++.6.dylib */,
 				AA4616211BA0B52100171704 /* SystemConfiguration.framework */,
-				AA46161F1BA0B51600171704 /* StoreKit.framework */,
 				AA46161D1BA0B50C00171704 /* Security.framework */,
 				AA46161B1BA0B50000171704 /* CoreLocation.framework */,
 				AA4616191BA0B4F400171704 /* CFNetwork.framework */,
@@ -401,6 +397,12 @@
 				TargetAttributes = {
 					343CC8101B3361670030FF65 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 6VYMUT4CEY;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 					343CC82C1B3361670030FF65 = {
 						CreatedOnToolsVersion = 6.1;
@@ -603,6 +605,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PickAPic",
@@ -610,7 +614,7 @@
 				INFOPLIST_FILE = PickAPic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c3c3fe29-f8e3-41e9-8413-ddcbc89305ab";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -618,6 +622,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PickAPic",
@@ -625,7 +631,7 @@
 				INFOPLIST_FILE = PickAPic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c3c3fe29-f8e3-41e9-8413-ddcbc89305ab";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

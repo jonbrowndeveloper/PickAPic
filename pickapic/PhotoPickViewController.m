@@ -130,15 +130,17 @@
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeScreen) userInfo:nil repeats:NO];
 }
 
-- (void)changeScreen
-{
-    [self performSegueWithIdentifier:@"pickerToOPIP" sender:self];
-}
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
+
+- (void)changeScreen
+{
+    [self performSegueWithIdentifier:@"pickerToOPIP" sender:self];
+}
+
 
 - (IBAction)getFacebookPhoto:(id)sender
 {
