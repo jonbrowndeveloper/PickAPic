@@ -10,6 +10,7 @@
 #import "TopicViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "PhotoPickViewController.h"
+#import "AppDelegate.h"
 
 @interface OPIPGameViewController ()
 
@@ -119,6 +120,14 @@
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:settingsItem, nil];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    countdownLabel.text = @"";
+    
+    [timer invalidate];
+    timer = nil;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     /* TODO: USE IN FINAL VERSION
@@ -129,6 +138,10 @@
      [self.navigationController setViewControllers:newViewControllers];
      */
     // to make sure the 'TopicViewConroller' is not in the view controller hierarchy
+    
+    // start the label update timer
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(setTimerLabel) userInfo:nil repeats:YES];
     
     // making sure bools are set correctly when view appears
     
@@ -142,6 +155,44 @@
     if (![topicChosen isEqualToString:@"placeholder"])
     {
         topicLabel.text = topicChosen;
+        
+        if (_photoChosen == NO)
+        {
+            [self startGame];
+        }
+        else
+        {
+            // countdownLabel.text = [NSString stringWithFormat:@"%d", _timerValue];
+            
+            addTopicButton.hidden = YES;
+            pickTopicButton.hidden = YES;
+            randomTopicButton.hidden = YES;
+            
+            countdownLabel.hidden = NO;
+            
+            nTopicButton.alpha = 0.4;
+            nTopicButton.enabled = NO;
+            logoImageView.hidden = YES;
+            
+            // timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
+            
+            // set image
+            
+            smallPhotoImageView.image = image;
+            
+            smallPhotoImageView.layer.cornerRadius = 5.0;
+            smallPhotoImageView.layer.masksToBounds = YES;
+            
+            smallPhotoImageView.hidden = NO;
+            
+            // add touch identifier
+            
+            UITapGestureRecognizer *newTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showLargePic)];
+            
+            [smallPhotoImageView setUserInteractionEnabled:YES];
+            
+            [smallPhotoImageView addGestureRecognizer:newTap];
+        }
     }
     
     NSLog(@"Topic Chosen: %@", topicChosen);
@@ -152,43 +203,7 @@
     
     [self.gameTableView reloadData];
     
-    if (_photoChosen == NO)
-    {
-        [self startGame];
-    }
-    else
-    {
-        countdownLabel.text = [NSString stringWithFormat:@"%d", _timerValue];
-        
-        addTopicButton.hidden = YES;
-        pickTopicButton.hidden = YES;
-        randomTopicButton.hidden = YES;
-        
-        countdownLabel.hidden = NO;
-        
-        nTopicButton.alpha = 0.4;
-        nTopicButton.enabled = NO;
-        logoImageView.hidden = YES;
-        
-        timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
-        
-        // set image
-        
-        smallPhotoImageView.image = image;
-        
-        smallPhotoImageView.layer.cornerRadius = 5.0;
-        smallPhotoImageView.layer.masksToBounds = YES;
-        
-        smallPhotoImageView.hidden = NO;
-        
-        // add touch identifier
-        
-        UITapGestureRecognizer *newTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showLargePic)];
-        
-        [smallPhotoImageView setUserInteractionEnabled:YES];
-        
-        [smallPhotoImageView addGestureRecognizer:newTap];
-    }
+
 }
 
 - (void)showLargePic
@@ -227,47 +242,11 @@
     [alert show];
 }
 
-- (void)startCountdown:(id)sender
+- (void)setTimerLabel
 {
-    countdownLabel.text = @"";
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
-}
-
-- (void)advanceTimer:(NSTimer *)timer
-{
-    --_timerValue;
-    if(self.timerValue >= 0)
-    {
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
-        countdownLabel.text = [NSString stringWithFormat:@"%d", _timerValue];
-        
-        AudioServicesPlaySystemSound(1105);
-        
-    }
-    
-    if (self.timerValue == 0)
-    {
-        countdownLabel.text = [NSString stringWithFormat:@"0"];
-        
-        // do something like say the round is over, choose a winner
-        
-        // possible buzzer
-        
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        AudioServicesPlaySystemSound(1005);
-        
-        _timerHasReachedZero = YES;
-        
-        // self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(fadeCountdownOut) userInfo:nil repeats:NO];
-    }
-    
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [timer invalidate];
-    timer = nil;
+    self.countdownLabel.text = [NSString stringWithFormat:@"%d", delegate.timerValue];
 }
 
 - (void)fadeCountdownOut
@@ -565,8 +544,10 @@
 
 - (IBAction)nTopicAction:(id)sender
 {
-    [timer invalidate];
-    timer = nil;
+    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] timer] invalidate];
+    // [(AppDelegate *)[[UIApplication sharedApplication] delegate] timer] = nil;
+    // [timer invalidate];
+    // timer = nil;
     
     // set host picking bool to make sure the photo picker doesn't show up yet
     
@@ -734,6 +715,8 @@
     }
     else
     {
+        countdownLabel.text = [NSString stringWithFormat:@"%d", (int)[[NSUserDefaults standardUserDefaults] doubleForKey:@"gameTimer"]];
+        
         [self fadeOutTopicButtons];
     }
     
@@ -763,8 +746,9 @@
     // _timerValue = 6;
     
     _timerValue = (int)[[NSUserDefaults standardUserDefaults] doubleForKey:@"gameTimer"] + 1;
-    
-    [self startCountdown:self];
+        
+    [[[UIApplication sharedApplication] delegate] performSelector:@selector(startTimer)];
+
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -773,6 +757,8 @@
     {
         if (pressedBackButton == YES)
         {
+            [[(AppDelegate *)[[UIApplication sharedApplication] delegate] timer] invalidate];
+            
             [self.navigationController popViewControllerAnimated:YES];
         }
         else if (hostNeedsToPic == YES && pressedBackButton == NO && gameOver == NO)

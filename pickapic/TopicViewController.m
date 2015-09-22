@@ -53,7 +53,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if ([isAddingTopic isEqual: @"YES"]) {
+    if ([isAddingTopic isEqual: @"YES"])
+    {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Create a new topic" message:@"\n" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Done", nil];
          alert.alertViewStyle = UIAlertViewStylePlainTextInput;
@@ -124,7 +125,7 @@
     return 60.0;
 }
 
-- (UITableView *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"topicCell" forIndexPath:indexPath];
     
@@ -132,6 +133,8 @@
     
     cell.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:22.0];
     cell.textLabel.text = topicsArray[indexPath.row];
+    
+    
     // cell.topicLabel.tag  = indexPath.row;
     
     // [self.playerList addObject:@"Placeholder"];
@@ -171,9 +174,6 @@
             // topicLabel.text = [NSString stringWithFormat:@"Topic Chosen: %@", alertTextField.text];
             
             // add to master list
-            
-            
-            
             
             PFObject *newTopic = [PFObject objectWithClassName:@"NewTopic"];
             newTopic[@"topicString"] = topicChosen;
@@ -260,6 +260,5 @@
     }
 
 }
-
 
 @end

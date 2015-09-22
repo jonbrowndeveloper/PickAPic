@@ -28,6 +28,11 @@
         playerList = [[NSMutableArray alloc] initWithObjects:(@""),(@""),(@""), nil];
     }
     
+    // remove horrible white space on top of tableview
+    
+    self.tableView.contentInset = UIEdgeInsetsZero;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     topicLabel.textColor = [UIColor grayColor];
     topicLabel.text = @"select an option from below";
     

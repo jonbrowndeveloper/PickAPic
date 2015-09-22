@@ -9,12 +9,15 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import <ParseCrashReporting/ParseCrashReporting.h>
+#import "OPIPGameViewController.h"
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
+
+@synthesize timer, timerValue;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -47,6 +50,7 @@
         [[NSUserDefaults standardUserDefaults] setDouble:numberOfRoundsOrPoints forKey:@"numberOfRoundsOrPoints"];
         
     }
+    
     
     // Override point for customization after application launch.
     return YES;
@@ -140,6 +144,51 @@
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     return _managedObjectContext;
 }
+
+-(void)startTimer
+{
+    timerValue = (int)[[NSUserDefaults standardUserDefaults] doubleForKey:@"gameTimer"];
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
+}
+
+- (void)advanceTimer:(NSTimer *)timer
+{
+    
+    --timerValue;
+    if(self.timerValue >= 0)
+    {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
+        // opipViewController.countdownLabel.text = [NSString stringWithFormat:@"%d", timerValue];
+        
+        AudioServicesPlaySystemSound(1105);
+        
+        // NSLog(@"counting down... %d", timerValue);
+        
+    }
+    
+    if (self.timerValue == 0)
+    {
+        // opipViewController.countdownLabel.text = [NSString stringWithFormat:@"0"];
+        
+        // do something like say the round is over, choose a winner
+        
+        [self.timer invalidate];
+        self.timer = nil;
+        
+        // possible buzzer
+        
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        AudioServicesPlaySystemSound(1005);
+        
+         // opipViewController.timerHasReachedZero = YES;
+        
+        // self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(fadeCountdownOut) userInfo:nil repeats:NO];
+    }
+    
+}
+
+
 
 #pragma mark - Core Data Saving support
 
