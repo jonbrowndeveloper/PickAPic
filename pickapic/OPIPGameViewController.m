@@ -41,6 +41,11 @@
         }
     }
     
+    // remove horrible white space on top of tableview
+    
+    self.gameTableView.contentInset = UIEdgeInsetsZero;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     if (roundNumber == nil)
     {
         roundNumber = [NSNumber numberWithInt:1];
@@ -593,8 +598,16 @@
         
         NSLog(@"Give Phone to next player!");
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"Now, pass the phone to %@ to choose the next topic!", _playersArray[(int)roundNumber%(int)_playersArray.count]] delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        alert.alertViewStyle = UIAlertActionStyleDefault;
+        NSString *playerName = _playersArray[(int)roundNumber%(int)_playersArray.count];
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Pass the phone!" message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:@"I passed it!", nil];
+        UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+        NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"Pass the phone to\n%@\nto choose the next topic!\n", playerName]];
+        [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(18,playerName.length)];
+        lbl.attributedText = attributedStr;
+        lbl.textAlignment = NSTextAlignmentCenter;
+        lbl.numberOfLines = 4;
+        [alert setValue:lbl forKey:@"accessoryView"];
         [alert show];
         
     }
@@ -685,8 +698,8 @@
     // generate random value from 0 to size of topics list
     
     int lowerBound = 0;
-    int upperBound = (int)topicsArray.count;
-    int rndValue = lowerBound + arc4random() % (upperBound - lowerBound);
+    int upperBound = (int)topicsArray.count - 1;
+    int rndValue = lowerBound + arc4random() % upperBound;
     
     NSLog(@"random number is: %d", rndValue);
     
@@ -731,8 +744,16 @@
         
         hostNeedsToPic = YES;
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"Now, pass the phone to %@ to pick a pic!", _playersArray[0]] delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        alert.alertViewStyle = UIAlertActionStyleDefault;
+        NSString *playerName = _playersArray[0];
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Pass the phone back" message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:@"I passed it!", nil];
+        UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+        NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"Pass the phone to\n%@\nto Pick a Pic!\n", playerName]];
+        [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(18,playerName.length)];
+        lbl.attributedText = attributedStr;
+        lbl.textAlignment = NSTextAlignmentCenter;
+        lbl.numberOfLines = 4;
+        [alert setValue:lbl forKey:@"accessoryView"];
         [alert show];
 
     }

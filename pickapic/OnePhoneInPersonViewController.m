@@ -156,6 +156,10 @@
     return 1;
 }
 
+#pragma keyboard and scrollview methods
+
+
+
 #pragma tablview methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -351,8 +355,8 @@
     // generate random value from 0 to size of topics list
     
     int lowerBound = 0;
-    int upperBound = (int)topicsArray.count;
-    int rndValue = lowerBound + arc4random() % (upperBound - lowerBound);
+    int upperBound = (int)topicsArray.count - 1;
+    int rndValue = lowerBound + arc4random() % upperBound;
     
     NSLog(@"random number is: %d", rndValue);
     

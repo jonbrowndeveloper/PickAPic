@@ -122,7 +122,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60.0;
+    return 40.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -131,9 +131,8 @@
     
     // cell.textField = [[tableView cellForRowAtIndexPath:indexPath] viewWithTag:(indexPath.row)];
     
-    cell.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:22.0];
+    cell.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:18.0];
     cell.textLabel.text = topicsArray[indexPath.row];
-    
     
     // cell.topicLabel.tag  = indexPath.row;
     
@@ -156,10 +155,10 @@
 {
     if(buttonIndex == 1)
     {
-        if (alertTextField.text.length > 25 || alertTextField.text.length == 0)
+        if (alertTextField.text.length > 32 || alertTextField.text.length == 0)
         {
             // if mis-formatted string, display new alert view with instructions
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please enter a topic that is between 1 to 25 characters" message:@"\n" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Done", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please enter a topic that is between 1 to 32 characters" message:@"\n" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Done", nil];
             alert.alertViewStyle = UIAlertViewStylePlainTextInput;
             alertTextField = [alert textFieldAtIndex:0];
             alertTextField.keyboardType = UIKeyboardTypeDefault;
