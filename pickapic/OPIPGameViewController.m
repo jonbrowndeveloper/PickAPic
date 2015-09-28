@@ -18,7 +18,7 @@
 
 @implementation OPIPGameViewController
 
-@synthesize topicLabel, playersArray = _playersArray, timer, timerValue = _timerValue, countdownLabel, topicChosen, nTopicButton, shareButton, cell = _cell, playerScores, currentJudge, roundNumber, hasAddedPoint = _hasAddedPoint, addTopicButton, pickTopicButton, randomTopicButton, roundLabel, timerHasReachedZero = _timerHasReachedZero, logoImageView, grayScreenView, photoChosen = _photoChosen, image, smallPhotoImageView, bigPhotoImageView, settingsButton, hostNeedsToPic, hosthasPickedAPic, actualRoundNumber, gameOver, pressedBackButton, shouldAddToRoundNumber, winners;
+@synthesize topicLabel, playersArray = _playersArray, timer, timerValue = _timerValue, countdownLabel, topicChosen, nTopicButton, shareButton, cell = _cell, playerScores, currentJudge, roundNumber, hasAddedPoint = _hasAddedPoint, addTopicButton, pickTopicButton, randomTopicButton, roundLabel, timerHasReachedZero = _timerHasReachedZero, logoImageView, grayScreenView, photoChosen = _photoChosen, image, smallPhotoImageView, bigPhotoImageView, settingsButton, hostNeedsToPic, hosthasPickedAPic, actualRoundNumber, gameOver, pressedBackButton, shouldAddToRoundNumber, winners, isRounds;
 
 - (void)viewDidLoad
 {
@@ -440,7 +440,7 @@
     
     // check to see if the game is over
     
-    BOOL isRounds = [[NSUserDefaults standardUserDefaults] boolForKey:@"isRounds"];
+    isRounds = [[NSUserDefaults standardUserDefaults] boolForKey:@"isRounds"];
     
     int numberToCheck;
     
@@ -448,11 +448,27 @@
     
     winners = [[NSMutableArray alloc] init];
     
-    NSNumber *maxValue = [playerScores valueForKeyPath:@"@max.intValue"];
+    int maxValue = 0;
+    
+    // find largest value
     
     for (int i = 0; i < playerScores.count; i++)
     {
-        if (playerScores[i] == maxValue)
+        NSNumber *currentPlayerScore = playerScores[i];
+        
+        if (currentPlayerScore.integerValue > maxValue)
+        {
+            maxValue = currentPlayerScore.intValue;
+        }
+    }
+    
+    // get names in list that have largest value
+    
+    for (int i = 0; i < playerScores.count; i++)
+    {
+        NSNumber *currentPlayerScore = playerScores[i];
+        
+        if (currentPlayerScore.integerValue == maxValue)
         {
             [winners addObject:_playersArray[i]];
         }
@@ -468,18 +484,24 @@
         
         NSLog(@"POINT GAME");
         
-        numberToCheck = maxValue.intValue + 1;
+        numberToCheck = maxValue;
     }
     
     // get number of points or rounds they selected from settings screen
     
     double numberOfRoundsOrPoints = [[NSUserDefaults standardUserDefaults] doubleForKey:@"numberOfRoundsOrPoints"];
     
-    NSLog(@"Number to check %d", numberToCheck);
+    NSLog(@"current player: %lu\n out of %lu players", (((roundNumber.integerValue -1)%_playersArray.count)+1), (unsigned long)_playersArray.count);
     
-    NSLog(@"number to check is %d\nnumber of rounds is %d", numberToCheck, (int)numberOfRoundsOrPoints);
+    // NSLog(@"number to check is %d\nnumber of rounds is %d", numberToCheck, (int)numberOfRoundsOrPoints);
 
-    if (numberToCheck == numberOfRoundsOrPoints)
+    if (!isRounds && numberToCheck == numberOfRoundsOrPoints)
+    {
+        gameOver = YES;
+        
+        [nTopicButton setTitle:@"End Game" forState:UIControlStateNormal];
+    }
+    else if (isRounds && numberToCheck == numberOfRoundsOrPoints && (((roundNumber.integerValue -1)%_playersArray.count) +1)== _playersArray.count)
     {
         gameOver = YES;
         
@@ -514,6 +536,11 @@
             [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
         }*/
         
+    }
+    
+    if (gameOver == YES)
+    {
+        [nTopicButton setTitle:@"New Topic" forState:UIControlStateNormal];
     }
     
     gameOver = NO;
@@ -570,7 +597,6 @@
         actualRoundNumber = [NSNumber numberWithInteger:roundValue +1];
     }
     
-    
     if (_hasAddedPoint == YES && !gameOver)
     {
         [self fadeInTopicButtons];
@@ -598,7 +624,8 @@
         
         NSLog(@"Give Phone to next player!");
         
-        NSString *playerName = _playersArray[(int)roundNumber%(int)_playersArray.count];
+        NSString *playerName = _playersArray[((roundNumber.integerValue -1)%_playersArray.count)];
+        
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Pass the phone!" message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:@"I passed it!", nil];
         UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
@@ -625,13 +652,17 @@
         }
         else
         {
-            NSString *winnersString = @"";
+            NSMutableString *winnersString = [NSMutableString stringWithString:@""];
             for (int i = 0; i < winners.count; i++)
             {
-                [winnersString stringByAppendingString:[NSString stringWithFormat:@"\n%@", winners[i]]];
+                [winnersString appendString:[NSString stringWithFormat:@"\n%@", winners[i]]];
+                
+                NSLog(@"current winner %@", winners[i]);
             }
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"GAME OVER!" message:[NSString stringWithFormat:@"There is a tie!\n%@\nwin!", winnersString] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            NSLog(@"Winners string: %@\n winners length is: %lu", winnersString, (unsigned long)winners.count);
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"GAME OVER!" message:[NSString stringWithFormat:@"There is a tie!%@\nwin!", winnersString] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             alert.alertViewStyle = UIAlertActionStyleDefault;
             [alert show];
         }
@@ -684,8 +715,6 @@
         divc.roundNumber = roundNumber;
     }
     
-    // [timer invalidate];
-    // timer = nil;
 }
 
 - (IBAction)randomTopic:(id)sender
@@ -763,8 +792,6 @@
     _timerHasReachedZero = NO;
     
     // begin countdown
-    
-    // _timerValue = 6;
     
     _timerValue = (int)[[NSUserDefaults standardUserDefaults] doubleForKey:@"gameTimer"] + 1;
         

@@ -33,6 +33,8 @@
 @property (nonatomic, assign) BOOL gameOver;
 @property (nonatomic, assign) BOOL pressedBackButton;
 @property (nonatomic, assign) BOOL shouldAddToRoundNumber;
+@property (nonatomic, assign) BOOL isRounds;
+
 
 
 @property (weak, nonatomic) IBOutlet UILabel *roundLabel;
