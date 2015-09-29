@@ -35,7 +35,9 @@
 @property (nonatomic, assign) BOOL shouldAddToRoundNumber;
 @property (nonatomic, assign) BOOL isRounds;
 
+// back button
 
+@property (strong, nonatomic) UIButton *backButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *roundLabel;
 

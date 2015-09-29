@@ -291,7 +291,7 @@
     {
         NSLog(@"there is an empty string in the players array");
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Minimum of 3 players needed to begin game" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Done", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"There are empty player slots!" message:@"Either enter player names or delete empty slots." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Done", nil];
         alert.alertViewStyle = UIAlertActionStyleDefault;
         [alert show];
         

@@ -18,7 +18,7 @@
 
 @implementation OPIPGameViewController
 
-@synthesize topicLabel, playersArray = _playersArray, timer, timerValue = _timerValue, countdownLabel, topicChosen, nTopicButton, shareButton, cell = _cell, playerScores, currentJudge, roundNumber, hasAddedPoint = _hasAddedPoint, addTopicButton, pickTopicButton, randomTopicButton, roundLabel, timerHasReachedZero = _timerHasReachedZero, logoImageView, grayScreenView, photoChosen = _photoChosen, image, smallPhotoImageView, bigPhotoImageView, settingsButton, hostNeedsToPic, hosthasPickedAPic, actualRoundNumber, gameOver, pressedBackButton, shouldAddToRoundNumber, winners, isRounds;
+@synthesize topicLabel, playersArray = _playersArray, timer, timerValue = _timerValue, countdownLabel, topicChosen, nTopicButton, shareButton, cell = _cell, playerScores, currentJudge, roundNumber, hasAddedPoint = _hasAddedPoint, addTopicButton, pickTopicButton, randomTopicButton, roundLabel, timerHasReachedZero = _timerHasReachedZero, logoImageView, grayScreenView, photoChosen = _photoChosen, image, smallPhotoImageView, bigPhotoImageView, settingsButton, hostNeedsToPic, hosthasPickedAPic, actualRoundNumber, gameOver, pressedBackButton, shouldAddToRoundNumber, winners, isRounds, backButton;
 
 - (void)viewDidLoad
 {
@@ -90,7 +90,7 @@
     
     // back button
     
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0, 0, (self.navigationController.navigationBar.frame.size.height *0.65), (self.navigationController.navigationBar.frame.size.height *0.65));
     [backButton setImage:[UIImage imageNamed:@"icn_back"] forState:UIControlStateNormal];
     [backButton setImage:[UIImage imageNamed:@"icn_back_active"] forState:(UIControlStateSelected | UIControlStateHighlighted)];
@@ -230,10 +230,12 @@
     [self.view.layer addAnimation:transition forKey:nil];
     grayScreenView.hidden = NO;
     bigPhotoImageView.hidden = NO;
+    backButton.enabled = NO;
 }
 
 - (void)hideLargePic
 {
+    backButton.enabled = YES;
     grayScreenView.hidden = YES;
     bigPhotoImageView.hidden = YES;
 }
@@ -646,7 +648,7 @@
     {
         if (winners.count == 1)
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"GAME OVER!" message:[NSString stringWithFormat:@"%@ Wins!", winners[0]] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"GAME OVER!\n%@ Wins!", winners[0]] message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             alert.alertViewStyle = UIAlertActionStyleDefault;
             [alert show];
         }
@@ -657,7 +659,7 @@
             {
                 [winnersString appendString:[NSString stringWithFormat:@"\n%@", winners[i]]];
                 
-                NSLog(@"current winner %@", winners[i]);
+                // NSLog(@"current winner %@", winners[i]);
             }
             
             NSLog(@"Winners string: %@\n winners length is: %lu", winnersString, (unsigned long)winners.count);
