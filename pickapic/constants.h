@@ -13,4 +13,9 @@
 
 #define orangeColor [UIColor colorWithRed:255.0/255.0 green:174.0/255.0 blue:0.0/255.0 alpha:1]
 
+#define orangeColorTut [UIColor colorWithRed:246.0/255.0 green:145.0/255.0 blue:23.0/255.0 alpha:1]
+#define greenColorTut [UIColor colorWithRed:61.0/255.0 green:127.0/255.0 blue:50.0/255.0 alpha:1]
+#define blueColorTut [UIColor colorWithRed:24.0/255.0 green:142.0/255.0 blue:192.0/255.0 alpha:1]
+#define pinkColorTut [UIColor colorWithRed:202.0/255.0 green:0.0/255.0 blue:80.0/255.0 alpha:1]
+
 @end

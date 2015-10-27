@@ -19,6 +19,26 @@
 
 @synthesize timer, timerValue;
 
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    BOOL tutorialHasBeenSeen = [[NSUserDefaults standardUserDefaults] boolForKey:@"tutorialHasBeenSeen"];
+    
+    UIStoryboard *storyboard = self.window.rootViewController.storyboard;
+
+    if (!tutorialHasBeenSeen)
+    {
+        UIViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"TutorialViewController"];
+        self.window.rootViewController = rootViewController;
+        [self.window makeKeyAndVisible];
+    }
+    else
+    {
+        // do nothing
+    }
+    
+    return YES;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
@@ -49,7 +69,22 @@
         double numberOfRoundsOrPoints = 5.0;
         [[NSUserDefaults standardUserDefaults] setDouble:numberOfRoundsOrPoints forKey:@"numberOfRoundsOrPoints"];
         
+        BOOL tutorialHasBeenSeen = NO;
+        [[NSUserDefaults standardUserDefaults] setBool:tutorialHasBeenSeen forKey:@"tutorialHasBeenSeen"];
+
+        
     }
+    
+    // show tutorial view if first time
+    
+    
+    
+    // for page indicator
+    
+    UIPageControl *pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+    pageControl.backgroundColor = [UIColor whiteColor];
     
     
     // Override point for customization after application launch.

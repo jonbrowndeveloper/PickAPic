@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		294440851BBE532900800F3C /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 294440841BBE532900800F3C /* TutorialViewController.m */; settings = {ASSET_TAGS = (); }; };
+		29BF82EE1BCC3059009A9D7A /* PageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29BF82ED1BCC3059009A9D7A /* PageContentViewController.m */; settings = {ASSET_TAGS = (); }; };
+		29BF82F11BCC39B4009A9D7A /* TutorialPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29BF82F01BCC39B4009A9D7A /* TutorialPageViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3411030C1B72BA1600EA1E24 /* GameChooseTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3411030B1B72BA1600EA1E24 /* GameChooseTypeViewController.m */; };
 		343CC8171B3361670030FF65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 343CC8161B3361670030FF65 /* main.m */; };
 		343CC81A1B3361670030FF65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 343CC8191B3361670030FF65 /* AppDelegate.m */; };
@@ -69,6 +72,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		294440831BBE532900800F3C /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialViewController.h; path = pickapic/TutorialViewController.h; sourceTree = SOURCE_ROOT; };
+		294440841BBE532900800F3C /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialViewController.m; path = pickapic/TutorialViewController.m; sourceTree = SOURCE_ROOT; };
+		29BF82EC1BCC3059009A9D7A /* PageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PageContentViewController.h; path = pickapic/PageContentViewController.h; sourceTree = SOURCE_ROOT; };
+		29BF82ED1BCC3059009A9D7A /* PageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PageContentViewController.m; path = pickapic/PageContentViewController.m; sourceTree = SOURCE_ROOT; };
+		29BF82EF1BCC39B4009A9D7A /* TutorialPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialPageViewController.h; path = pickapic/TutorialPageViewController.h; sourceTree = SOURCE_ROOT; };
+		29BF82F01BCC39B4009A9D7A /* TutorialPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialPageViewController.m; path = pickapic/TutorialPageViewController.m; sourceTree = SOURCE_ROOT; };
 		3411030A1B72BA1600EA1E24 /* GameChooseTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameChooseTypeViewController.h; sourceTree = "<group>"; };
 		3411030B1B72BA1600EA1E24 /* GameChooseTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameChooseTypeViewController.m; sourceTree = "<group>"; };
 		343CC8111B3361670030FF65 /* PickAPic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PickAPic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +184,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		29BF82EB1BCC2FDC009A9D7A /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				29BF82EC1BCC3059009A9D7A /* PageContentViewController.h */,
+				29BF82ED1BCC3059009A9D7A /* PageContentViewController.m */,
+				29BF82EF1BCC39B4009A9D7A /* TutorialPageViewController.h */,
+				29BF82F01BCC39B4009A9D7A /* TutorialPageViewController.m */,
+			);
+			name = Tutorial;
+			sourceTree = "<group>";
+		};
 		343CC8081B3361670030FF65 = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +221,7 @@
 				343CC8191B3361670030FF65 /* AppDelegate.m */,
 				349C87DC1B7A988B002C7B65 /* Game */,
 				349C87DD1B7A98A1002C7B65 /* Home, Settings, and Leaderboard */,
+				29BF82EB1BCC2FDC009A9D7A /* Tutorial */,
 				343CC8481B34DD260030FF65 /* constants.h */,
 				343CC8491B34DD260030FF65 /* constants.m */,
 				AA4DA3C11B83F289001C45DE /* 3rd Party Classes */,
@@ -280,6 +301,8 @@
 		349C87DD1B7A98A1002C7B65 /* Home, Settings, and Leaderboard */ = {
 			isa = PBXGroup;
 			children = (
+				294440831BBE532900800F3C /* TutorialViewController.h */,
+				294440841BBE532900800F3C /* TutorialViewController.m */,
 				343CC81E1B3361670030FF65 /* ViewController.h */,
 				343CC81F1B3361670030FF65 /* ViewController.m */,
 				34A18ABA1B4217A90000BBEC /* SettingsViewController.h */,
@@ -397,7 +420,7 @@
 				TargetAttributes = {
 					343CC8101B3361670030FF65 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 6VYMUT4CEY;
+						DevelopmentTeam = M34W26HKK4;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 0;
@@ -467,6 +490,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA0FF3A91B93DC6600E9E9EC /* OPIPSettingsViewController.m in Sources */,
+				29BF82F11BCC39B4009A9D7A /* TutorialPageViewController.m in Sources */,
 				343CC84A1B34DD260030FF65 /* constants.m in Sources */,
 				34BE66981B3C61230059AF9B /* gTableViewCell.m in Sources */,
 				34A18ABF1B4217B70000BBEC /* LeaderboardViewController.m in Sources */,
@@ -483,7 +507,9 @@
 				343CC8171B3361670030FF65 /* main.m in Sources */,
 				AA3883A71B7BF91800C2CE1D /* OnePhoneInPersonViewController.m in Sources */,
 				34A18ABC1B4217A90000BBEC /* SettingsViewController.m in Sources */,
+				29BF82EE1BCC3059009A9D7A /* PageContentViewController.m in Sources */,
 				3411030C1B72BA1600EA1E24 /* GameChooseTypeViewController.m in Sources */,
+				294440851BBE532900800F3C /* TutorialViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -614,8 +640,9 @@
 				);
 				INFOPLIST_FILE = PickAPic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.D-G-Ventures.pickapic";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b97e6596-6c40-4e6b-a24f-641b77ff8e96";
 			};
 			name = Debug;
 		};
@@ -632,8 +659,9 @@
 				);
 				INFOPLIST_FILE = PickAPic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.D-G-Ventures.pickapic";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b97e6596-6c40-4e6b-a24f-641b77ff8e96";
 			};
 			name = Release;
 		};

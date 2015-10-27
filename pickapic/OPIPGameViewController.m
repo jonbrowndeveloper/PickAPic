@@ -18,7 +18,7 @@
 
 @implementation OPIPGameViewController
 
-@synthesize topicLabel, playersArray = _playersArray, timer, timerValue = _timerValue, countdownLabel, topicChosen, nTopicButton, shareButton, cell = _cell, playerScores, currentJudge, roundNumber, hasAddedPoint = _hasAddedPoint, addTopicButton, pickTopicButton, randomTopicButton, roundLabel, timerHasReachedZero = _timerHasReachedZero, logoImageView, grayScreenView, photoChosen = _photoChosen, image, smallPhotoImageView, bigPhotoImageView, settingsButton, hostNeedsToPic, hosthasPickedAPic, actualRoundNumber, gameOver, pressedBackButton, shouldAddToRoundNumber, winners, isRounds, backButton;
+@synthesize topicLabel, playersArray = _playersArray, timer, timerValue = _timerValue, countdownLabel, topicChosen, nTopicButton, shareButton, cell = _cell, playerScores, currentJudge, roundNumber, hasAddedPoint = _hasAddedPoint, addTopicButton, pickTopicButton, randomTopicButton, roundLabel, timerHasReachedZero = _timerHasReachedZero, logoImageView, grayScreenView, photoChosen = _photoChosen, image, smallPhotoImageView, bigPhotoImageView, settingsButton, hostNeedsToPic, hosthasPickedAPic, actualRoundNumber, gameOver, pressedBackButton, shouldAddToRoundNumber, winners, isRounds, backButton, gameHasStarted;
 
 - (void)viewDidLoad
 {
@@ -110,7 +110,7 @@
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     self.navigationItem.titleView = imgView;
     
-    // settings button
+    // settings button - added to make sure that the pickapic logo stays centered
     
     settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
     settingsButton.frame = CGRectMake(0, 0, (self.navigationController.navigationBar.frame.size.height *0.65), (self.navigationController.navigationBar.frame.size.height *0.65));
@@ -161,7 +161,7 @@
     {
         topicLabel.text = topicChosen;
         
-        if (_photoChosen == NO)
+        if (_photoChosen == NO && gameHasStarted == NO)
         {
             [self startGame];
         }
@@ -553,9 +553,11 @@
 
 - (IBAction)shareAction:(id)sender
 {
-    /*
-    NSString *textToShare = @"Lets play PickAPic!";
-    NSURL *myWebsite = [NSURL URLWithString:@"\n\nAppStoreLink"];
+    // https://docs.google.com/forms/d/1jKaCVZVzlnPnaUYm8ti8oSP-NbXZkzoBIDV7eDB5FPc/viewform
+    
+    
+    NSString *textToShare = @"Find out when PickAPic is availible on the App Store!\n";
+    NSURL *myWebsite = [NSURL URLWithString:@"https://docs.google.com/forms/d/1jKaCVZVzlnPnaUYm8ti8oSP-NbXZkzoBIDV7eDB5FPc/viewform"];
     
     NSArray *objectsToShare = @[textToShare, myWebsite];
     
@@ -572,7 +574,7 @@
     activityVC.excludedActivityTypes = excludeActivities;
     
     [self presentViewController:activityVC animated:YES completion:nil];
-     */
+    
 
 }
 
@@ -620,6 +622,7 @@
         logoImageView.hidden = YES;
         
         _photoChosen = NO;
+        gameHasStarted = NO;
         
         [timer invalidate];
         timer = nil;
@@ -669,7 +672,6 @@
             [alert show];
         }
 
-        
         gameOver = YES;
         
     }
@@ -744,6 +746,10 @@
 
 - (void)startGame
 {
+    // bool to keep track of if the game is going or not
+    
+    gameHasStarted = YES;
+    
     if (roundNumber.intValue == 1)
     {
         addTopicButton.hidden = YES;

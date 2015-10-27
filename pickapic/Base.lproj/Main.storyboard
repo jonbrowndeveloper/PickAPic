@@ -42,6 +42,7 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -489,6 +490,14 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W24-8e-lKK">
+                                <rect key="frame" x="256" y="550" width="89" height="30"/>
+                                <color key="tintColor" red="0.0" green="0.61960784310000006" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="View Tutorial"/>
+                                <connections>
+                                    <segue destination="6m8-wA-7wG" kind="show" id="EbY-V3-CwZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -499,9 +508,11 @@
                             <constraint firstItem="jGD-Xa-dhl" firstAttribute="top" secondItem="TJR-hB-gkg" secondAttribute="bottom" constant="8" id="A3L-jC-lWq"/>
                             <constraint firstItem="TJR-hB-gkg" firstAttribute="top" secondItem="Bzc-Ff-MRe" secondAttribute="bottom" constant="8" id="JgL-Fv-kfc"/>
                             <constraint firstItem="IIB-nW-p3o" firstAttribute="top" secondItem="jGD-Xa-dhl" secondAttribute="bottom" constant="8" id="Or2-eq-49N"/>
+                            <constraint firstItem="eYI-Ct-jWo" firstAttribute="top" secondItem="W24-8e-lKK" secondAttribute="bottom" constant="20" id="R6R-PW-UW6"/>
                             <constraint firstItem="Bzc-Ff-MRe" firstAttribute="top" secondItem="eTH-rN-xth" secondAttribute="bottom" constant="16" id="WCK-ki-BE5"/>
                             <constraint firstItem="Bzc-Ff-MRe" firstAttribute="leading" secondItem="8gM-gU-xpp" secondAttribute="leadingMargin" id="XyK-kK-sb4"/>
                             <constraint firstAttribute="centerX" secondItem="eTH-rN-xth" secondAttribute="centerX" constant="1.5" id="Zl6-SM-f0E"/>
+                            <constraint firstItem="W24-8e-lKK" firstAttribute="centerX" secondItem="8gM-gU-xpp" secondAttribute="centerX" id="e5f-8b-u3O"/>
                             <constraint firstAttribute="centerX" secondItem="7rZ-v4-adD" secondAttribute="centerX" id="gwK-nq-QJh"/>
                             <constraint firstItem="eTH-rN-xth" firstAttribute="top" secondItem="ltR-zZ-6Gi" secondAttribute="bottom" constant="28" id="mmH-U5-Tku"/>
                             <constraint firstAttribute="centerX" secondItem="IIB-nW-p3o" secondAttribute="centerX" id="nyI-vb-bUx"/>
@@ -522,7 +533,7 @@
         <!--Game View Controller-->
         <scene sceneID="nIm-Rf-FiY">
             <objects>
-                <viewController id="Mu0-8c-vzV" customClass="OPIPGameViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OPIPGameViewController" id="Mu0-8c-vzV" customClass="OPIPGameViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="o3j-DF-pnI"/>
                         <viewControllerLayoutGuide type="bottom" id="Egv-od-inT"/>
@@ -827,7 +838,7 @@
         <!--One Phone - In Person-->
         <scene sceneID="loF-nd-Yxi">
             <objects>
-                <viewController id="vdD-nY-5Qw" customClass="OnePhoneInPersonViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameSettingsViewController" id="vdD-nY-5Qw" customClass="OnePhoneInPersonViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YvS-fi-aAx"/>
                         <viewControllerLayoutGuide type="bottom" id="8DA-q5-sJP"/>
@@ -1336,23 +1347,82 @@
             </objects>
             <point key="canvasLocation" x="382" y="406"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="pcp-gp-KeC">
+        <!--Tutorial Page View Controller-->
+        <scene sceneID="lIk-SM-z8v">
             <objects>
-                <viewController id="GfT-2e-dkp" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TutorialViewController" id="6m8-wA-7wG" customClass="TutorialPageViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ZRf-Ah-RUb"/>
-                        <viewControllerLayoutGuide type="bottom" id="8JW-jk-SD9"/>
+                        <viewControllerLayoutGuide type="top" id="mUx-d9-u5H"/>
+                        <viewControllerLayoutGuide type="bottom" id="ucD-bc-6gc"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="CS0-Mx-s2r">
+                    <view key="view" contentMode="scaleToFill" id="bmR-U8-Lnh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="glq-bp-kef" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0NU-S6-b4G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1930" y="-308"/>
+            <point key="canvasLocation" x="1182" y="-1710"/>
+        </scene>
+        <!--Page Content View Controller-->
+        <scene sceneID="nXC-ea-RbQ">
+            <objects>
+                <viewController storyboardIdentifier="PageContentViewController" id="dGa-Gi-aWp" customClass="PageContentViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SjP-ML-Ppm"/>
+                        <viewControllerLayoutGuide type="bottom" id="jT0-MD-Nvd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ffD-Gb-Bqj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7m-19-Wfs">
+                                <rect key="frame" x="20" y="28" width="560" height="386"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="48"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nlY-8Z-NQr">
+                                <rect key="frame" x="20" y="530" width="560" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="iQh-Ji-eTy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="22"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="beginGameAction:" destination="dGa-Gi-aWp" eventType="touchUpInside" id="0hi-od-8YR"/>
+                                    <segue destination="j01-nL-ftk" kind="show" id="b9B-fa-L9g"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="A7m-19-Wfs" firstAttribute="trailing" secondItem="ffD-Gb-Bqj" secondAttribute="trailingMargin" id="CBg-Fz-ve9"/>
+                            <constraint firstItem="nlY-8Z-NQr" firstAttribute="leading" secondItem="ffD-Gb-Bqj" secondAttribute="leadingMargin" id="D0x-R9-HWV"/>
+                            <constraint firstItem="A7m-19-Wfs" firstAttribute="top" secondItem="SjP-ML-Ppm" secondAttribute="bottom" constant="8" id="Glb-CQ-rxI"/>
+                            <constraint firstItem="nlY-8Z-NQr" firstAttribute="trailing" secondItem="ffD-Gb-Bqj" secondAttribute="trailingMargin" id="dPg-Hh-vqf"/>
+                            <constraint firstItem="A7m-19-Wfs" firstAttribute="leading" secondItem="ffD-Gb-Bqj" secondAttribute="leadingMargin" id="fPz-yb-UEh"/>
+                            <constraint firstItem="jT0-MD-Nvd" firstAttribute="top" secondItem="A7m-19-Wfs" secondAttribute="bottom" constant="186" id="fpn-io-suv"/>
+                            <constraint firstItem="jT0-MD-Nvd" firstAttribute="top" secondItem="nlY-8Z-NQr" secondAttribute="bottom" constant="20" id="zHK-eX-ch9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="beginPlayingButton" destination="nlY-8Z-NQr" id="fMQ-zV-JHC"/>
+                        <outlet property="textLabel" destination="A7m-19-Wfs" id="Xjw-gc-owV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EhL-ZB-WpE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1838" y="-1710"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="eRH-dB-omL">
+            <objects>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="ZvN-cP-xAZ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cz6-L5-VIk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1838" y="-960"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5cq-qx-cDG">
@@ -1383,9 +1453,9 @@
         <image name="random" width="60" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QNl-zM-2qX"/>
-        <segue reference="YPe-Gq-53J"/>
-        <segue reference="nW8-XS-KKF"/>
+        <segue reference="XyB-Lo-O2i"/>
+        <segue reference="b9B-fa-L9g"/>
         <segue reference="beg-cI-uiL"/>
+        <segue reference="nW8-XS-KKF"/>
     </inferredMetricsTieBreakers>
 </document>
