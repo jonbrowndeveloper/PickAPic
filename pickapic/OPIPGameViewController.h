@@ -35,6 +35,7 @@
 @property (nonatomic, assign) BOOL shouldAddToRoundNumber;
 @property (nonatomic, assign) BOOL isRounds;
 @property (nonatomic, assign) BOOL gameHasStarted;
+@property (nonatomic, assign) BOOL prompts;
 
 // back button
 

@@ -15,6 +15,8 @@
 
 - (IBAction)gameTypeControl:(id)sender;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *gameTypeControlOutlet;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *gamePromptsSegmentedControl;
+- (IBAction)gamePromptsControl:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UILabel *numberLabel;
 - (IBAction)numberStepper:(id)sender;

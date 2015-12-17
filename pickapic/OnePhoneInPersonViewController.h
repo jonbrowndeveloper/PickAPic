@@ -18,6 +18,19 @@
 @property (strong, nonatomic) NSMutableArray *playerList;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+// attempt to make the cell be visible when textfield is active
+
+@property (nonatomic, retain) IBOutlet UITextField *actifText;
+// tableview methods
+
+- (IBAction)textFieldDidBeginEditing:(UITextField *)textField;
+- (IBAction)textFieldDidEndEditing:(UITextField *)textField;
+
+-(void) keyboardWillHide:(NSNotification *)note;
+-(void) keyboardWillShow:(NSNotification *)note;
+
+@property (nonatomic, assign) CGRect origTVFrame;
+
 // begin game
 
 - (IBAction)beginGame:(id)sender;
@@ -45,6 +58,10 @@
 
 @property (nonatomic, retain) UIButton *settingsButton;
 
+// labels and button for hiding when cell is selected
+@property (weak, nonatomic) IBOutlet UIButton *addPlayerButton;
+@property (weak, nonatomic) IBOutlet UILabel *playersLabel;
+@property (weak, nonatomic) IBOutlet UILabel *threeMinLabel;
 
 
 @end

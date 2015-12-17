@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		294440851BBE532900800F3C /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 294440841BBE532900800F3C /* TutorialViewController.m */; settings = {ASSET_TAGS = (); }; };
-		29BF82EE1BCC3059009A9D7A /* PageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29BF82ED1BCC3059009A9D7A /* PageContentViewController.m */; settings = {ASSET_TAGS = (); }; };
-		29BF82F11BCC39B4009A9D7A /* TutorialPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29BF82F01BCC39B4009A9D7A /* TutorialPageViewController.m */; settings = {ASSET_TAGS = (); }; };
+		294440851BBE532900800F3C /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 294440841BBE532900800F3C /* TutorialViewController.m */; };
+		29BF82EE1BCC3059009A9D7A /* PageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29BF82ED1BCC3059009A9D7A /* PageContentViewController.m */; };
+		29BF82F11BCC39B4009A9D7A /* TutorialPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29BF82F01BCC39B4009A9D7A /* TutorialPageViewController.m */; };
+		29DD44711BEC25A0008D9AFA /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29DD44701BEC25A0008D9AFA /* StoreViewController.m */; };
+		29DD44741BEC27BF008D9AFA /* StoreCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29DD44731BEC27BF008D9AFA /* StoreCollectionViewCell.m */; };
+		29F21EDD1C037E4D00262525 /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F21EDC1C037E4D00262525 /* IAPHelper.m */; };
+		29F21EE01C037FAD00262525 /* PAPIAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F21EDF1C037FAD00262525 /* PAPIAPHelper.m */; };
+		29F21EE21C03813A00262525 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29F21EE11C03813A00262525 /* StoreKit.framework */; };
 		3411030C1B72BA1600EA1E24 /* GameChooseTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3411030B1B72BA1600EA1E24 /* GameChooseTypeViewController.m */; };
 		343CC8171B3361670030FF65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 343CC8161B3361670030FF65 /* main.m */; };
 		343CC81A1B3361670030FF65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 343CC8191B3361670030FF65 /* AppDelegate.m */; };
@@ -78,6 +83,15 @@
 		29BF82ED1BCC3059009A9D7A /* PageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PageContentViewController.m; path = pickapic/PageContentViewController.m; sourceTree = SOURCE_ROOT; };
 		29BF82EF1BCC39B4009A9D7A /* TutorialPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialPageViewController.h; path = pickapic/TutorialPageViewController.h; sourceTree = SOURCE_ROOT; };
 		29BF82F01BCC39B4009A9D7A /* TutorialPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialPageViewController.m; path = pickapic/TutorialPageViewController.m; sourceTree = SOURCE_ROOT; };
+		29DD446F1BEC25A0008D9AFA /* StoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoreViewController.h; path = ../StoreViewController.h; sourceTree = "<group>"; };
+		29DD44701BEC25A0008D9AFA /* StoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoreViewController.m; path = ../StoreViewController.m; sourceTree = "<group>"; };
+		29DD44721BEC27BF008D9AFA /* StoreCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoreCollectionViewCell.h; path = pickapic/StoreCollectionViewCell.h; sourceTree = SOURCE_ROOT; };
+		29DD44731BEC27BF008D9AFA /* StoreCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoreCollectionViewCell.m; path = pickapic/StoreCollectionViewCell.m; sourceTree = SOURCE_ROOT; };
+		29F21EDB1C037E4D00262525 /* IAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPHelper.h; sourceTree = "<group>"; };
+		29F21EDC1C037E4D00262525 /* IAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPHelper.m; sourceTree = "<group>"; };
+		29F21EDE1C037FAD00262525 /* PAPIAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAPIAPHelper.h; path = pickapic/PAPIAPHelper.h; sourceTree = SOURCE_ROOT; };
+		29F21EDF1C037FAD00262525 /* PAPIAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAPIAPHelper.m; path = pickapic/PAPIAPHelper.m; sourceTree = SOURCE_ROOT; };
+		29F21EE11C03813A00262525 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		3411030A1B72BA1600EA1E24 /* GameChooseTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameChooseTypeViewController.h; sourceTree = "<group>"; };
 		3411030B1B72BA1600EA1E24 /* GameChooseTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameChooseTypeViewController.m; sourceTree = "<group>"; };
 		343CC8111B3361670030FF65 /* PickAPic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PickAPic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,6 +173,7 @@
 				AA4616281BA0B56300171704 /* libsqlite3.dylib in Frameworks */,
 				AA4616261BA0B55700171704 /* libz.dylib in Frameworks */,
 				AA4616241BA0B53F00171704 /* libstdc++.6.dylib in Frameworks */,
+				29F21EE21C03813A00262525 /* StoreKit.framework in Frameworks */,
 				AA4616221BA0B52100171704 /* SystemConfiguration.framework in Frameworks */,
 				AA46161E1BA0B50C00171704 /* Security.framework in Frameworks */,
 				AA46161C1BA0B50000171704 /* CoreLocation.framework in Frameworks */,
@@ -198,6 +213,7 @@
 		343CC8081B3361670030FF65 = {
 			isa = PBXGroup;
 			children = (
+				29F21EE11C03813A00262525 /* StoreKit.framework */,
 				343CC8131B3361670030FF65 /* PickAPic */,
 				343CC8301B3361670030FF65 /* PickAPicTests */,
 				343CC8121B3361670030FF65 /* Products */,
@@ -311,6 +327,10 @@
 				34A18ABE1B4217B70000BBEC /* LeaderboardViewController.m */,
 				34B010C71B4AFF8F005F2096 /* LeaderboardTableViewCell.h */,
 				34B010C81B4AFF8F005F2096 /* LeaderboardTableViewCell.m */,
+				29DD446F1BEC25A0008D9AFA /* StoreViewController.h */,
+				29DD44701BEC25A0008D9AFA /* StoreViewController.m */,
+				29DD44721BEC27BF008D9AFA /* StoreCollectionViewCell.h */,
+				29DD44731BEC27BF008D9AFA /* StoreCollectionViewCell.m */,
 			);
 			name = "Home, Settings, and Leaderboard";
 			sourceTree = "<group>";
@@ -345,6 +365,10 @@
 		AA4DA3C11B83F289001C45DE /* 3rd Party Classes */ = {
 			isa = PBXGroup;
 			children = (
+				29F21EDB1C037E4D00262525 /* IAPHelper.h */,
+				29F21EDC1C037E4D00262525 /* IAPHelper.m */,
+				29F21EDE1C037FAD00262525 /* PAPIAPHelper.h */,
+				29F21EDF1C037FAD00262525 /* PAPIAPHelper.m */,
 			);
 			name = "3rd Party Classes";
 			sourceTree = "<group>";
@@ -423,7 +447,7 @@
 						DevelopmentTeam = M34W26HKK4;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -498,12 +522,16 @@
 				AA3883AA1B7BF9CF00C2CE1D /* OnePhonePlayerListTableViewCell.m in Sources */,
 				343CC81D1B3361670030FF65 /* PickAPic.xcdatamodeld in Sources */,
 				343CC81A1B3361670030FF65 /* AppDelegate.m in Sources */,
+				29F21EE01C037FAD00262525 /* PAPIAPHelper.m in Sources */,
 				AA62318B1B81517F00E3DC48 /* TopicTableViewCell.m in Sources */,
+				29DD44711BEC25A0008D9AFA /* StoreViewController.m in Sources */,
 				AA6231881B814FBD00E3DC48 /* TopicViewController.m in Sources */,
 				AA61A5261B98F04E00CEEE5B /* PhotoPickViewController.m in Sources */,
 				AA4DA3D61B8E2A17001C45DE /* OPIPTableViewCell.m in Sources */,
 				343CC8201B3361670030FF65 /* ViewController.m in Sources */,
 				AA4DA3CD1B83F5AE001C45DE /* OPIPGameViewController.m in Sources */,
+				29F21EDD1C037E4D00262525 /* IAPHelper.m in Sources */,
+				29DD44741BEC27BF008D9AFA /* StoreCollectionViewCell.m in Sources */,
 				343CC8171B3361670030FF65 /* main.m in Sources */,
 				AA3883A71B7BF91800C2CE1D /* OnePhoneInPersonViewController.m in Sources */,
 				34A18ABC1B4217A90000BBEC /* SettingsViewController.m in Sources */,
@@ -642,7 +670,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.D-G-Ventures.pickapic";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b97e6596-6c40-4e6b-a24f-641b77ff8e96";
+				PROVISIONING_PROFILE = "744380c2-1ddd-4063-b36c-857a54f4f190";
 			};
 			name = Debug;
 		};
@@ -661,7 +689,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.D-G-Ventures.pickapic";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b97e6596-6c40-4e6b-a24f-641b77ff8e96";
+				PROVISIONING_PROFILE = "744380c2-1ddd-4063-b36c-857a54f4f190";
 			};
 			name = Release;
 		};

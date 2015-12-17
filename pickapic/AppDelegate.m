@@ -66,6 +66,9 @@
         BOOL rounds = YES;
         [[NSUserDefaults standardUserDefaults] setBool:rounds forKey:@"isRounds"];
         
+        BOOL prompts = YES;
+        [[NSUserDefaults standardUserDefaults] setBool:prompts forKey:@"gamePromptsActive"];
+        
         double numberOfRoundsOrPoints = 5.0;
         [[NSUserDefaults standardUserDefaults] setDouble:numberOfRoundsOrPoints forKey:@"numberOfRoundsOrPoints"];
         

@@ -14,7 +14,7 @@
 
 @implementation OPIPSettingsViewController
 
-@synthesize timerControlOutlet, gameTypeControlOutlet, numberStepperOutlet, gameTypeNumber, numberLabel;
+@synthesize timerControlOutlet, gameTypeControlOutlet, numberStepperOutlet, gameTypeNumber, numberLabel, gamePromptsSegmentedControl;
 
 - (void)viewDidLoad
 {
@@ -49,6 +49,17 @@
     
     gameTypeNumber = (int)[[NSUserDefaults standardUserDefaults] doubleForKey:@"numberOfRoundsOrPoints"];
     
+    BOOL prompts = [[NSUserDefaults standardUserDefaults] boolForKey:@"gamePromptsActive"];
+    
+    if (prompts == YES)
+    {
+        gamePromptsSegmentedControl.selectedSegmentIndex = 0;
+    }
+    else if (prompts == NO)
+    {
+        gamePromptsSegmentedControl.selectedSegmentIndex = 1;
+    }
+    
     numberLabel.text = [NSString stringWithFormat:@"%d", gameTypeNumber];
     
     numberStepperOutlet.value = (double)gameTypeNumber;
@@ -69,6 +80,13 @@
     [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    
+    // navbar color
+    
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar
+     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.navigationController.navigationBar.translucent = NO;
     
     self.navigationItem.leftBarButtonItem = backItem;
 }
@@ -138,4 +156,15 @@
     }
 }
 
+- (IBAction)gamePromptsControl:(id)sender
+{
+    if (gamePromptsSegmentedControl.selectedSegmentIndex == 0)
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"gamePromptsActive"];
+    }
+    else if (gamePromptsSegmentedControl.selectedSegmentIndex == 1)
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"gamePromptsActive"];
+    }
+}
 @end

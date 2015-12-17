@@ -18,7 +18,7 @@
 
 @implementation OPIPGameViewController
 
-@synthesize topicLabel, playersArray = _playersArray, timer, timerValue = _timerValue, countdownLabel, topicChosen, nTopicButton, shareButton, cell = _cell, playerScores, currentJudge, roundNumber, hasAddedPoint = _hasAddedPoint, addTopicButton, pickTopicButton, randomTopicButton, roundLabel, timerHasReachedZero = _timerHasReachedZero, logoImageView, grayScreenView, photoChosen = _photoChosen, image, smallPhotoImageView, bigPhotoImageView, settingsButton, hostNeedsToPic, hosthasPickedAPic, actualRoundNumber, gameOver, pressedBackButton, shouldAddToRoundNumber, winners, isRounds, backButton, gameHasStarted;
+@synthesize topicLabel, playersArray = _playersArray, timer, timerValue = _timerValue, countdownLabel, topicChosen, nTopicButton, shareButton, cell = _cell, playerScores, currentJudge, roundNumber, hasAddedPoint = _hasAddedPoint, addTopicButton, pickTopicButton, randomTopicButton, roundLabel, timerHasReachedZero = _timerHasReachedZero, logoImageView, grayScreenView, photoChosen = _photoChosen, image, smallPhotoImageView, bigPhotoImageView, settingsButton, hostNeedsToPic, hosthasPickedAPic, actualRoundNumber, gameOver, pressedBackButton, shouldAddToRoundNumber, winners, isRounds, backButton, gameHasStarted, prompts;
 
 - (void)viewDidLoad
 {
@@ -122,7 +122,11 @@
     
     UIBarButtonItem *settingsItem = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
     
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:settingsItem, nil];
+    self.navigationItem.rightBarButtonItem = settingsItem;
+    
+    // game prompts bool
+    
+    prompts = [[NSUserDefaults standardUserDefaults] boolForKey:@"gamePromptsActive"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -163,11 +167,27 @@
         
         if (_photoChosen == NO && gameHasStarted == NO)
         {
+            // likely coming from topic picker view
+            
             [self startGame];
+        }
+        else if (_photoChosen == NO && gameHasStarted == YES)
+        {
+            // if the photo picker has been cancelled
+            
+            NSLog(@"host is playing");
+            
+            // grayScreenView.hidden = NO;
+            
+            hostNeedsToPic = YES;
+
+            NSTimer *alertTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(passThePhoneToHost) userInfo:nil repeats:NO];
+            
+
         }
         else
         {
-            // countdownLabel.text = [NSString stringWithFormat:@"%d", _timerValue];
+            // host photo has been picked
             
             addTopicButton.hidden = YES;
             pickTopicButton.hidden = YES;
@@ -179,8 +199,6 @@
             nTopicButton.enabled = NO;
             logoImageView.hidden = YES;
             
-            // timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
-            
             // set image
             
             smallPhotoImageView.image = image;
@@ -189,14 +207,17 @@
             smallPhotoImageView.layer.masksToBounds = YES;
             
             smallPhotoImageView.hidden = NO;
-            
-            // add touch identifier
+                        // add touch identifier
             
             UITapGestureRecognizer *newTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showLargePic)];
             
             [smallPhotoImageView setUserInteractionEnabled:YES];
             
             [smallPhotoImageView addGestureRecognizer:newTap];
+            
+            NSTimer *alertTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(passThePhoneToJudge) userInfo:nil repeats:NO];
+
+            
         }
     }
     
@@ -629,18 +650,11 @@
         
         NSLog(@"Give Phone to next player!");
         
-        NSString *playerName = _playersArray[((roundNumber.integerValue -1)%_playersArray.count)];
-        
-        
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Pass the phone!" message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:@"I passed it!", nil];
-        UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
-        NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"Pass the phone to\n%@\nto choose the next topic!\n", playerName]];
-        [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(18,playerName.length)];
-        lbl.attributedText = attributedStr;
-        lbl.textAlignment = NSTextAlignmentCenter;
-        lbl.numberOfLines = 4;
-        [alert setValue:lbl forKey:@"accessoryView"];
-        [alert show];
+        if (prompts == YES)
+        {
+            NSTimer *alertTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(passThePhoneToPickTopic) userInfo:nil repeats:NO];
+
+        }
         
     }
     else if (_hasAddedPoint == NO)
@@ -667,8 +681,18 @@
             
             NSLog(@"Winners string: %@\n winners length is: %lu", winnersString, (unsigned long)winners.count);
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"GAME OVER!" message:[NSString stringWithFormat:@"There is a tie!%@\nwin!", winnersString] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Game Complete!" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             alert.alertViewStyle = UIAlertActionStyleDefault;
+            [alert show];
+            
+            UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 200)];
+            NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"\nWinners:\n%@\n\n", winnersString]];
+            [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(11,winnersString.length)];
+            [attributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:26.0] range:NSMakeRange(11, winnersString.length)];
+            lbl.attributedText = attributedStr;
+            lbl.textAlignment = NSTextAlignmentCenter;
+            lbl.numberOfLines = 9;
+            [alert setValue:lbl forKey:@"accessoryView"];
             [alert show];
         }
 
@@ -778,20 +802,10 @@
         NSLog(@"host is playing");
         
         // grayScreenView.hidden = NO;
-        
-        hostNeedsToPic = YES;
-        
-        NSString *playerName = _playersArray[0];
-        
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Pass the phone back" message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:@"I passed it!", nil];
-        UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
-        NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"Pass the phone to\n%@\nto Pick a Pic!\n", playerName]];
-        [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(18,playerName.length)];
-        lbl.attributedText = attributedStr;
-        lbl.textAlignment = NSTextAlignmentCenter;
-        lbl.numberOfLines = 4;
-        [alert setValue:lbl forKey:@"accessoryView"];
-        [alert show];
+
+        NSTimer *alertTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(passThePhoneToHost) userInfo:nil repeats:NO];
+
+
 
     }
 
@@ -873,5 +887,57 @@
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
+- (void)passThePhoneToHost
+{
+    hostNeedsToPic = YES;
+    
+    NSString *playerName = _playersArray[0];
+    
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"I passed it!", nil];
+    UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 200)];
+    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"\nPass the phone to\n\n%@\n\nto Pick a Pic!\n", playerName]];
+    [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(20,playerName.length)];
+    [attributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:26.0] range:NSMakeRange(20, playerName.length)];
+    lbl.attributedText = attributedStr;
+    lbl.textAlignment = NSTextAlignmentCenter;
+    lbl.numberOfLines = 9;
+    [alert setValue:lbl forKey:@"accessoryView"];
+    [alert show];
+}
+
+- (void)passThePhoneToPickTopic
+{
+    NSString *playerName = _playersArray[((roundNumber.integerValue -1)%_playersArray.count)];
+    
+    
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"I passed it!", nil];
+    UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 200)];
+    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"\nPass the phone to\n\n%@\n\nto choose the next topic!\n", playerName]];
+    [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(20,playerName.length)];
+    [attributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:26.0] range:NSMakeRange(20, playerName.length)];
+    lbl.attributedText = attributedStr;
+    lbl.textAlignment = NSTextAlignmentCenter;
+    lbl.numberOfLines = 9;
+    [alert setValue:lbl forKey:@"accessoryView"];
+    [alert show];
+}
+
+- (void)passThePhoneToJudge
+{
+    // prompt to send phone back to the current judge
+    
+    NSString *playerName = _playersArray[((roundNumber.integerValue -1)%_playersArray.count)];
+    
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"I passed it!", nil];
+    UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 200)];
+    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"\nPass the phone to\n\n%@\n\nto choose the best pic!\n", playerName]];
+    [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(20,playerName.length)];
+    [attributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:26.0] range:NSMakeRange(20, playerName.length)];
+    lbl.attributedText = attributedStr;
+    lbl.textAlignment = NSTextAlignmentCenter;
+    lbl.numberOfLines = 9;
+    [alert setValue:lbl forKey:@"accessoryView"];
+    [alert show];
+}
 
 @end

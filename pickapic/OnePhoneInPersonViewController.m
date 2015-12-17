@@ -17,7 +17,7 @@
 
 @implementation OnePhoneInPersonViewController
 
-@synthesize playerList, tableView, beginGameButtonOutlet, topicLabel, topicChosen, cell, tapper, settingsButton;
+@synthesize playerList, tableView, beginGameButtonOutlet, topicLabel, topicChosen, cell, tapper, settingsButton, actifText, origTVFrame, addPlayerButton, playersLabel, threeMinLabel;
 
 - (void)viewDidLoad
 {
@@ -27,6 +27,8 @@
     {
         playerList = [[NSMutableArray alloc] initWithObjects:(@""),(@""),(@""), nil];
     }
+    
+    origTVFrame = self.tableView.frame;
     
     // remove horrible white space on top of tableview
     
@@ -60,7 +62,7 @@
     [self.beginGameButtonOutlet setAttributedTitle:attributedString forState:UIControlStateNormal];
     
     // back button
-    
+    /* TODO: Implement in full version
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0, 0, (self.navigationController.navigationBar.frame.size.height *0.65), (self.navigationController.navigationBar.frame.size.height *0.65));
     backButton.hidden = YES;
@@ -73,7 +75,7 @@
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
     self.navigationItem.leftBarButtonItem = backItem;
-    
+    */
     // gesure recognizer for dismissing keybaord if another part of the screen is touched
     
     tapper = [[UITapGestureRecognizer alloc]
@@ -106,8 +108,35 @@
     
     UIBarButtonItem *settingsItem = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
     
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:settingsItem, nil];
+    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:settingsItem, nil];
     
+    // store button
+    
+    UIButton *storeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    storeButton.frame = CGRectMake(0, 0, (self.navigationController.navigationBar.frame.size.height *0.65), (self.navigationController.navigationBar.frame.size.height *0.65));
+    [storeButton setImage:[UIImage imageNamed:@"ios7-cart"] forState:UIControlStateNormal];
+    [storeButton setImage:[UIImage imageNamed:@"ios7-cart_active"] forState:(UIControlStateSelected | UIControlStateHighlighted)];
+    [storeButton setSelected:YES];
+    
+    [storeButton addTarget:self action:@selector(activateStoreSegue) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *storeButtonItem = [[UIBarButtonItem alloc] initWithCustomView:storeButton];
+    
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:storeButtonItem, nil];
+    
+    // textfield notification methods
+    
+    // Register notification when the keyboard will be show
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    // Register notification when the keyboard will be hide
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -138,7 +167,16 @@
 
 - (void)activateSettingsSegue
 {
+    // settings segue
+    
     [self performSegueWithIdentifier:@"segueToSettings" sender:self];
+}
+
+- (void)activateStoreSegue
+{
+    // store segue
+    
+    [self performSegueWithIdentifier:@"segueToStore" sender:self];
 }
 
 - (void)backAction
@@ -220,12 +258,118 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+// To be link with your TextField event "Editing Did Begin"
+//  memoryze the current TextField
+- (IBAction)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.actifText = textField;
+}
+
+- (IBAction)textFieldDidEndEditing:(UITextField *)textField
 {
     // returning current index path
     NSIndexPath *indexPath = [self.tableView indexPathForCell:(OnePhonePlayerListTableViewCell *)[[textField superview] superview]];
     
     playerList[indexPath.row] = textField.text;
+    
+    self.actifText = nil;
+}
+
+- (void) keyboardWillShow:(NSNotification *)note
+{
+    // Get the keyboard size
+    CGRect keyboardBounds;
+    [[note.userInfo valueForKey:UIKeyboardFrameBeginUserInfoKey] getValue: &keyboardBounds];
+    
+    // Detect orientation
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    CGRect frame = self.tableView.frame;
+    
+    // Start animation
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:0.3f];
+    
+    [self fadeOutLabels];
+    
+    // Reduce size of the Table view
+    if (orientation == UIInterfaceOrientationPortrait || orientation == UIInterfaceOrientationPortraitUpsideDown)
+        frame.size.height -= keyboardBounds.size.height;
+    else
+        frame.size.height -= keyboardBounds.size.width;
+    
+    // Apply new size of table view
+    self.tableView.frame = frame;
+    
+    // Scroll the table view to see the TextField just above the keyboard
+    if (self.actifText)
+    {
+        CGRect textFieldRect = [self.tableView convertRect:self.actifText.bounds fromView:self.actifText];
+        [self.tableView scrollRectToVisible:textFieldRect animated:NO];
+    }
+    
+    [UIView commitAnimations];
+}
+
+- (void) keyboardWillHide:(NSNotification *)note
+{
+    [self.view sendSubviewToBack:playersLabel];
+    [self.view sendSubviewToBack:threeMinLabel];
+    [self.view sendSubviewToBack:addPlayerButton];
+
+    
+    // Get the keyboard size
+    CGRect keyboardBounds;
+    [[note.userInfo valueForKey:UIKeyboardFrameBeginUserInfoKey] getValue: &keyboardBounds];
+    
+    // Detect orientation
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    CGRect frame = self.tableView.frame;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:0.3f];
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(fadeInLabels) userInfo:nil repeats:NO];
+
+    // Increase size of the Table view
+    if (orientation == UIInterfaceOrientationPortrait || orientation == UIInterfaceOrientationPortraitUpsideDown)
+        frame.size.height += keyboardBounds.size.height;
+    else
+        frame.size.height += keyboardBounds.size.width;
+    
+    // Apply new size of table view
+    self.tableView.frame = origTVFrame;
+    
+    [UIView commitAnimations];
+}
+
+- (void)fadeInLabels
+{
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.3f;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionFade;
+    transition.delegate = self;
+    [self.view.layer addAnimation:transition forKey:nil];
+    playersLabel.hidden = NO;
+    threeMinLabel.hidden = NO;
+    addPlayerButton.hidden = NO;
+    
+}
+
+- (void)fadeOutLabels
+{
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.3f;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionFade;
+    transition.delegate = self;
+    [self.view.layer addAnimation:transition forKey:nil];
+    playersLabel.hidden = YES;
+    threeMinLabel.hidden = YES;
+    addPlayerButton.hidden = YES;
+    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
