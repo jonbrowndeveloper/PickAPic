@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 
+@property (weak, nonatomic) IBOutlet UILabel *purchasedLabel;
 
 
 @end

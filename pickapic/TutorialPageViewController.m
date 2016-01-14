@@ -15,11 +15,12 @@
 
 @implementation TutorialPageViewController
 
-@synthesize textArray, colors;
+@synthesize textArray, colors, imageArray;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     
     
     // create attributed string for finger image first
@@ -38,6 +39,10 @@
     // text array
     
     self.textArray = [[NSArray alloc] initWithObjects:@"Pick a Topic,\nAdd Players,\nBegin Game!",@"Players find a photo on their own phone according to the topic", attributedString,@"Judge views photo that each player submitted and chooses the best photo and gives that player a point",@"Next player in list becomes judge and it's their turn to pick the topic", nil];
+    
+    // set image array
+    
+    self.imageArray = [[NSArray alloc] initWithObjects:@"intro-1",@"intro-2",@"intro-3",@"intro-4",@"intro-5", nil];
     
     // Create page view controller
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
@@ -155,14 +160,20 @@
     // Create a new view controller and pass suitable data.
     PageContentViewController *pageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageContentViewController"];
     
+    NSLog(@"current index = %lu\n images array count: %lu", (unsigned long)index, (unsigned long)imageArray.count);
+    
+    pageContentViewController.currentImage = self.imageArray[index];
+    
     // make sure on page 3 the finger image shows correctly
     if (index == 2)
     {
-        pageContentViewController.attributedLabelText = self.textArray[index];
+        // pageContentViewController.attributedLabelText = self.textArray[index];
+        
+        // pageContentViewController.tutImageView.image = self.imageArray[index];
     }
     else
     {
-        pageContentViewController.labelText = self.textArray[index];
+        // pageContentViewController.labelText = self.textArray[index];
     }
     
     

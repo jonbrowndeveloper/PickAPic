@@ -14,11 +14,12 @@
 
 @interface StoreViewController ()
 
+
 @end
 
 @implementation StoreViewController
 
-@synthesize imageArray, collectionView, productsArray;
+@synthesize imageArray, collectionView, productsArray, productsNow;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,11 +51,21 @@
      setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.translucent = NO;
     
-    imageArray = [[NSArray alloc] initWithObjects:@"goofus",@"knucklehead",@"screwball",@"sillypants", nil];
+    imageArray = [[NSArray alloc] initWithObjects:@"2202x2208_goofus",@"2202x2208_knucklehead",@"2202x2208_screwball",@"2202x2208_sillypants", nil];
     
     // products array
     
-    // productsArray = [NSArray arrayWithObjects:@"com.DGVentures.pickapic.goofus",@"com.DGVentures.pickapic.sillypants",@"com.DGVentures.pickapic.screwball",@"com.DGVentures.pickapic.knucklehead", nil];
+    [[PAPIAPHelper sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
+        if (success) {
+            productsNow = products;
+            NSLog(@"Products: %@", products);
+        }
+    }];
+    
+    // stop scrolling
+    
+    collectionView.scrollEnabled = NO;
+    
 
 }
 
@@ -70,7 +81,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 16;
+    return 4;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -90,7 +101,18 @@
     // setup store collection view cell
     static NSString *CellIdentifier = @"categoryCell";
     StoreCollectionViewCell *cell = (StoreCollectionViewCell *)[self.collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    
+    if ((indexPath.row == 0 && [[NSUserDefaults standardUserDefaults] boolForKey:@"goofusUnlocked"]) || (indexPath.row == 1 && [[NSUserDefaults standardUserDefaults] boolForKey:@"knuckleheadUnlocked"]) || (indexPath.row == 2 && [[NSUserDefaults standardUserDefaults] boolForKey:@"screwballUnlocked"]) || (indexPath.row == 3 && [[NSUserDefaults standardUserDefaults] boolForKey:@"sillypantsUnlocked"]))
+    {
+        cell.categoryButton.alpha = 0.3;
+        cell.purchasedLabel.hidden = NO;
+        
+        cell.categoryButton.enabled = NO;
 
+    }
+
+    
     // add image to cell
     if (indexPath.row <= 3)
     {
@@ -102,6 +124,20 @@
     }
 
     cell.categoryButton.tag = indexPath.row;
+    
+    // add corner radius and shadow
+    
+    cell.contentView.layer.cornerRadius = 8.0f;
+    cell.contentView.layer.borderWidth = 1.0f;
+    cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
+    cell.contentView.layer.masksToBounds = YES;
+    
+    cell.layer.shadowColor = [UIColor grayColor].CGColor;
+    cell.layer.shadowOffset = CGSizeMake(0, 2.0f);
+    cell.layer.shadowRadius = 4.0f;
+    cell.layer.shadowOpacity = 1.0f;
+    cell.layer.masksToBounds = NO;
+    cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
     
     // [[cell categoryButton] addTarget:self action:@selector(storeCellButtonPress:event:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -125,28 +161,47 @@
 {
     
     NSString * productIdentifier = notification.object;
+    
+    NSLog(@"product bought: %@", productIdentifier);
+    
     [productsArray enumerateObjectsUsingBlock:^(SKProduct * product, NSUInteger idx, BOOL *stop) {
         if ([product.productIdentifier isEqualToString:productIdentifier])
         {
-            if ([productIdentifier isEqualToString:@"com.jonbrown.GifBucket.singlebucket1"])
-            {
-                // do something
-            }
-            else if ([productIdentifier isEqualToString:@"com.jonbrown.GifBucket.bucketbundle5"])
-            {
-                // do something
-            }
-            else if ([productIdentifier isEqualToString:@"com.jonbrown.GifBucket.bucketbundle5"])
-            {
-                // do something
-            }
-            else if ([productIdentifier isEqualToString:@"com.jonbrown.GifBucket.gifbucketunlimited"])
-            {
-                // do something else
-            }
+
+
            
         }
     }];
+    
+    BOOL topicPackIncluded = YES;
+    
+    NSLog(@"adjusting topic packs...");
+    
+    if ([productIdentifier isEqualToString:@"com.DGVentures.pickapic.goofus"])
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"goofusUnlocked"];
+        NSLog(@"goofus unlocked");
+    }
+    else if ([productIdentifier isEqualToString:@"com.DGVentures.pickapic.knucklehead"])
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"knuckleheadUnlocked"];
+        NSLog(@"knucklehead unlocked");
+        
+    }
+    else if ([productIdentifier isEqualToString:@"com.DGVentures.pickapic.screwball"])
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"screwballUnlocked"];
+        NSLog(@"screwball unlocked");
+        
+    }
+    else if ([productIdentifier isEqualToString:@"com.DGVentures.pickapic.sillypants"])
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"sillypantsUnlocked"];
+        NSLog(@"sillypants unlocked");
+        
+    }
+    
+    [self.collectionView reloadData];
     
 }
 
@@ -154,41 +209,42 @@
 {
     UIButton *button = (UIButton *)sender;
     
-    if (button.tag == 0)
+    if (button.tag == 0 && ![[NSUserDefaults standardUserDefaults] boolForKey:@"goofusUnlocked"])
     {
         NSLog(@"First cell pressed");
         
-         SKProduct *product = productsArray[0];
+        
+        SKProduct *product = productsNow[0];
          NSLog(@"Buying: %@", product.productIdentifier);
          [[PAPIAPHelper sharedInstance] buyProduct:product];
          
     }
-    else if (button.tag == 1)
+    else if (button.tag == 1 && ![[NSUserDefaults standardUserDefaults] boolForKey:@"knuckleheadUnlocked"])
     {
         NSLog(@"Second cell pressed");
-        /*
-         SKProduct *product = productsArray[1];
+        
+         SKProduct *product = productsNow[1];
          NSLog(@"Buying: %@", product.productIdentifier);
          [[PAPIAPHelper sharedInstance] buyProduct:product];
-         */
+        
     }
-    else if (button.tag == 2)
+    else if (button.tag == 2 && ![[NSUserDefaults standardUserDefaults] boolForKey:@"screwballUnlocked"])
     {
         NSLog(@"Third cell pressed");
-        /*
-         SKProduct *product = productsArray[2];
+        
+         SKProduct *product = productsNow[2];
          NSLog(@"Buying: %@", product.productIdentifier);
          [[PAPIAPHelper sharedInstance] buyProduct:product];
-         */
+        
     }
-    else if (button.tag == 3)
+    else if (button.tag == 3 && ![[NSUserDefaults standardUserDefaults] boolForKey:@"sillypantsUnlocked"])
     {
         NSLog(@"Fourth cell pressed");
-        /*
-         SKProduct *product = productsArray[3];
+        
+         SKProduct *product = productsNow[3];
          NSLog(@"Buying: %@", product.productIdentifier);
          [[PAPIAPHelper sharedInstance] buyProduct:product];
-         */
+        
     }
 }
 

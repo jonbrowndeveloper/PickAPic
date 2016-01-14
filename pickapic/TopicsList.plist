@@ -1,56 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<array>
-	<string>Why I can’t sleep at night</string>
-	<string>The next happy meal toy</string>
-	<string>This ended my last relationship</string>
-	<string>I drink to forget ______</string>
-	<string>Couldn’t finish my homework cuz</string>
-	<string>Batman’s guilty pleasure</string>
-	<string>A girl’s best friend</string>
-	<string>_____ is the new currency</string>
-	<string>The next superhero/sidekick duo</string>
-	<string>Betcha can’t have just one! </string>
-	<string>White people like ______</string>
-	<string>______. High five bro!</string>
-	<string>During sex, I think about ______</string>
-	<string>This will always get you laid</string>
-	<string>Don’t wanna see this in your food</string>
-	<string>This is why I have friends</string>
-	<string>This is why I don’t have friends</string>
-	<string>Aliens would like to study this</string>
-	<string>The field trip was ruined by _____</string>
-	<string>There’s a ton of these in heaven</string>
-	<string>This would disturb Grandma</string>
-	<string>US airdropped these to Iraq</string>
-	<string>What helps Obama unwind</string>
-	<string>Schwarzenegger would eat this</string>
-	<string>_____, good till the last drop</string>
-	<string>This gets better with age</string>
-	<string>kid-tested, mother-approved</string>
-	<string>Inspires kids to stay in school</string>
-	<string>A World War IV weapon</string>
-	<string>Why do I hurt all over?</string>
-	<string>What I am giving up for Lent?</string>
-	<string>What I do when no ones looking</string>
-	<string>F#@! Grades, look at me now</string>
-	<string>C’s get degrees</string>
-	<string>college isn’t over!</string>
-	<string>I would lose a fight to this</string>
-	<string>I wonder how much that cost?</string>
-	<string>Best hair day</string>
-	<string>Best selfie</string>
-	<string>Best dressed</string>
-	<string>Fun outdoors</string>
-	<string>Good times with good people</string>
-	<string>Coolest place I have been</string>
-	<string>Hungover</string>
-	<string>Best meal</string>
-	<string>3rd picture in your camera roll</string>
-	<string>Something Lincoln hid in his hat</string>
-	<string>Your “in memoriam” photo</string>
-	<string>My “drug” of choice</string>
-	<string>Cause for a “roommate meeting”</string>
-</array>
+<dict>
+	<key>UserGenerated</key>
+	<array>
+		<string>test</string>
+	</array>
+	<key>FREE</key>
+	<array>
+		<string>Why I can’t sleep at night</string>
+		<string>The things I dream about</string>
+		<string>This ended my last relationship</string>
+		<string>I drink to forget ______</string>
+		<string>Couldn’t finish my homework cuz</string>
+		<string>Batman’s guilty pleasure</string>
+		<string>A girl’s best friend</string>
+		<string>_____ is the new currency</string>
+		<string>The next superhero/sidekick duo</string>
+		<string>Betcha can’t have just one!</string>
+		<string>White people like ______</string>
+		<string>______. High five bro!</string>
+		<string>During sex, I think about ______</string>
+		<string>This will always get you laid</string>
+		<string>Don’t wanna see this in your food</string>
+		<string>Cutest pet</string>
+		<string>This is why I have friends</string>
+		<string>This gets better with age</string>
+		<string>Aliens would like to study this</string>
+		<string>There’s a ton of these in heaven</string>
+		<string>This would disturb Grandma</string>
+		<string>US airdropped these to Iraq</string>
+		<string>What helps Obama unwind</string>
+		<string>Schwarzenegger would eat this</string>
+		<string>_____, good till the last drop</string>
+	</array>
+	<key>Knucklehead</key>
+	<array>
+		<string>This is why I don’t have friends</string>
+		<string>kid-tested, mother-approved</string>
+		<string>Inspires kids to stay in school</string>
+		<string>A World War IV weapon</string>
+		<string>Why do I hurt all over?</string>
+		<string>What I am giving up for Lent?</string>
+		<string>What I do when no one is looking</string>
+		<string>F#@! Grades, look at me now</string>
+		<string>C’s get degrees</string>
+		<string>college isn’t over!</string>
+		<string>I would lose a fight to this</string>
+		<string>I wonder how much that cost?</string>
+		<string>Fun outdoors</string>
+		<string>Good times with good people</string>
+		<string>Coolest place I have been</string>
+		<string>Hungover</string>
+		<string>Best hair day</string>
+		<string>Best selfie</string>
+		<string>Is this socially acceptable?</string>
+		<string>Fuck it</string>
+	</array>
+	<key>Screwball</key>
+	<array>
+		<string>3rd picture in your camera roll</string>
+		<string>Basic Bro</string>
+		<string>Your “in memoriam” photo</string>
+		<string>My “drug” of choice</string>
+		<string>Cause for a “roommate meeting”</string>
+		<string>abort! abort! abort!</string>
+		<string>why old age is gonna be amazing</string>
+		<string>something single girls own</string>
+		<string>something that you’ve named</string>
+		<string>your idea of romance</string>
+		<string>advertising you love</string>
+		<string>should be an olympic sport</string>
+		<string>something you would parkour</string>
+		<string>strange murder trial evidence</string>
+		<string>this should never be bedazzled</string>
+		<string>you’re not sure why you own this</string>
+		<string>no clue how this works</string>
+		<string>a turning point in your life</string>
+		<string>Keep this out of the scrapbook</string>
+		<string>Cutest dog ever!</string>
+	</array>
+	<key>Sillypants</key>
+	<array>
+		<string>Best dressed</string>
+		<string>Best meal</string>
+		<string>unorthodox toy for a bubble bath</string>
+		<string>Worst Hair Day</string>
+		<string>Manscaping at its finest</string>
+		<string>Celebrity Look Alike </string>
+		<string>Drunkest Night Ever</string>
+		<string>Dad bod</string>
+		<string>The world is ending</string>
+		<string>Crazy Tattoo</string>
+		<string>Funny, but dumb</string>
+		<string>Caught in the act</string>
+		<string>Guilty as Charged</string>
+		<string>PDA</string>
+		<string>Is this weird?</string>
+		<string>YOLO</string>
+		<string>For sure a crazy cat lady</string>
+		<string>She was born with it</string>
+		<string>Cutest baby</string>
+		<string>surefire way to ruin a date</string>
+	</array>
+	<key>Goofus</key>
+	<array>
+		<string>Cutest kid</string>
+		<string>Too Far?...</string>
+		<string>This will haunt my dreams…</string>
+		<string>This is how the world ends</string>
+		<string>Best View</string>
+		<string>Are you fucking kidding me!?</string>
+		<string>Last meal on earth</string>
+		<string>Hangover Cure</string>
+		<string>I paid good money for this</string>
+		<string>Don&apos;t Do Drugs</string>
+		<string>Heaven on Earth</string>
+		<string>I want to wake up to…</string>
+		<string>I woke up like this</string>
+		<string>That is crazy!</string>
+		<string>the hangover</string>
+		<string>old people are funny</string>
+		<string>The next happy meal toy</string>
+		<string>Basic Betch</string>
+		<string>The field trip was ruined by...</string>
+		<string>Something Lincoln hid in his hat</string>
+	</array>
+</dict>
 </plist>

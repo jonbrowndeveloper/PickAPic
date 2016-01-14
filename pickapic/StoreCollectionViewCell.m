@@ -11,6 +11,7 @@
 
 @implementation StoreCollectionViewCell
 
+@synthesize purchasedLabel;
 
 
 @end

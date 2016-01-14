@@ -21,6 +21,8 @@
 - (IBAction)beginGameAction:(id)sender;
 
 @property (assign, nonatomic) NSUInteger pageIndex;
+@property (weak, nonatomic) IBOutlet UIImageView *tutImageView;
+@property (strong, nonatomic) NSString *currentImage;
 
 
 @end

@@ -74,6 +74,14 @@
         
         BOOL tutorialHasBeenSeen = NO;
         [[NSUserDefaults standardUserDefaults] setBool:tutorialHasBeenSeen forKey:@"tutorialHasBeenSeen"];
+        
+        // for topic packs
+        
+        BOOL topicPackIncluded = NO;
+        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"goofusUnlocked"];
+        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"knuckleheadUnlocked"];
+        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"screwballUnlocked"];
+        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"sillypantsUnlocked"];
 
         
     }

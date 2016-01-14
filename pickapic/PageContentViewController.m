@@ -14,7 +14,7 @@
 
 @implementation PageContentViewController
 
-@synthesize textLabel, beginPlayingButton, pageIndex, backgroundColor, labelText, attributedLabelText;
+@synthesize textLabel, beginPlayingButton, pageIndex, backgroundColor, labelText, attributedLabelText, tutImageView, currentImage;
 
 - (void)viewDidLoad
 {
@@ -22,10 +22,16 @@
 
     // colors array
     
-    NSArray *colors = [NSArray arrayWithObjects:pinkColorTut, blueColorTut, greenColorTut, orangeColorTut, pinkColorTut, nil];
+    NSArray *colors = [NSArray arrayWithObjects:blueColorNew, pinkColorNew, orangeColorNew, greenColorNew, pinkColorNew, nil];
     
     self.view.backgroundColor = colors[pageIndex];
     self.textLabel.text = self.labelText;
+    self.tutImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.tutImageView.image = [UIImage imageNamed:currentImage];
+    // self.tutImageView.image = nil;
+    
+    NSLog(@"current image: %@", currentImage);
+    
     if (attributedLabelText != nil)
     {
         self.textLabel.attributedText = self.attributedLabelText;
@@ -41,6 +47,7 @@
     [btnLayer setCornerRadius:8.0f];
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"  Start Playing"];
+    
     [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [attributedString length])];
     
     NSTextAttachment *textAttachment = [[NSTextAttachment alloc] init];

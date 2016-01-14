@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2903328D1C3363EA007D24FE /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2903328C1C3363EA007D24FE /* images.xcassets */; };
 		294440851BBE532900800F3C /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 294440841BBE532900800F3C /* TutorialViewController.m */; };
 		29BF82EE1BCC3059009A9D7A /* PageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29BF82ED1BCC3059009A9D7A /* PageContentViewController.m */; };
 		29BF82F11BCC39B4009A9D7A /* TutorialPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29BF82F01BCC39B4009A9D7A /* TutorialPageViewController.m */; };
@@ -21,7 +22,6 @@
 		343CC81D1B3361670030FF65 /* PickAPic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 343CC81B1B3361670030FF65 /* PickAPic.xcdatamodeld */; };
 		343CC8201B3361670030FF65 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 343CC81F1B3361670030FF65 /* ViewController.m */; };
 		343CC8231B3361670030FF65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 343CC8211B3361670030FF65 /* Main.storyboard */; };
-		343CC8251B3361670030FF65 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 343CC8241B3361670030FF65 /* Images.xcassets */; };
 		343CC8281B3361670030FF65 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 343CC8261B3361670030FF65 /* LaunchScreen.xib */; };
 		343CC8341B3361670030FF65 /* PickAPicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 343CC8331B3361670030FF65 /* PickAPicTests.m */; };
 		343CC84A1B34DD260030FF65 /* constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 343CC8491B34DD260030FF65 /* constants.m */; };
@@ -77,6 +77,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2903328C1C3363EA007D24FE /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		294440831BBE532900800F3C /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialViewController.h; path = pickapic/TutorialViewController.h; sourceTree = SOURCE_ROOT; };
 		294440841BBE532900800F3C /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialViewController.m; path = pickapic/TutorialViewController.m; sourceTree = SOURCE_ROOT; };
 		29BF82EC1BCC3059009A9D7A /* PageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PageContentViewController.h; path = pickapic/PageContentViewController.h; sourceTree = SOURCE_ROOT; };
@@ -103,7 +104,6 @@
 		343CC81E1B3361670030FF65 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		343CC81F1B3361670030FF65 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		343CC8221B3361670030FF65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		343CC8241B3361670030FF65 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		343CC8271B3361670030FF65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		343CC82D1B3361670030FF65 /* PickAPicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PickAPicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		343CC8321B3361670030FF65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -242,7 +242,7 @@
 				343CC8491B34DD260030FF65 /* constants.m */,
 				AA4DA3C11B83F289001C45DE /* 3rd Party Classes */,
 				343CC8211B3361670030FF65 /* Main.storyboard */,
-				343CC8241B3361670030FF65 /* Images.xcassets */,
+				2903328C1C3363EA007D24FE /* images.xcassets */,
 				343CC8261B3361670030FF65 /* LaunchScreen.xib */,
 				343CC81B1B3361670030FF65 /* PickAPic.xcdatamodeld */,
 				343CC8141B3361670030FF65 /* Supporting Files */,
@@ -490,12 +490,12 @@
 				AA3883B01B7C149A00C2CE1D /* Lato-HairlineItalic.ttf in Resources */,
 				AA3883B11B7C149A00C2CE1D /* Lato-Italic.ttf in Resources */,
 				AA3883B21B7C149A00C2CE1D /* Lato-Light.ttf in Resources */,
+				2903328D1C3363EA007D24FE /* images.xcassets in Resources */,
 				AA3883B31B7C149A00C2CE1D /* Lato-LightItalic.ttf in Resources */,
 				AA3883B41B7C149A00C2CE1D /* Lato-Regular.ttf in Resources */,
 				343CC8231B3361670030FF65 /* Main.storyboard in Resources */,
 				343CC8281B3361670030FF65 /* LaunchScreen.xib in Resources */,
 				34B010CB1B4B0DBB005F2096 /* placeholderLeaderboard.plist in Resources */,
-				343CC8251B3361670030FF65 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,7 +670,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.D-G-Ventures.pickapic";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "744380c2-1ddd-4063-b36c-857a54f4f190";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -689,7 +689,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.D-G-Ventures.pickapic";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "744380c2-1ddd-4063-b36c-857a54f4f190";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

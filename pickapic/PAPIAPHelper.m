@@ -15,6 +15,8 @@
     static dispatch_once_t once;
     static PAPIAPHelper * sharedInstance;
     
+    
+    
     dispatch_once(&once, ^{
         NSSet *productIdentifiers = [NSSet setWithObjects:
                                      @"com.DGVentures.pickapic.goofus",
@@ -23,6 +25,9 @@
                                      @"com.DGVentures.pickapic.sillypants",
                                      nil];
         sharedInstance = [[self alloc] initWithProductIdentifiers:productIdentifiers];
+        
+        
+        
     });
     return sharedInstance;
 }

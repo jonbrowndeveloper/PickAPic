@@ -18,4 +18,10 @@
 #define blueColorTut [UIColor colorWithRed:24.0/255.0 green:142.0/255.0 blue:192.0/255.0 alpha:1]
 #define pinkColorTut [UIColor colorWithRed:202.0/255.0 green:0.0/255.0 blue:80.0/255.0 alpha:1]
 
+#define blueColorNew [UIColor colorWithRed:0.0/255.0 green:160.0/255.0 blue:203.0/255.0 alpha:1]
+#define pinkColorNew [UIColor colorWithRed:214.0/255.0 green:26.0/255.0 blue:99.0/255.0 alpha:1]
+#define orangeColorNew [UIColor colorWithRed:250.0/255.0 green:162.0/255.0 blue:29.0/255.0 alpha:1]
+#define greenColorNew [UIColor colorWithRed:75.0/255.0 green:142.0/255.0 blue:65.0/255.0 alpha:1]
+
+
 @end

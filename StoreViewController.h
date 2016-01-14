@@ -23,4 +23,6 @@
 @property (strong, nonatomic) NSArray *productDescriptions;
 @property (strong, nonatomic) NSArray *pictureNames;
 
+@property (strong, nonatomic) NSArray *productsNow;
+
 @end

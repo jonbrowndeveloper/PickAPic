@@ -18,7 +18,7 @@
 
 @implementation TopicViewController
 
-@synthesize tableView, topicsArray, topicChosen, isAddingTopic, alertTextField, fromController, playersArray, scoreArray, roundNumber;
+@synthesize tableView, topicsArray, topicChosen, isAddingTopic, alertTextField, fromController, playersArray, scoreArray, roundNumber, categoryKeysUnlocked;
 
 - (void)viewDidLoad
 {
@@ -43,8 +43,63 @@
     // Load topics
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TopicsList" ofType:@"plist"];
-    NSArray *topicsArrayNM = [[NSArray alloc] initWithContentsOfFile:filePath];
-    topicsArray = [NSMutableArray arrayWithArray:topicsArrayNM];
+    NSDictionary *topicsDictionaryNM = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    
+    // initiate topics array with free and custom
+    
+    NSArray *customArray = [NSArray arrayWithArray:[topicsDictionaryNM objectForKey:@"Custom"]];
+    
+    if (customArray.count > 0)
+    {
+        topicsArray = [[NSMutableArray alloc] initWithObjects:[NSArray arrayWithArray:[topicsDictionaryNM objectForKey:@"UserGenerated"]],[NSArray arrayWithArray:[topicsDictionaryNM objectForKey:@"FREE"]], nil];
+        
+        categoryKeysUnlocked = [[NSMutableArray alloc] initWithObjects:@"Custom",@"PickAPic Originals", nil];
+    }
+    else
+    {
+        topicsArray = [[NSMutableArray alloc] initWithObjects:[NSArray arrayWithArray:[topicsDictionaryNM objectForKey:@"FREE"]], nil];
+        
+        categoryKeysUnlocked = [[NSMutableArray alloc] initWithObjects:@"PickAPic Originals", nil];
+    }
+    
+    
+    // add purchased topics to list
+    
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goofusUnlocked"])
+    {
+        [topicsArray addObject:[NSMutableArray arrayWithArray:[topicsDictionaryNM objectForKey:@"Goofus"]]];
+        NSLog(@"adding goofus");
+        
+        [categoryKeysUnlocked addObject:@"Goofus"];
+        
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"knuckleheadUnlocked"])
+    {
+        [topicsArray addObject:[NSMutableArray arrayWithArray:[topicsDictionaryNM objectForKey:@"Knucklehead"]]];
+        NSLog(@"adding knuckelhead");
+        
+        [categoryKeysUnlocked addObject:@"Knucklehead"];
+
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"screwballUnlocked"])
+    {
+        [topicsArray addObject:[NSMutableArray arrayWithArray:[topicsDictionaryNM objectForKey:@"Screwball"]]];
+        NSLog(@"adding screwball");
+        
+        [categoryKeysUnlocked addObject:@"Screwball"];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"sillypantsUnlocked"])
+    {
+        [topicsArray addObject:[NSMutableArray arrayWithArray:[topicsDictionaryNM objectForKey:@"Sillypants"]]];
+        NSLog(@"adding sillypants");
+        
+        [categoryKeysUnlocked addObject:@"Sillypants"];
+
+    }
     
     // topicsArray = [NSArray arrayWithArray:[dict objectForKey:@"Root"]];
     
@@ -66,6 +121,11 @@
     }
     
     self.tableView.allowsSelection = YES;
+    
+    // remove horrible white space on top of tableview
+    
+    self.tableView.contentInset = UIEdgeInsetsZero;
+    self.automaticallyAdjustsScrollViewInsets = NO;
 
 }
 
@@ -111,12 +171,34 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return categoryKeysUnlocked.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return topicsArray.count;
+
+    NSArray *currentArray = [topicsArray objectAtIndex:section];
+    return currentArray.count;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *tempView=[[UIView alloc]initWithFrame:CGRectMake(0,200,300,400)];
+    
+        // custom view for section title
+        tempView.backgroundColor=[UIColor whiteColor];
+        
+        UILabel *tempLabel=[[UILabel alloc]initWithFrame:CGRectMake(15,0,300,40)];
+        tempLabel.backgroundColor = [UIColor whiteColor];
+        tempLabel.shadowOffset = CGSizeMake(0,2);
+        tempLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:161.0/255.0 blue:203.0/255.0 alpha:1];
+        tempLabel.font = [UIFont fontWithName:@"Lato-Light.ttf" size:18.0];
+        tempLabel.font = [UIFont boldSystemFontOfSize:18.0];
+        tempLabel.text = categoryKeysUnlocked[section];
+        
+        [tempView addSubview:tempLabel];
+    
+    return tempView;
 }
 
 
@@ -132,7 +214,8 @@
     // cell.textField = [[tableView cellForRowAtIndexPath:indexPath] viewWithTag:(indexPath.row)];
     
     cell.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:18.0];
-    cell.textLabel.text = topicsArray[indexPath.row];
+    cell.textLabel.text = topicsArray[indexPath.section][indexPath.row];
+    
     
     // cell.topicLabel.tag  = indexPath.row;
     
