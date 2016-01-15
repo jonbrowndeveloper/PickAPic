@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>7335E634-8352-4DA1-8DD4-2EFCAB24240C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>pickapic</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>77F1DE34AB4BF854E636C5F454DA2466974CB156</key>
+		<string>https://github.com/jonbrowndeveloper/PickAPic</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>pickapic.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>77F1DE34AB4BF854E636C5F454DA2466974CB156</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jonbrowndeveloper/PickAPic</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>77F1DE34AB4BF854E636C5F454DA2466974CB156</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>77F1DE34AB4BF854E636C5F454DA2466974CB156</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PickAPic</string>
+		</dict>
+	</array>
+</dict>
+</plist>
