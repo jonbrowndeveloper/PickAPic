@@ -1503,8 +1503,11 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dNN-04-Jk2">
+                                <rect key="frame" x="0.0" y="16" width="600" height="584"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nlY-8Z-NQr">
-                                <rect key="frame" x="20" y="530" width="560" height="50"/>
+                                <rect key="frame" x="20" y="536" width="560" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="iQh-Ji-eTy"/>
                                 </constraints>
@@ -1515,9 +1518,6 @@
                                     <segue destination="j01-nL-ftk" kind="show" id="b9B-fa-L9g"/>
                                 </connections>
                             </button>
-                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2_screen-1" translatesAutoresizingMaskIntoConstraints="NO" id="dNN-04-Jk2">
-                                <rect key="frame" x="0.0" y="16" width="600" height="584"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1531,7 +1531,7 @@
                             <constraint firstItem="nlY-8Z-NQr" firstAttribute="trailing" secondItem="ffD-Gb-Bqj" secondAttribute="trailingMargin" id="dPg-Hh-vqf"/>
                             <constraint firstItem="A7m-19-Wfs" firstAttribute="leading" secondItem="ffD-Gb-Bqj" secondAttribute="leadingMargin" id="fPz-yb-UEh"/>
                             <constraint firstItem="jT0-MD-Nvd" firstAttribute="top" secondItem="A7m-19-Wfs" secondAttribute="bottom" constant="186" id="fpn-io-suv"/>
-                            <constraint firstItem="jT0-MD-Nvd" firstAttribute="top" secondItem="nlY-8Z-NQr" secondAttribute="bottom" constant="20" id="zHK-eX-ch9"/>
+                            <constraint firstItem="jT0-MD-Nvd" firstAttribute="top" secondItem="nlY-8Z-NQr" secondAttribute="bottom" constant="14" id="zHK-eX-ch9"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1579,12 +1579,11 @@
         <image name="one-phone-in-person" width="217" height="117"/>
         <image name="pick" width="60" height="60"/>
         <image name="random" width="60" height="60"/>
-        <image name="v2_screen-1" width="750" height="1336"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XyB-Lo-O2i"/>
-        <segue reference="YPe-Gq-53J"/>
+        <segue reference="b9B-fa-L9g"/>
         <segue reference="nW8-XS-KKF"/>
         <segue reference="qAn-fC-QCH"/>
+        <segue reference="XyB-Lo-O2i"/>
     </inferredMetricsTieBreakers>
 </document>

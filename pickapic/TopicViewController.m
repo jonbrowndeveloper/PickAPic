@@ -18,7 +18,7 @@
 
 @implementation TopicViewController
 
-@synthesize tableView, topicsArray, topicChosen, isAddingTopic, alertTextField, fromController, playersArray, scoreArray, roundNumber, categoryKeysUnlocked;
+@synthesize tableView, topicsArray, topicChosen, isAddingTopic, alertTextField, fromController, playersArray, scoreArray, roundNumber, categoryKeysUnlocked, topicsDictionaryNM;
 
 - (void)viewDidLoad
 {
@@ -42,18 +42,21 @@
     
     // Load topics
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TopicsList" ofType:@"plist"];
-    NSDictionary *topicsDictionaryNM = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = paths[0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"TopicsList.plist"];
+    
+    topicsDictionaryNM = [NSDictionary dictionaryWithContentsOfFile:filePath];
     
     // initiate topics array with free and custom
     
-    NSArray *customArray = [NSArray arrayWithArray:[topicsDictionaryNM objectForKey:@"Custom"]];
+    NSArray *customArray = [NSArray arrayWithArray:[topicsDictionaryNM objectForKey:@"UserGenerated"]];
     
-    if (customArray.count > 0)
+    if (customArray != NULL)
     {
         topicsArray = [[NSMutableArray alloc] initWithObjects:[NSArray arrayWithArray:[topicsDictionaryNM objectForKey:@"UserGenerated"]],[NSArray arrayWithArray:[topicsDictionaryNM objectForKey:@"FREE"]], nil];
         
-        categoryKeysUnlocked = [[NSMutableArray alloc] initWithObjects:@"Custom",@"PickAPic Originals", nil];
+        categoryKeysUnlocked = [[NSMutableArray alloc] initWithObjects:@"Your Topics",@"PickAPic Originals", nil];
     }
     else
     {
@@ -62,6 +65,7 @@
         categoryKeysUnlocked = [[NSMutableArray alloc] initWithObjects:@"PickAPic Originals", nil];
     }
     
+    // NSLog(@"current array: %@", topicsArray);
     
     // add purchased topics to list
     
@@ -185,18 +189,18 @@
 {
     UIView *tempView=[[UIView alloc]initWithFrame:CGRectMake(0,200,300,400)];
     
-        // custom view for section title
-        tempView.backgroundColor=[UIColor whiteColor];
-        
-        UILabel *tempLabel=[[UILabel alloc]initWithFrame:CGRectMake(15,0,300,40)];
-        tempLabel.backgroundColor = [UIColor whiteColor];
-        tempLabel.shadowOffset = CGSizeMake(0,2);
-        tempLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:161.0/255.0 blue:203.0/255.0 alpha:1];
-        tempLabel.font = [UIFont fontWithName:@"Lato-Light.ttf" size:18.0];
-        tempLabel.font = [UIFont boldSystemFontOfSize:18.0];
-        tempLabel.text = categoryKeysUnlocked[section];
-        
-        [tempView addSubview:tempLabel];
+    // custom view for section title
+    tempView.backgroundColor=[UIColor whiteColor];
+    
+    UILabel *tempLabel=[[UILabel alloc]initWithFrame:CGRectMake(15,0,300,40)];
+    tempLabel.backgroundColor = [UIColor whiteColor];
+    tempLabel.shadowOffset = CGSizeMake(0,2);
+    tempLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:161.0/255.0 blue:203.0/255.0 alpha:1];
+    tempLabel.font = [UIFont fontWithName:@"Lato-Light.ttf" size:18.0];
+    tempLabel.font = [UIFont boldSystemFontOfSize:18.0];
+    tempLabel.text = categoryKeysUnlocked[section];
+    
+    [tempView addSubview:tempLabel];
     
     return tempView;
 }
@@ -255,7 +259,7 @@
             topicChosen = alertTextField.text;
             // topicLabel.text = [NSString stringWithFormat:@"Topic Chosen: %@", alertTextField.text];
             
-            // add to master list
+            // add to master list on parse
             
             PFObject *newTopic = [PFObject objectWithClassName:@"NewTopic"];
             newTopic[@"topicString"] = topicChosen;
@@ -269,12 +273,43 @@
                 }
             }];
             
-            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TopicsList" ofType:@"plist"];
-
-            [topicsArray insertObject:alertTextField.text atIndex:0];
-            // NSLog(@"topics array: %@", topicsArray);
+            // file path of dict
             
-            [topicsArray writeToFile:filePath atomically:YES];
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = paths[0];
+            NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"TopicsList.plist"];
+            
+            // array to add new topic
+            
+            NSMutableArray *quickCustomArray = [topicsDictionaryNM objectForKey:@"UserGenerated"];
+            
+            
+            if (quickCustomArray == NULL)
+            {
+                quickCustomArray = [[NSMutableArray alloc] initWithObjects:topicChosen, nil];
+            }
+            else
+            {
+                [quickCustomArray insertObject:topicChosen atIndex:0];
+            }
+            
+            // NSLog(@"quick array: %@", quickCustomArray);
+            
+            // add new topic within array to dictionary
+            
+            NSMutableDictionary *mutableDictionary = [topicsDictionaryNM mutableCopy];
+            
+            [mutableDictionary setObject:quickCustomArray forKey:@"UserGenerated"];
+            
+            [mutableDictionary writeToFile:filePath atomically:YES];
+            
+            // add topic to temporary topicsarray for use in tableview
+            
+            NSLog(@"topics array before: %@", topicsArray[0]);
+            
+            [topicsArray replaceObjectAtIndex:0 withObject:quickCustomArray];
+            
+            NSLog(@"inserting %@ into topics array %@", topicChosen, topicsArray);
             
             [self.tableView reloadData];
             

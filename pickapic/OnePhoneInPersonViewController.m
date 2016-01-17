@@ -333,11 +333,12 @@
     [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(fadeInLabels) userInfo:nil repeats:NO];
 
     // Increase size of the Table view
+    /*
     if (orientation == UIInterfaceOrientationPortrait || orientation == UIInterfaceOrientationPortraitUpsideDown)
         frame.size.height += keyboardBounds.size.height;
     else
         frame.size.height += keyboardBounds.size.width;
-    
+    */
     // Apply new size of table view
     self.tableView.frame = origTVFrame;
     
@@ -491,10 +492,62 @@
 {
     topicLabel.textColor = [UIColor blackColor];
     
-    // get current topic list from file system
+    // Load topics
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TopicsList" ofType:@"plist"];
-    NSArray *topicsArray = [[NSArray alloc] initWithContentsOfFile:filePath];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = paths[0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"TopicsList.plist"];
+    
+    NSDictionary *topicsDictionaryNM = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    NSMutableArray *topicsArray = [[NSMutableArray alloc] init];
+    
+    // initiate topics array with free and custom
+    
+    NSArray *customArray = [NSArray arrayWithArray:[topicsDictionaryNM objectForKey:@"UserGenerated"]];
+    
+    if (customArray != NULL)
+    {
+        [topicsArray addObjectsFromArray:[topicsDictionaryNM objectForKey:@"UserGenerated"]];
+        [topicsArray addObjectsFromArray:[topicsDictionaryNM objectForKey:@"FREE"]];
+
+    }
+    else
+    {
+        [topicsArray addObjectsFromArray:[topicsDictionaryNM objectForKey:@"FREE"]];
+    }
+    
+    // NSLog(@"current array: %@", topicsArray);
+    
+    // add purchased topics to list
+    
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goofusUnlocked"])
+    {
+        [topicsArray addObjectsFromArray:[topicsDictionaryNM objectForKey:@"Goofus"]];
+        NSLog(@"adding goofus");
+        
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"knuckleheadUnlocked"])
+    {
+        [topicsArray addObjectsFromArray:[topicsDictionaryNM objectForKey:@"Knucklehead"]];
+        NSLog(@"adding knuckelhead");
+        
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"screwballUnlocked"])
+    {
+        [topicsArray addObjectsFromArray:[topicsDictionaryNM objectForKey:@"Screwball"]];
+        NSLog(@"adding screwball");
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"sillypantsUnlocked"])
+    {
+        [topicsArray addObjectsFromArray:[topicsDictionaryNM objectForKey:@"Sillypants"]];
+        NSLog(@"adding sillypants");
+    }
+    
+    NSLog(@"Topics Array: %@", topicsArray);
     
     // generate random value from 0 to size of topics list
     

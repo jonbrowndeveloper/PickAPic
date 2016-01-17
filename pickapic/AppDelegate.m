@@ -84,11 +84,34 @@
         [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"sillypantsUnlocked"];
 
         
+        
     }
     
+    #pragma mark topics list
+    
+    // get dictionary of current topics
+    
+    NSString *filePathOrig = [[NSBundle mainBundle] pathForResource:@"TopicsList" ofType:@"plist"];
+    NSDictionary *topicsDictionaryNM = [NSDictionary dictionaryWithContentsOfFile:filePathOrig];
+    
+    // get path of documents folder topicslist plist file
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = paths[0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"TopicsList.plist"];
+    
+    // file manager
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:filePath])
+    {
+        [topicsDictionaryNM writeToFile:filePath atomically:YES];
+        
+        NSLog(@"Created Plist file at %@", filePath);
+    }
+    
+    #pragma mark tutorial
+    
     // show tutorial view if first time
-    
-    
     
     // for page indicator
     
@@ -96,7 +119,6 @@
     pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
     pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
     pageControl.backgroundColor = [UIColor whiteColor];
-    
     
     // Override point for customization after application launch.
     return YES;

@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, atomic) NSMutableArray *topicsArray;
 @property (strong, nonatomic) NSMutableArray *categoryKeysUnlocked;
+@property (strong, nonatomic) NSDictionary *topicsDictionaryNM;
 @property (strong, atomic) NSString *topicChosen;
 @property (strong, nonatomic) NSString *fromController;
 
