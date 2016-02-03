@@ -55,6 +55,13 @@
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
+    // TODO: Change added on 2-2-2016 for initial release to remove ability to do rounds
+    // remove these next two lines in the final version
+    
+    BOOL rounds = NO;
+    [[NSUserDefaults standardUserDefaults] setBool:rounds forKey:@"isRounds"];
+
+    
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"preferencesSet"])
     {
         BOOL preferencesSet = YES;
@@ -63,7 +70,7 @@
         double gameTimer = 60.0;
         [[NSUserDefaults standardUserDefaults] setDouble:gameTimer forKey:@"gameTimer"];
         
-        BOOL rounds = YES;
+        BOOL rounds = NO;
         [[NSUserDefaults standardUserDefaults] setBool:rounds forKey:@"isRounds"];
         
         BOOL prompts = YES;

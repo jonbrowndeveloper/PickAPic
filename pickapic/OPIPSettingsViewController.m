@@ -167,4 +167,53 @@
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"gamePromptsActive"];
     }
 }
+- (IBAction)sendFeedbackButton:(id)sender
+{
+    // From within your active view controller
+    if([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
+        mailCont.mailComposeDelegate = self;
+        
+        [mailCont setSubject:@"PickAPic Feedback!"];
+        [mailCont setToRecipients:[NSArray arrayWithObject:@"garrett.pickapic@gmail.com"]];
+        [mailCont setMessageBody:@"" isHTML:NO];
+        
+        [self presentViewController:mailCont animated:YES completion:NULL];
+    }
+    
+    
+
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            NSLog(@"mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"mail saved");
+            break;
+        case MFMailComposeResultSent:
+        {
+            UIAlertView *noDataAlert = [[UIAlertView alloc] initWithTitle:@"Thank you" message:@"\nYour feedback will be reviewed" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+            noDataAlert.alertViewStyle = UIAlertViewStyleDefault;
+            
+            [noDataAlert show];
+        }
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"mail failed %@", [error localizedDescription]);
+            break;
+            
+        default:
+            break;
+    }
+    
+    // close mail interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    
+    // [self.navigationController popViewControllerAnimated:YES];
+}
+
 @end

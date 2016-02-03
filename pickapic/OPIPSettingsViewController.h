@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-@interface OPIPSettingsViewController : UIViewController
+@interface OPIPSettingsViewController : UIViewController <MFMailComposeViewControllerDelegate>
 
 - (IBAction)timerControl:(id)sender;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *timerControlOutlet;
@@ -24,5 +25,6 @@
 
 @property (nonatomic, assign) int gameTypeNumber;
 
+- (IBAction)sendFeedbackButton:(id)sender;
 
 @end
