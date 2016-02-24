@@ -10,6 +10,9 @@
 #import <Parse/Parse.h>
 #import <ParseCrashReporting/ParseCrashReporting.h>
 #import "OPIPGameViewController.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
+#import "SoundManager.h"
 
 @interface AppDelegate ()
 
@@ -35,6 +38,9 @@
     {
         // do nothing
     }
+    
+    [SoundManager sharedManager].allowsBackgroundMusic = YES;
+    [[SoundManager sharedManager] prepareToPlay];
     
     return YES;
 }
@@ -85,12 +91,14 @@
         // for topic packs
         
         BOOL topicPackIncluded = NO;
-        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"goofusUnlocked"];
-        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"knuckleheadUnlocked"];
-        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"screwballUnlocked"];
-        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"sillypantsUnlocked"];
-
-        
+        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"GoofusUnlocked"];
+        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"KnuckleheadUnlocked"];
+        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"ScrewballUnlocked"];
+        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"SillypantsUnlocked"];
+        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"DingleberryUnlocked"];
+        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"GreenhornUnlocked"];
+        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"NitwitUnlocked"];
+        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"JabroniUnlocked"];
         
     }
     
@@ -115,6 +123,8 @@
         
         NSLog(@"Created Plist file at %@", filePath);
     }
+    
+    // NSLog(@"%@", [NSString stringWithFormat:@"%@/Tick.m4a" [[NSBundle mainBundle] resourcePath]]);
     
     #pragma mark tutorial
     
@@ -234,27 +244,20 @@
     if(self.timerValue >= 0)
     {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
-        // opipViewController.countdownLabel.text = [NSString stringWithFormat:@"%d", timerValue];
         
-        AudioServicesPlaySystemSound(1105);
-        
-        // NSLog(@"counting down... %d", timerValue);
+        [[SoundManager sharedManager] playSound:@"Tick.mp3" looping:NO];
         
     }
     
     if (self.timerValue == 0)
     {
-        // opipViewController.countdownLabel.text = [NSString stringWithFormat:@"0"];
-        
-        // do something like say the round is over, choose a winner
-        
         [self.timer invalidate];
         self.timer = nil;
         
         // possible buzzer
         
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        AudioServicesPlaySystemSound(1005);
+        [[SoundManager sharedManager] playSound:@"Air_Horn.mp3" looping:NO];
         
          // opipViewController.timerHasReachedZero = YES;
         
@@ -262,8 +265,6 @@
     }
     
 }
-
-
 
 #pragma mark - Core Data Saving support
 

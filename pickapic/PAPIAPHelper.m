@@ -23,6 +23,10 @@
                                      @"com.DGVentures.pickapic.knucklehead",
                                      @"com.DGVentures.pickapic.screwball",
                                      @"com.DGVentures.pickapic.sillypants",
+                                     @"com.DGVentures.pickapic.dingleberry",
+                                     @"com.DGVentures.pickapic.greenhorn",
+                                     @"com.DGVentures.pickapic.nitwit",
+                                     @"com.DGVentures.pickapic.jabroni",
                                      nil];
         sharedInstance = [[self alloc] initWithProductIdentifiers:productIdentifiers];
         

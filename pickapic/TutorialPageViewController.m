@@ -42,7 +42,7 @@
     
     // set image array
     
-    self.imageArray = [[NSArray alloc] initWithObjects:@"intro-1",@"intro-2",@"intro-3",@"intro-4",@"intro-5", nil];
+    self.imageArray = [[NSArray alloc] initWithObjects:@"intro_1",@"intro_2",@"intro_3",@"intro_4",@"intro_5", nil];
     
     // Create page view controller
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];

@@ -15,9 +15,7 @@
             <string>Lato-Bold</string>
             <string>Lato-Bold</string>
             <string>Lato-Bold</string>
-        </mutableArray>
-        <mutableArray key="Lato-BoldItalic.ttf">
-            <string>Lato-BoldItalic</string>
+            <string>Lato-Bold</string>
         </mutableArray>
         <mutableArray key="Lato-Regular.ttf">
             <string>Lato-Regular</string>
@@ -576,7 +574,7 @@
                                 <rect key="frame" x="0.0" y="318" width="600" height="217"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="opipCell" rowHeight="50" id="FXx-ot-tZO" customClass="OPIPTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="opipCell" rowHeight="50" id="FXx-ot-tZO" customClass="OPIPTableViewCell">
                                         <rect key="frame" x="0.0" y="22" width="600" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FXx-ot-tZO" id="2ob-O5-pIk">
@@ -877,47 +875,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DTB-39-2Hi">
+                            <collectionView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DTB-39-2Hi">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OVs-Bi-a4L">
-                                    <size key="itemSize" width="148" height="154"/>
+                                    <size key="itemSize" width="560" height="165"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="30" minY="20" maxX="30" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="categoryCell" id="gm9-Tj-1mO" customClass="StoreCollectionViewCell">
-                                        <rect key="frame" x="20" y="84" width="150" height="150"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="categoryCell" id="gm9-Tj-1mO" customClass="StoreCollectionViewCell">
+                                        <rect key="frame" x="30" y="84" width="540" height="165"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="165"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJA-lU-yMg">
-                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJA-lU-yMg">
+                                                    <rect key="frame" x="0.0" y="0.0" width="560" height="165"/>
                                                     <connections>
                                                         <action selector="cellButtonPressed:" destination="aPY-M4-DyF" eventType="touchUpInside" id="N5N-Lc-sb0"/>
                                                     </connections>
                                                 </button>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Purchased" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4R-Fi-ICX">
-                                                    <rect key="frame" x="26" y="64" width="98" height="21"/>
-                                                    <fontDescription key="fontDescription" name="Lato-BoldItalic" family="Lato" pointSize="20"/>
-                                                    <color key="textColor" red="0.26489504419999998" green="0.26489504419999998" blue="0.26489504419999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Purchased" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4R-Fi-ICX">
+                                                    <rect key="frame" x="202" y="64" width="157" height="37"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="30"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" red="0.26489504419191923" green="0.26489504419191923" blue="0.26489504419191923" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="WJA-lU-yMg" firstAttribute="leading" secondItem="gm9-Tj-1mO" secondAttribute="leadingMargin" constant="-8" id="5yU-Gg-tBM"/>
-                                            <constraint firstItem="S4R-Fi-ICX" firstAttribute="centerY" secondItem="WJA-lU-yMg" secondAttribute="centerY" id="MWE-pK-9ok"/>
-                                            <constraint firstItem="WJA-lU-yMg" firstAttribute="top" secondItem="gm9-Tj-1mO" secondAttribute="topMargin" constant="-8" id="P9h-rV-swo"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="WJA-lU-yMg" secondAttribute="trailing" constant="-8" id="eXg-XI-NrN"/>
-                                            <constraint firstItem="S4R-Fi-ICX" firstAttribute="centerX" secondItem="WJA-lU-yMg" secondAttribute="centerX" id="pop-aa-RLl"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="WJA-lU-yMg" secondAttribute="bottom" constant="-8" id="sfP-Ka-qUe"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="WJA-lU-yMg" secondAttribute="trailing" constant="-8" id="FvW-z2-5Jz"/>
+                                            <constraint firstItem="S4R-Fi-ICX" firstAttribute="centerY" secondItem="WJA-lU-yMg" secondAttribute="centerY" id="Nkn-6p-315"/>
+                                            <constraint firstItem="S4R-Fi-ICX" firstAttribute="centerX" secondItem="WJA-lU-yMg" secondAttribute="centerX" id="QMg-fx-bJA"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="WJA-lU-yMg" secondAttribute="bottom" constant="-8" id="axJ-Yh-tf2"/>
+                                            <constraint firstItem="WJA-lU-yMg" firstAttribute="leading" secondItem="gm9-Tj-1mO" secondAttribute="leadingMargin" constant="-8" id="dRF-cf-v4V"/>
+                                            <constraint firstItem="WJA-lU-yMg" firstAttribute="top" secondItem="gm9-Tj-1mO" secondAttribute="topMargin" constant="-8" id="j3R-AU-W5a"/>
                                         </constraints>
-                                        <size key="customSize" width="150" height="150"/>
+                                        <size key="customSize" width="540" height="165"/>
                                         <connections>
                                             <outlet property="categoryButton" destination="WJA-lU-yMg" id="jdU-xO-l0V"/>
                                             <outlet property="purchasedLabel" destination="S4R-Fi-ICX" id="EOg-zt-Gpy"/>

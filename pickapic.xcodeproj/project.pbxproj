@@ -11,6 +11,10 @@
 		294440851BBE532900800F3C /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 294440841BBE532900800F3C /* TutorialViewController.m */; };
 		29BF82EE1BCC3059009A9D7A /* PageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29BF82ED1BCC3059009A9D7A /* PageContentViewController.m */; };
 		29BF82F11BCC39B4009A9D7A /* TutorialPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29BF82F01BCC39B4009A9D7A /* TutorialPageViewController.m */; };
+		29C841B21C644BE100BC3DAC /* Air_Horn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 29C841B11C644BE100BC3DAC /* Air_Horn.mp3 */; };
+		29C841B61C644C3600BC3DAC /* Ta_Da.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 29C841B51C644C3600BC3DAC /* Ta_Da.mp3 */; };
+		29C841B91C79113B00BC3DAC /* Tick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 29C841B81C79113B00BC3DAC /* Tick.mp3 */; };
+		29C841BC1C79140B00BC3DAC /* SoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C841BB1C79140B00BC3DAC /* SoundManager.m */; };
 		29DD44711BEC25A0008D9AFA /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29DD44701BEC25A0008D9AFA /* StoreViewController.m */; };
 		29DD44741BEC27BF008D9AFA /* StoreCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29DD44731BEC27BF008D9AFA /* StoreCollectionViewCell.m */; };
 		29F21EDD1C037E4D00262525 /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F21EDC1C037E4D00262525 /* IAPHelper.m */; };
@@ -84,6 +88,11 @@
 		29BF82ED1BCC3059009A9D7A /* PageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PageContentViewController.m; path = pickapic/PageContentViewController.m; sourceTree = SOURCE_ROOT; };
 		29BF82EF1BCC39B4009A9D7A /* TutorialPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialPageViewController.h; path = pickapic/TutorialPageViewController.h; sourceTree = SOURCE_ROOT; };
 		29BF82F01BCC39B4009A9D7A /* TutorialPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialPageViewController.m; path = pickapic/TutorialPageViewController.m; sourceTree = SOURCE_ROOT; };
+		29C841B11C644BE100BC3DAC /* Air_Horn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Air_Horn.mp3; sourceTree = "<group>"; };
+		29C841B51C644C3600BC3DAC /* Ta_Da.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ta_Da.mp3; sourceTree = "<group>"; };
+		29C841B81C79113B00BC3DAC /* Tick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tick.mp3; sourceTree = "<group>"; };
+		29C841BA1C79140B00BC3DAC /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
+		29C841BB1C79140B00BC3DAC /* SoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundManager.m; sourceTree = "<group>"; };
 		29DD446F1BEC25A0008D9AFA /* StoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoreViewController.h; path = ../StoreViewController.h; sourceTree = "<group>"; };
 		29DD44701BEC25A0008D9AFA /* StoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoreViewController.m; path = ../StoreViewController.m; sourceTree = "<group>"; };
 		29DD44721BEC27BF008D9AFA /* StoreCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoreCollectionViewCell.h; path = pickapic/StoreCollectionViewCell.h; sourceTree = SOURCE_ROOT; };
@@ -210,6 +219,16 @@
 			name = Tutorial;
 			sourceTree = "<group>";
 		};
+		29C841B01C644BCE00BC3DAC /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				29C841B11C644BE100BC3DAC /* Air_Horn.mp3 */,
+				29C841B81C79113B00BC3DAC /* Tick.mp3 */,
+				29C841B51C644C3600BC3DAC /* Ta_Da.mp3 */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
 		343CC8081B3361670030FF65 = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +272,7 @@
 		343CC8141B3361670030FF65 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				29C841B01C644BCE00BC3DAC /* Audio */,
 				343CC83D1B34CEBF0030FF65 /* Lato Font */,
 				343CC8151B3361670030FF65 /* Info.plist */,
 				34B010CA1B4B0DBB005F2096 /* placeholderLeaderboard.plist */,
@@ -369,6 +389,8 @@
 				29F21EDC1C037E4D00262525 /* IAPHelper.m */,
 				29F21EDE1C037FAD00262525 /* PAPIAPHelper.h */,
 				29F21EDF1C037FAD00262525 /* PAPIAPHelper.m */,
+				29C841BA1C79140B00BC3DAC /* SoundManager.h */,
+				29C841BB1C79140B00BC3DAC /* SoundManager.m */,
 			);
 			name = "3rd Party Classes";
 			sourceTree = "<group>";
@@ -487,12 +509,15 @@
 				AA62318D1B81544F00E3DC48 /* TopicsList.plist in Resources */,
 				AA3883AE1B7C149A00C2CE1D /* Lato-BoldItalic.ttf in Resources */,
 				AA3883AF1B7C149A00C2CE1D /* Lato-Hairline.ttf in Resources */,
+				29C841B61C644C3600BC3DAC /* Ta_Da.mp3 in Resources */,
 				AA3883B01B7C149A00C2CE1D /* Lato-HairlineItalic.ttf in Resources */,
 				AA3883B11B7C149A00C2CE1D /* Lato-Italic.ttf in Resources */,
+				29C841B91C79113B00BC3DAC /* Tick.mp3 in Resources */,
 				AA3883B21B7C149A00C2CE1D /* Lato-Light.ttf in Resources */,
 				2903328D1C3363EA007D24FE /* images.xcassets in Resources */,
 				AA3883B31B7C149A00C2CE1D /* Lato-LightItalic.ttf in Resources */,
 				AA3883B41B7C149A00C2CE1D /* Lato-Regular.ttf in Resources */,
+				29C841B21C644BE100BC3DAC /* Air_Horn.mp3 in Resources */,
 				343CC8231B3361670030FF65 /* Main.storyboard in Resources */,
 				343CC8281B3361670030FF65 /* LaunchScreen.xib in Resources */,
 				34B010CB1B4B0DBB005F2096 /* placeholderLeaderboard.plist in Resources */,
@@ -514,6 +539,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA0FF3A91B93DC6600E9E9EC /* OPIPSettingsViewController.m in Sources */,
+				29C841BC1C79140B00BC3DAC /* SoundManager.m in Sources */,
 				29BF82F11BCC39B4009A9D7A /* TutorialPageViewController.m in Sources */,
 				343CC84A1B34DD260030FF65 /* constants.m in Sources */,
 				34BE66981B3C61230059AF9B /* gTableViewCell.m in Sources */,

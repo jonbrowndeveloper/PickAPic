@@ -3,9 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>UserGenerated</key>
-	<array>
-		<string>test</string>
-	</array>
+	<array/>
 	<key>FREE</key>
 	<array>
 		<string>Why I can’t sleep at night</string>
@@ -125,6 +123,98 @@
 		<string>Basic Betch</string>
 		<string>The field trip was ruined by...</string>
 		<string>Something Lincoln hid in his hat</string>
+	</array>
+	<key>Dingleberry</key>
+	<array>
+		<string>things to run over with my car</string>
+		<string>something you lose a lot</string>
+		<string>something that always gets wet</string>
+		<string>your reaction when I fart</string>
+		<string>first person to pass out</string>
+		<string>wouldn’t care if you lost this</string>
+		<string>wish we had smellivision</string>
+		<string>cuteness overload</string>
+		<string>better than sex</string>
+		<string>better than puppies</string>
+		<string>tequilla made me do it</string>
+		<string>what would kanye do</string>
+		<string>what not to wear</string>
+		<string>foodgasm</string>
+		<string>least favorite person</string>
+		<string>no TP? use this…</string>
+		<string>basic women adore this</string>
+		<string>a basic bro’s favorite</string>
+		<string>karmas a bitch</string>
+		<string>If I had a million dollars</string>
+	</array>
+	<key>Greenhorn</key>
+	<array>
+		<string>million dollar idea</string>
+		<string>I’ll go to the gym tomorrow…</string>
+		<string>where I see myself in 20 years</string>
+		<string>honeymoons over</string>
+		<string>gets better with whiskey</string>
+		<string>obsessed with the x</string>
+		<string>mmm...don’t look at the label</string>
+		<string>biggest pet peeve</string>
+		<string>nails on a chalkboard</string>
+		<string>when you hear an ice cream truck</string>
+		<string>If I had a nickel for every time..</string>
+		<string>haters gunna hate</string>
+		<string>haha, i’m gunna pee my pants</string>
+		<string>wait, but first…</string>
+		<string>that’s not the first time</string>
+		<string>just broke the internet</string>
+		<string>makes a vegetarian reconsider</string>
+		<string>has religious meaning to aliens</string>
+		<string>leave this in an emergency</string>
+		<string>TSA loves confiscating this</string>
+	</array>
+	<key>Nitwit</key>
+	<array>
+		<string>I was going to work out, but…</string>
+		<string>I could be bribed with this</string>
+		<string>where I see myself in 10 years</string>
+		<string>should be in vending machines</string>
+		<string>could be a prize in a cereal box</string>
+		<string>First thing you see in Heaven</string>
+		<string>the Amish don’t get to do this</string>
+		<string>the doctor prescribed me this</string>
+		<string>sinking? throw this overboard</string>
+		<string>wishing this appeared right now</string>
+		<string>99 problems, but _____ ain’t one</string>
+		<string>Now banned on airplanes</string>
+		<string>Candlelit dinner complete with</string>
+		<string>you trade cigarettes in jail for</string>
+		<string>Important to time travel with</string>
+		<string>step one ___, step two: profit</string>
+		<string>before I kill you, look at this</string>
+		<string>Considered the 11th plague</string>
+		<string>Smithsonian Museum’s new exhibit</string>
+		<string>My best Snapchat</string>
+	</array>
+	<key>Jabroni</key>
+	<array>
+		<string>Gives athletes an advantage</string>
+		<string>This is at the end of a rainbow</string>
+		<string>will be done by robots in future</string>
+		<string>a new weapon for a video game</string>
+		<string>Will loosen up a tense situation</string>
+		<string>there should be a emoji for this</string>
+		<string>The cover of your next album</string>
+		<string>I use this to clean</string>
+		<string>would be disgusting if hairy</string>
+		<string>figured out what that smell was</string>
+		<string>first thing I would make legal</string>
+		<string>most embarrassing photo I have</string>
+		<string>if my celebrity crush was here</string>
+		<string>where I see myself in 5 years</string>
+		<string>vodka made me do it</string>
+		<string>When I looked my most attractive</string>
+		<string>more effective than steroids</string>
+		<string>my favorite afrodesiac</string>
+		<string>Distracts Obama during debates</string>
+		<string>superman’s kriptonite</string>
 	</array>
 </dict>
 </plist>

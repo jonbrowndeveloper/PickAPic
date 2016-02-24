@@ -11,6 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "PhotoPickViewController.h"
 #import "AppDelegate.h"
+#import "SoundManager.h"
 
 @interface OPIPGameViewController ()
 
@@ -23,6 +24,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // setup sound
+    
+    [SoundManager sharedManager].allowsBackgroundMusic = YES;
+    [[SoundManager sharedManager] prepareToPlay];
     
     // the game isn't over
     
@@ -444,7 +450,7 @@
 - (void)addPointToScore:(UIButton *)sender
 {
     // increase score by 1
-    if (_hasAddedPoint == NO)
+    if (_hasAddedPoint == NO && gameHasStarted == YES)
     {
         NSNumber *playerScore = [playerScores objectAtIndex:(sender.tag)];
         
@@ -459,77 +465,79 @@
         
         [self fadeInNewTopicButton];
         nTopicButton.enabled = YES;
-    }
-    
-    // check to see if the game is over
-    
-    isRounds = [[NSUserDefaults standardUserDefaults] boolForKey:@"isRounds"];
-    
-    int numberToCheck;
-    
-    // get the max numbers in the array
-    
-    winners = [[NSMutableArray alloc] init];
-    
-    int maxValue = 0;
-    
-    // find largest value
-    
-    for (int i = 0; i < playerScores.count; i++)
-    {
-        NSNumber *currentPlayerScore = playerScores[i];
         
-        if (currentPlayerScore.integerValue > maxValue)
+        // check to see if the game is overd
+        
+        isRounds = [[NSUserDefaults standardUserDefaults] boolForKey:@"isRounds"];
+        
+        int numberToCheck;
+        
+        // get the max numbers in the array
+        
+        winners = [[NSMutableArray alloc] init];
+        
+        int maxValue = 0;
+        
+        // find largest value
+        
+        for (int i = 0; i < playerScores.count; i++)
         {
-            maxValue = currentPlayerScore.intValue;
+            NSNumber *currentPlayerScore = playerScores[i];
+            
+            if (currentPlayerScore.integerValue > maxValue)
+            {
+                maxValue = currentPlayerScore.intValue;
+            }
+        }
+        
+        // get names in list that have largest value
+        
+        for (int i = 0; i < playerScores.count; i++)
+        {
+            NSNumber *currentPlayerScore = playerScores[i];
+            
+            if (currentPlayerScore.integerValue == maxValue)
+            {
+                [winners addObject:_playersArray[i]];
+            }
+        }
+        
+        if (isRounds == YES)
+        {
+            numberToCheck = actualRoundNumber.intValue;
+        }
+        else
+        {
+            // point checker
+            
+            NSLog(@"POINT GAME");
+            
+            numberToCheck = maxValue;
+        }
+        
+        // get number of points or rounds they selected from settings screen
+        
+        double numberOfRoundsOrPoints = [[NSUserDefaults standardUserDefaults] doubleForKey:@"numberOfRoundsOrPoints"];
+        
+        NSLog(@"current player: %lu\n out of %lu players", (((roundNumber.integerValue -1)%_playersArray.count)+1), (unsigned long)_playersArray.count);
+        
+        // NSLog(@"number to check is %d\nnumber of rounds is %d", numberToCheck, (int)numberOfRoundsOrPoints);
+        
+        if (!isRounds && numberToCheck == numberOfRoundsOrPoints)
+        {
+            gameOver = YES;
+            
+            [nTopicButton setTitle:@"End Game" forState:UIControlStateNormal];
+        }
+        else if (isRounds && numberToCheck == numberOfRoundsOrPoints && (((roundNumber.integerValue -1)%_playersArray.count) +1)== _playersArray.count)
+        {
+            gameOver = YES;
+            
+            [nTopicButton setTitle:@"End Game" forState:UIControlStateNormal];
         }
     }
     
-    // get names in list that have largest value
-    
-    for (int i = 0; i < playerScores.count; i++)
-    {
-        NSNumber *currentPlayerScore = playerScores[i];
-        
-        if (currentPlayerScore.integerValue == maxValue)
-        {
-            [winners addObject:_playersArray[i]];
-        }
-    }
-    
-    if (isRounds == YES)
-    {
-        numberToCheck = actualRoundNumber.intValue;
-    }
-    else
-    {
-        // point checker
-        
-        NSLog(@"POINT GAME");
-        
-        numberToCheck = maxValue;
-    }
-    
-    // get number of points or rounds they selected from settings screen
-    
-    double numberOfRoundsOrPoints = [[NSUserDefaults standardUserDefaults] doubleForKey:@"numberOfRoundsOrPoints"];
-    
-    NSLog(@"current player: %lu\n out of %lu players", (((roundNumber.integerValue -1)%_playersArray.count)+1), (unsigned long)_playersArray.count);
-    
-    // NSLog(@"number to check is %d\nnumber of rounds is %d", numberToCheck, (int)numberOfRoundsOrPoints);
 
-    if (!isRounds && numberToCheck == numberOfRoundsOrPoints)
-    {
-        gameOver = YES;
-        
-        [nTopicButton setTitle:@"End Game" forState:UIControlStateNormal];
-    }
-    else if (isRounds && numberToCheck == numberOfRoundsOrPoints && (((roundNumber.integerValue -1)%_playersArray.count) +1)== _playersArray.count)
-    {
-        gameOver = YES;
-        
-        [nTopicButton setTitle:@"End Game" forState:UIControlStateNormal];
-    }
     
 }
 
@@ -539,7 +547,7 @@
     NSNumber *playerScore = [playerScores objectAtIndex:(sender.tag - 10000)];
     int value = [playerScore intValue];
     
-    if (value > 0)
+    if (value > 0 && gameHasStarted == YES && _hasAddedPoint == YES)
     {
         // decrease score by 1
         
@@ -559,16 +567,18 @@
             [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];
         }*/
         
+        
+        if (gameOver == YES)
+        {
+            [nTopicButton setTitle:@"New Topic" forState:UIControlStateNormal];
+        }
+        
+        gameOver = NO;
+        
+        [self.gameTableView reloadData];
     }
     
-    if (gameOver == YES)
-    {
-        [nTopicButton setTitle:@"New Topic" forState:UIControlStateNormal];
-    }
-    
-    gameOver = NO;
-    
-    [self.gameTableView reloadData];
+
 }
 
 
@@ -577,8 +587,8 @@
     // https://docs.google.com/forms/d/1jKaCVZVzlnPnaUYm8ti8oSP-NbXZkzoBIDV7eDB5FPc/viewform
     
     
-    NSString *textToShare = @"Find out when PickAPic is availible on the App Store!\n";
-    NSURL *myWebsite = [NSURL URLWithString:@"https://docs.google.com/forms/d/1jKaCVZVzlnPnaUYm8ti8oSP-NbXZkzoBIDV7eDB5FPc/viewform"];
+    NSString *textToShare = @"Hey! Go download PickAPic!\n";
+    NSURL *myWebsite = [NSURL URLWithString:@"https://itunes.apple.com/us/app/pickapic-competitive-photo/id1047423089?ls=1&mt=8"];
     
     NSArray *objectsToShare = @[textToShare, myWebsite];
     
@@ -663,6 +673,8 @@
     }
     else if (gameOver)
     {
+        [[SoundManager sharedManager] playSound:@"Ta_Da.mp3" looping:NO];
+        
         if (winners.count == 1)
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"GAME OVER!\n%@ Wins!", winners[0]] message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -850,7 +862,7 @@
     
     NSLog(@"round number: %d", (int)roundNumber%(int)_playersArray.count);
     
-    NSTimer *alertTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(hostChosesPic) userInfo:nil repeats:NO];
+    NSTimer *alertTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(hostChosesPic) userInfo:nil repeats:NO];
     
     _hasAddedPoint = NO;
     _timerHasReachedZero = NO;

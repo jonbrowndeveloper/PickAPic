@@ -10,6 +10,7 @@
 #import "OnePhonePlayerListTableViewCell.h"
 #import "TopicViewController.h"
 #import "OPIPGameViewController.h"
+#import "SoundManager.h"
 
 @interface OnePhoneInPersonViewController ()
 

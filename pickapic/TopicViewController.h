@@ -11,7 +11,7 @@
 @interface TopicViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, atomic) NSMutableArray *topicsArray;
+@property (strong, nonatomic) NSMutableArray *topicsArray;
 @property (strong, nonatomic) NSMutableArray *categoryKeysUnlocked;
 @property (strong, nonatomic) NSDictionary *topicsDictionaryNM;
 @property (strong, atomic) NSString *topicChosen;
@@ -19,6 +19,8 @@
 
 @property (strong, nonatomic) NSMutableArray *playersArray;
 @property (strong, nonatomic) NSMutableArray *scoreArray;
+
+@property (strong, nonatomic) NSMutableArray *userTopics;
 
 // Adding Topic
 

@@ -18,7 +18,7 @@
 
 @implementation TopicViewController
 
-@synthesize tableView, topicsArray, topicChosen, isAddingTopic, alertTextField, fromController, playersArray, scoreArray, roundNumber, categoryKeysUnlocked, topicsDictionaryNM;
+@synthesize tableView, topicsArray, topicChosen, isAddingTopic, alertTextField, fromController, playersArray, scoreArray, roundNumber, categoryKeysUnlocked, topicsDictionaryNM, userTopics;
 
 - (void)viewDidLoad
 {
@@ -52,7 +52,13 @@
     
     NSArray *customArray = [NSArray arrayWithArray:[topicsDictionaryNM objectForKey:@"UserGenerated"]];
     
-    if (customArray != NULL)
+    
+    userTopics = [[NSMutableArray alloc] initWithArray:customArray];
+    
+    // NSLog(@"custom array: %@\nuser topics array: %@", customArray, userTopics);
+
+    
+    if (customArray.count != 0)
     {
         topicsArray = [[NSMutableArray alloc] initWithObjects:[NSArray arrayWithArray:[topicsDictionaryNM objectForKey:@"UserGenerated"]],[NSArray arrayWithArray:[topicsDictionaryNM objectForKey:@"FREE"]], nil];
         
@@ -70,44 +76,29 @@
     // add purchased topics to list
     
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goofusUnlocked"])
-    {
-        [topicsArray addObject:[NSMutableArray arrayWithArray:[topicsDictionaryNM objectForKey:@"Goofus"]]];
-        NSLog(@"adding goofus");
-        
-        [categoryKeysUnlocked addObject:@"Goofus"];
-        
-    }
-    
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"knuckleheadUnlocked"])
-    {
-        [topicsArray addObject:[NSMutableArray arrayWithArray:[topicsDictionaryNM objectForKey:@"Knucklehead"]]];
-        NSLog(@"adding knuckelhead");
-        
-        [categoryKeysUnlocked addObject:@"Knucklehead"];
-
-    }
-    
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"screwballUnlocked"])
-    {
-        [topicsArray addObject:[NSMutableArray arrayWithArray:[topicsDictionaryNM objectForKey:@"Screwball"]]];
-        NSLog(@"adding screwball");
-        
-        [categoryKeysUnlocked addObject:@"Screwball"];
-    }
-    
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"sillypantsUnlocked"])
-    {
-        [topicsArray addObject:[NSMutableArray arrayWithArray:[topicsDictionaryNM objectForKey:@"Sillypants"]]];
-        NSLog(@"adding sillypants");
-        
-        [categoryKeysUnlocked addObject:@"Sillypants"];
-
-    }
+    [self unlockTopicPack:@"Goofus"];
+    [self unlockTopicPack:@"Knucklehead"];
+    [self unlockTopicPack:@"Screwball"];
+    [self unlockTopicPack:@"Sillypants"];
+    [self unlockTopicPack:@"Dingleberry"];
+    [self unlockTopicPack:@"Greenhorn"];
+    [self unlockTopicPack:@"Nitwit"];
+    [self unlockTopicPack:@"Jabroni"];
     
     // topicsArray = [NSArray arrayWithArray:[dict objectForKey:@"Root"]];
     
     // NSLog(@"topics array: %@\nFilePath: %@", topicsArray, filePath);
+}
+
+- (void)unlockTopicPack:(NSString *)topicPackName
+{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@Unlocked", topicPackName]])
+    {
+        [topicsArray addObject:[NSMutableArray arrayWithArray:[topicsDictionaryNM objectForKey:topicPackName]]];
+        
+        [categoryKeysUnlocked addObject:topicPackName];
+        
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -230,6 +221,50 @@
     return cell;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // NSLog(@"usertopics count: %lu index row: %ld", userTopics.count, (long)indexPath.row);
+    
+    NSInteger section = [indexPath section];
+    
+    // Return NO if you do not want the specified item to be editable.
+    if (section == 0 && indexPath.row < (userTopics.count))
+    {
+        // NSLog(@"row %ld is able to be edited\nuser topics count: %ld", (long)indexPath.row, userTopics.count);
+        
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"removing %@ at index %ld\n topicsarray count: %lu", userTopics[indexPath.row], indexPath.row, (unsigned long)topicsArray.count);
+    
+    [userTopics removeObjectAtIndex:indexPath.row];
+    
+    topicsArray[0] = userTopics;
+    
+    // file path of dict
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = paths[0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"TopicsList.plist"];
+    
+    // add new topic within array to dictionary
+    
+    NSMutableDictionary *mutableDictionary = [topicsDictionaryNM mutableCopy];
+    
+    [mutableDictionary setObject:userTopics forKey:@"UserGenerated"];
+    
+    [mutableDictionary writeToFile:filePath atomically:YES];
+    
+    [self.tableView reloadData];
+}
+
 - (void)didReceiveMemoryWarning
 {
     
@@ -281,17 +316,11 @@
             
             // array to add new topic
             
-            NSMutableArray *quickCustomArray = [topicsDictionaryNM objectForKey:@"UserGenerated"];
+            NSMutableArray *quickCustomArray = [[NSMutableArray alloc] initWithArray:[topicsDictionaryNM objectForKey:@"UserGenerated"]];
             
+
+            [quickCustomArray insertObject:topicChosen atIndex:0];
             
-            if (quickCustomArray == NULL)
-            {
-                quickCustomArray = [[NSMutableArray alloc] initWithObjects:topicChosen, nil];
-            }
-            else
-            {
-                [quickCustomArray insertObject:topicChosen atIndex:0];
-            }
             
             // NSLog(@"quick array: %@", quickCustomArray);
             
