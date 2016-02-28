@@ -11,7 +11,7 @@
 
 @implementation StoreCollectionViewCell
 
-@synthesize purchasedLabel;
+@synthesize purchasedLabel, categoryButton;
 
 
 @end

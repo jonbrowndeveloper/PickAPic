@@ -13,6 +13,7 @@
 @property (nonatomic, retain) NSArray *imageArray;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
+- (IBAction)restorePreviousPurchases:(id)sender;
 // store properties
 
 @property (nonatomic, strong) NSArray *fetchedCategoryArray;

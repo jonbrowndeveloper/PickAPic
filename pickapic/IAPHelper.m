@@ -133,16 +133,14 @@ NSString *const IAPHelperProductPurchasedNotification = @"IAPHelperProductPurcha
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"purchaseRestored"])
     {
-        // if unlimited after restoring transaction, send back to main bucket controller
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Thank you for choosing Gif Bucket Unlimited!" message:@"\nYour previous purchase has been restored" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        //
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Thank you for using PickAPic!" message:@"\nYour previous purchases has been restored" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         alert.alertViewStyle = UIAlertViewStyleDefault;
         [alert dismissWithClickedButtonIndex:1 animated:TRUE];
         [alert show];
         
         BOOL restored = YES;
         [[NSUserDefaults standardUserDefaults] setBool:restored forKey:@"purchaseRestored"];
-        
-        [[NSUserDefaults standardUserDefaults] setBool:restored forKey:@"isUnlimited"];
     }
 
 }

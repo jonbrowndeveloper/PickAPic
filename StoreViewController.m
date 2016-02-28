@@ -51,7 +51,7 @@
      setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.translucent = NO;
     
-    imageArray = [[NSArray alloc] initWithObjects:@"Goofus",@"Knucklehead",@"Screwball",@"Sillypants",@"Dingleberry",@"Greenhorn",@"Nitwit",@"Jabroni", nil];
+    imageArray = [[NSArray alloc] initWithObjects:@"Dingleberry",@"Goofus",@"Greenhorn",@"Jabroni",@"Knucklehead",@"Nitwit",@"Screwball",@"Sillypants", nil];
     
     for (int i = 0; i<imageArray.count; i++)
     {
@@ -61,9 +61,16 @@
     // products array
     
     [[PAPIAPHelper sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
-        if (success) {
+        if (success)
+        {
             productsNow = products;
-            NSLog(@"Products: %@", productsArray);
+            // NSLog(@"Products: %@", productsNow);
+            for (int i = 0; i < productsNow.count; i++)
+            {
+                SKProduct *product = productsNow[i];
+                NSLog(@"%@", product.productIdentifier);
+            }
+            
         }
     }];
     
@@ -116,23 +123,26 @@
     static NSString *CellIdentifier = @"categoryCell";
     StoreCollectionViewCell *cell = (StoreCollectionViewCell *)[self.collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    
-    /*
-    if ((indexPath.row == 0 && [[NSUserDefaults standardUserDefaults] boolForKey:@"GoofusUnlocked"]) || (indexPath.row == 1 && [[NSUserDefaults standardUserDefaults] boolForKey:@"KnuckleheadUnlocked"]) || (indexPath.row == 2 && [[NSUserDefaults standardUserDefaults] boolForKey:@"ScrewballUnlocked"]) || (indexPath.row == 3 && [[NSUserDefaults standardUserDefaults] boolForKey:@"SillypantsUnlocked"]) || (indexPath.row == 4 && [[NSUserDefaults standardUserDefaults] boolForKey:@"DingleberryUnlocked"]) || (indexPath.row == 5 && [[NSUserDefaults standardUserDefaults] boolForKey:@"GreenhornUnlocked"]) || (indexPath.row == 6 && [[NSUserDefaults standardUserDefaults] boolForKey:@"NitwitUnlocked"]) || (indexPath.row == 7 && [[NSUserDefaults standardUserDefaults] boolForKey:@"JabroniUnlocked"]))
-    {
-        NSLog(@"button at cell %ld has been purchased", (long)indexPath.row);
-    }*/
+    // check if cell's topic pack has been purchased
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@Unlocked",imageArray[indexPath.row]]])
     {
+        NSLog(@"cell %@ at %ld has been purchased", imageArray[indexPath.row],(long)indexPath.row);
+        
         cell.categoryButton.alpha = 0.3;
         cell.purchasedLabel.hidden = NO;
         
         cell.categoryButton.enabled = NO;
 
     }
-
-    
+    // to get rid of bug that is making cells 4 away that have not been purchased, greyed out
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@Unlocked",imageArray[indexPath.row]]])
+    {
+        cell.categoryButton.alpha = 1.0;
+        cell.purchasedLabel.hidden = YES;
+        
+        cell.categoryButton.enabled = YES;
+    }
 
     [cell.categoryButton setBackgroundImage:[UIImage imageNamed:imageArray[indexPath.row]] forState:UIControlStateNormal];
 
@@ -141,7 +151,7 @@
     
     // add corner radius and shadow
     
-    cell.contentView.layer.cornerRadius = 8.0f;
+    cell.contentView.layer.cornerRadius = 0.0f;
     cell.contentView.layer.borderWidth = 1.0f;
     cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
     cell.contentView.layer.masksToBounds = YES;
@@ -152,9 +162,6 @@
     cell.layer.shadowOpacity = 1.0f;
     cell.layer.masksToBounds = NO;
     cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
-    
-    // [[cell categoryButton] addTarget:self action:@selector(storeCellButtonPress:event:) forControlEvents:UIControlEventTouchUpInside];
-
     
     return cell;
 }
@@ -191,56 +198,14 @@
     
     NSLog(@"adjusting topic packs...");
     
-    if ([productIdentifier isEqualToString:@"com.DGVentures.pickapic.goofus"])
+    for (int i = 0; i<imageArray.count;i++)
     {
-        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"GoofusUnlocked"];
-        NSLog(@"unlocking goofus");
+        if ([productIdentifier isEqualToString:[NSString stringWithFormat:@"com.DGVentures.pickapic.%@",[[imageArray[i] substringFromIndex:0] lowercaseString]]])
+        {
+            [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:[NSString stringWithFormat:@"%@Unlocked", imageArray[i]]];
+            NSLog(@"unlocking %@", imageArray[i]);
+        }
     }
-    else if ([productIdentifier isEqualToString:@"com.DGVentures.pickapic.knucklehead"])
-    {
-        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"KnuckleheadUnlocked"];
-        NSLog(@"unlocking Knucklehead");
-        
-    }
-    else if ([productIdentifier isEqualToString:@"com.DGVentures.pickapic.screwball"])
-    {
-        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"ScrewballUnlocked"];
-        NSLog(@"unlocking screwball");
-    }
-    else if ([productIdentifier isEqualToString:@"com.DGVentures.pickapic.sillypants"])
-    {
-        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"SillypantsUnlocked"];
-        NSLog(@"unlocking sillypants");
-        
-        
-    }
-    else if ([productIdentifier isEqualToString:@"com.DGVentures.pickapic.dingleberry"])
-    {
-        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"DingleberryUnlocked"];
-        NSLog(@"unlocking dingleberry");
-
-        
-    }
-    else if ([productIdentifier isEqualToString:@"com.DGVentures.pickapic.greenhorn"])
-    {
-        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"GreenhornUnlocked"];
-        NSLog(@"unlocking greenhorn");
-
-        
-    }
-    else if ([productIdentifier isEqualToString:@"com.DGVentures.pickapic.nitwit"])
-    {
-        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"NitwitUnlocked"];
-        NSLog(@"unlocking nitwit");
-        
-    }
-    else if ([productIdentifier isEqualToString:@"com.DGVentures.pickapic.jabroni"])
-    {
-        [[NSUserDefaults standardUserDefaults] setBool:topicPackIncluded forKey:@"JabroniUnlocked"];
-        NSLog(@"unlocking jabroni");
-        
-    }
-    
     [self.collectionView reloadData];
     
 }
@@ -249,81 +214,18 @@
 {
     UIButton *button = (UIButton *)sender;
     
-    // the products list coming from iTunesConnect is in a different order than I anticipated... shame
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@Unlocked",imageArray[button.tag]]])
+    {
+        SKProduct *product = productsNow[button.tag];
+        NSLog(@"Buying: %@", product.productIdentifier);
+        [[PAPIAPHelper sharedInstance] buyProduct:product];
+    }
+
+}
+- (IBAction)restorePreviousPurchases:(id)sender
+{
+    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
     
-    if (button.tag == 0 && ![[NSUserDefaults standardUserDefaults] boolForKey:@"GoofusUnlocked"])
-    {
-        NSLog(@"First cell pressed");
-        
-        
-        SKProduct *product = productsNow[1];
-         NSLog(@"Buying: %@", product.productIdentifier);
-         [[PAPIAPHelper sharedInstance] buyProduct:product];
-         
-    }
-    else if (button.tag == 1 && ![[NSUserDefaults standardUserDefaults] boolForKey:@"KnuckleheadUnlocked"])
-    {
-        NSLog(@"Second cell pressed");
-        
-         SKProduct *product = productsNow[4];
-         NSLog(@"Buying: %@", product.productIdentifier);
-         [[PAPIAPHelper sharedInstance] buyProduct:product];
-        
-    }
-    else if (button.tag == 2 && ![[NSUserDefaults standardUserDefaults] boolForKey:@"ScrewballUnlocked"])
-    {
-        NSLog(@"Third cell pressed");
-        
-         SKProduct *product = productsNow[6];
-         NSLog(@"Buying: %@", product.productIdentifier);
-         [[PAPIAPHelper sharedInstance] buyProduct:product];
-        
-    }
-    else if (button.tag == 3 && ![[NSUserDefaults standardUserDefaults] boolForKey:@"SillypantsUnlocked"])
-    {
-        NSLog(@"Fourth cell pressed");
-        
-         SKProduct *product = productsNow[7];
-         NSLog(@"Buying: %@", product.productIdentifier);
-         [[PAPIAPHelper sharedInstance] buyProduct:product];
-        
-    }
-    else if (button.tag == 4 && ![[NSUserDefaults standardUserDefaults] boolForKey:@"DingleberryUnlocked"])
-    {
-        NSLog(@"Fifth cell pressed");
-        
-        SKProduct *product = productsNow[0];
-        NSLog(@"Buying: %@", product.productIdentifier);
-        [[PAPIAPHelper sharedInstance] buyProduct:product];
-        
-    }
-    else if (button.tag == 5 && ![[NSUserDefaults standardUserDefaults] boolForKey:@"GreenhornUnlocked"])
-    {
-        NSLog(@"Sixth cell pressed");
-        
-        SKProduct *product = productsNow[2];
-        NSLog(@"Buying: %@", product.productIdentifier);
-        [[PAPIAPHelper sharedInstance] buyProduct:product];
-        
-    }
-    else if (button.tag == 6 && ![[NSUserDefaults standardUserDefaults] boolForKey:@"NitwitUnlocked"])
-    {
-        NSLog(@"Seventh cell pressed");
-        
-        SKProduct *product = productsNow[5];
-        NSLog(@"Buying: %@", product.productIdentifier);
-        [[PAPIAPHelper sharedInstance] buyProduct:product];
-        
-    }
-    else if (button.tag == 7 && ![[NSUserDefaults standardUserDefaults] boolForKey:@"JabroniUnlocked"])
-    {
-        NSLog(@"Eighth cell pressed");
-        
-        SKProduct *product = productsNow[3];
-        NSLog(@"Buying: %@", product.productIdentifier);
-        [[PAPIAPHelper sharedInstance] buyProduct:product];
-        
-    }
-    
+    [self.collectionView reloadData];
 }
 @end

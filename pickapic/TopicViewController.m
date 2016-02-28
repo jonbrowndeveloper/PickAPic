@@ -76,14 +76,14 @@
     // add purchased topics to list
     
     
+    [self unlockTopicPack:@"Dingleberry"];
     [self unlockTopicPack:@"Goofus"];
+    [self unlockTopicPack:@"Greenhorn"];
+    [self unlockTopicPack:@"Jabroni"];
     [self unlockTopicPack:@"Knucklehead"];
+    [self unlockTopicPack:@"Nitwit"];
     [self unlockTopicPack:@"Screwball"];
     [self unlockTopicPack:@"Sillypants"];
-    [self unlockTopicPack:@"Dingleberry"];
-    [self unlockTopicPack:@"Greenhorn"];
-    [self unlockTopicPack:@"Nitwit"];
-    [self unlockTopicPack:@"Jabroni"];
     
     // topicsArray = [NSArray arrayWithArray:[dict objectForKey:@"Root"]];
     
