@@ -180,7 +180,7 @@
         else if (_photoChosen == NO && gameHasStarted == YES)
         {
             // if the photo picker has been cancelled
-            
+            /*
             NSLog(@"host is playing");
             
             // grayScreenView.hidden = NO;
@@ -188,8 +188,7 @@
             hostNeedsToPic = YES;
 
             NSTimer *alertTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(hostChosesPic) userInfo:nil repeats:NO];
-            
-
+            */
         }
         else
         {
@@ -207,7 +206,7 @@
             
             // set image
             
-            smallPhotoImageView.image = image;
+            [smallPhotoImageView setBackgroundImage:image forState:UIControlStateNormal];
             
             smallPhotoImageView.layer.cornerRadius = 5.0;
             smallPhotoImageView.layer.masksToBounds = YES;
@@ -862,7 +861,7 @@
     
     NSLog(@"round number: %d", (int)roundNumber%(int)_playersArray.count);
     
-    NSTimer *alertTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(hostChosesPic) userInfo:nil repeats:NO];
+    // NSTimer *alertTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(hostChosesPic) userInfo:nil repeats:NO];
     
     _hasAddedPoint = NO;
     _timerHasReachedZero = NO;
@@ -889,9 +888,7 @@
         {
             NSLog(@"host should pick a pic now!");
             
-            // open up photo picker
-            
-            [self getCameraRollPhoto];
+            // DEPRICATED
         }
         else if (gameOver == YES)
         {
@@ -926,7 +923,7 @@
     self.bigPhotoImageView.image = image;
     self.bigPhotoImageView.contentMode = UIViewContentModeScaleAspectFit;
     
-    self.smallPhotoImageView.image = image;
+    [smallPhotoImageView setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     self.smallPhotoImageView.contentMode = UIViewContentModeScaleAspectFill;
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
@@ -939,25 +936,6 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:NULL];
-}
-
-- (void)hostChosesPic
-{
-    hostNeedsToPic = YES;
-    
-    NSString *playerName = _playersArray[0];
-    
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Okay!", nil];
-    UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 200)];
-    NSString *quickString = [NSString stringWithFormat:@"Time to Pick a Pic %@!\n", playerName];
-    // [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(20,playerName.length)];
-    // [attributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:26.0] range:NSMakeRange(20, playerName.length)];
-    lbl.text = quickString;
-    lbl.textAlignment = NSTextAlignmentCenter;
-    lbl.numberOfLines = 4;
-    [alert setValue:lbl forKey:@"accessoryView"];
-    [alert show];
-    
 }
 
 - (void)passThePhoneToPickTopic
@@ -998,4 +976,17 @@
      */
 }
 
+- (IBAction)photoLibraryButtonPressed:(id)sender
+{
+    // open up photo picker
+    
+    if (_photoChosen == NO)
+    {
+        [self getCameraRollPhoto];
+    }
+    else
+    {
+        [self showLargePic];
+    }
+}
 @end

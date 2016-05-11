@@ -69,7 +69,9 @@
 @property (weak, nonatomic) IBOutlet UIView *grayScreenView;
 
 @property (nonatomic, assign) BOOL photoChosen;
-@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *smallPhotoImageView;
+
+- (IBAction)photoLibraryButtonPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *smallPhotoImageView;
 @property (nonatomic, weak) UIImage *image;
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bigPhotoImageView;
